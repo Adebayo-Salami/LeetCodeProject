@@ -1,0 +1,14 @@
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\bin\Debug\net8.0\LeetCodeProject.exe
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\bin\Debug\net8.0\LeetCodeProject.deps.json
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\bin\Debug\net8.0\LeetCodeProject.runtimeconfig.json
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\bin\Debug\net8.0\LeetCodeProject.dll
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\bin\Debug\net8.0\LeetCodeProject.pdb
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.AssemblyInfoInputs.cache
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.AssemblyInfo.cs
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.csproj.CoreCompileInputs.cache
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.dll
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\refint\LeetCodeProject.dll
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.pdb
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.genruntimeconfig.cache
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\ref\LeetCodeProject.dll
