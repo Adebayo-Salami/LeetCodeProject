@@ -8,7 +8,8 @@ namespace LeetCodeProject
         {
             Console.WriteLine("Welcome To Project Leet Code!");
 
-            TwoSum.Trial1();
+            //TwoSum.Run();
+            AddTwoNumbers.Run();
 
             Console.ReadKey();
         }

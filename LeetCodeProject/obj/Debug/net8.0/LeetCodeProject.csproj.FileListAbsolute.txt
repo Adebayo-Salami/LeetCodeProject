@@ -12,3 +12,4 @@ C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\
 C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.pdb
 C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.genruntimeconfig.cache
 C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\ref\LeetCodeProject.dll
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\LeetCodeProject\obj\Debug\net8.0\LeetCodeProject.sourcelink.json

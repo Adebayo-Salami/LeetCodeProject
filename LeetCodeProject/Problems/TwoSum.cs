@@ -2,9 +2,9 @@
 {
     public static class TwoSum
     {
-        public static void Trial1()
+        public static void Run()
         {
-            Console.WriteLine("Running TwoSum Trial1");
+            Console.WriteLine("Running TwoSum Run");
 
             var test1 = LeetCodeTwoSum([2, 7, 11, 15], 9);
             Console.WriteLine("Result: " + String.Join(',', test1));
