@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/LeetCodeProject/FileContentIndex/01bbba04-f878-4299-9712-cf248d0275d1.vsidx
+/.vs/LeetCodeProject/FileContentIndex/364b5444-c143-4fa3-9ccb-80f48003268f.vsidx
+/.vs/LeetCodeProject/FileContentIndex/67ef367a-e78b-4983-a148-06a42373d8e1.vsidx
+/.vs/LeetCodeProject/FileContentIndex/d8ef49c2-ff31-4212-a36f-c181eeaaed4a.vsidx
+/.vs/LeetCodeProject/FileContentIndex/ef623bcd-4b68-4bc3-b2b4-94b1e10ac087.vsidx
+/.vs/LeetCodeProject/DesignTimeBuild/.dtbcache.v2
+/LeetCodeProject/bin/Debug/net8.0/LeetCodeProject.dll
+/.vs/LeetCodeProject/v17/DocumentLayout.json
