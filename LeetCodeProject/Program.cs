@@ -9,7 +9,8 @@ namespace LeetCodeProject
             Console.WriteLine("Welcome To Project Leet Code!");
 
             //TwoSum.Run();
-            AddTwoNumbers.Run();
+            //AddTwoNumbers.Run();
+            LongestUniqueSubstring.Run();
 
             Console.ReadKey();
         }

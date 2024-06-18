@@ -10,3 +10,4 @@
 /.vs/LeetCodeProject/DesignTimeBuild/.dtbcache.v2
 /LeetCodeProject/bin/Debug/net8.0/LeetCodeProject.dll
 /.vs/LeetCodeProject/v17/DocumentLayout.json
+*.vsidx

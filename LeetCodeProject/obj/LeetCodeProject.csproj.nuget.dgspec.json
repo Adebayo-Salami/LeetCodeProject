@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Adebayo Salami\\Documents\\Work\\Test\\LeetCodeProject\\LeetCodeProject\\LeetCodeProject.csproj": {}
+    "C:\\Users\\INFORMATION TECH\\Documents\\Programs\\LeetCode\\LeetCodeProject\\LeetCodeProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Adebayo Salami\\Documents\\Work\\Test\\LeetCodeProject\\LeetCodeProject\\LeetCodeProject.csproj": {
+    "C:\\Users\\INFORMATION TECH\\Documents\\Programs\\LeetCode\\LeetCodeProject\\LeetCodeProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Adebayo Salami\\Documents\\Work\\Test\\LeetCodeProject\\LeetCodeProject\\LeetCodeProject.csproj",
+        "projectUniqueName": "C:\\Users\\INFORMATION TECH\\Documents\\Programs\\LeetCode\\LeetCodeProject\\LeetCodeProject.csproj",
         "projectName": "LeetCodeProject",
-        "projectPath": "C:\\Users\\Adebayo Salami\\Documents\\Work\\Test\\LeetCodeProject\\LeetCodeProject\\LeetCodeProject.csproj",
-        "packagesPath": "C:\\Users\\Adebayo Salami\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Adebayo Salami\\Documents\\Work\\Test\\LeetCodeProject\\LeetCodeProject\\obj\\",
+        "projectPath": "C:\\Users\\INFORMATION TECH\\Documents\\Programs\\LeetCode\\LeetCodeProject\\LeetCodeProject.csproj",
+        "packagesPath": "C:\\Users\\INFORMATION TECH\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\INFORMATION TECH\\Documents\\Programs\\LeetCode\\LeetCodeProject\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Adebayo Salami\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\INFORMATION TECH\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [

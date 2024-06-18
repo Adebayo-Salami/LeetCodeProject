@@ -17,7 +17,7 @@ namespace LeetCodeProject.Problems
             var input3 = LeetCodeAddTwoNumbers(CreateListNode([9, 9, 9, 9, 9, 9, 9]), CreateListNode([9, 9, 9, 9]));
             Console.WriteLine("Result: " + ConvertNodeToString(input3));
 
-            var input4 = OptAddTwoNumbers(CreateListNode([1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1]), CreateListNode([5, 6, 4]));
+            var input4 = OptAddTwoNumbers(CreateListNode([9, 9, 9, 9, 9, 9, 9]), CreateListNode([9, 9, 9, 9]));
             Console.WriteLine("Result: " + ConvertNodeToString(input4));
         }
 
