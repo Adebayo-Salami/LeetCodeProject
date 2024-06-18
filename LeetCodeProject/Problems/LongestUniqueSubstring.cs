@@ -13,13 +13,19 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Longest Substring Without Repeating Characters");
 
             var input1 = "abcabcbb";
-            Console.WriteLine("Result for " + input1 + ": " + OptLengthOfLongestSubstring(input1));
+            Console.WriteLine("Result for " + input1 + ": " + LengthOfLongestSubstring(input1));
 
             var input2 = "bbbbb";
             Console.WriteLine("Result for " + input2 + ": " + LengthOfLongestSubstring(input2));
 
             var input3 = "pwwkew";
             Console.WriteLine("Result for " + input3 + ": " + LengthOfLongestSubstring(input3));
+
+            var input4 = "dvdf";
+            Console.WriteLine("Result for " + input4 + ": " + OptLengthOfLongestSubstring(input4));
+
+            var input5 = " ";
+            Console.WriteLine("Result for " + input5 + ": " + OptLengthOfLongestSubstring(input5));
         }
 
         public static int LengthOfLongestSubstring(string s)
