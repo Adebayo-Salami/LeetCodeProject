@@ -10,7 +10,8 @@ namespace LeetCodeProject
 
             //TwoSum.Run();
             //AddTwoNumbers.Run();
-            LongestUniqueSubstring.Run();
+            //LongestUniqueSubstring.Run();
+            MedianOfTwoSortedArray.Run();
 
             Console.ReadKey();
         }
