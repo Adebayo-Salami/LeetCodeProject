@@ -15,6 +15,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for [1, 10, 3, 10, 2], 3, 1: " + MinDays([1, 10, 3, 10, 2], 3, 1));
             Console.WriteLine("Result for [1,10,3,10,2], 3, 2: " + MinDays([1, 10, 3, 10, 2], 3, 2));
             Console.WriteLine("Result for [7,7,7,7,12,7,7], 2, 3: " + MinDays([7, 7, 7, 7, 12, 7, 7], 2, 3));
+            Console.WriteLine("Result for [51,67,18,83,25,26,40,45,100,15,3,27,96,88,79,66,46,52,67,13,28,38,93,69,89,23,72,100,42,34,16], 2, 3: " + MinDays([51, 67, 18, 83, 25, 26, 40, 45, 100, 15, 3, 27, 96, 88, 79, 66, 46, 52, 67, 13, 28, 38, 93, 69, 89, 23, 72, 100, 42, 34, 16], 2, 11));
         }
 
         #region Challenge 19-06-2024
@@ -27,7 +28,7 @@ namespace LeetCodeProject.Problems
         public static int MinDays(int[] bloomDay, int m, int k)
         {
             int minimumDays = -1;
-
+         
             try
             {
                 int flowersNeeded = m * k;
@@ -46,6 +47,7 @@ namespace LeetCodeProject.Problems
                     if (daysLog.Count == m)
                         break;
 
+                    daysLog = new Dictionary<int, int>();
                     for (int i = 0; i < (bloomDay.Length - k + 1); i++)
                     {
                         if (daysLog.Count == m)
@@ -64,6 +66,12 @@ namespace LeetCodeProject.Problems
                         int tempK = k;
                         while (tempK > 1)
                         {
+                            if (daysLog.ContainsKey((i + tempK) - 1))
+                            {
+                                i = (i + k) - 1;
+                                break;
+                            }
+
                             if ((bloomDay[(i + tempK) - 1] - daysPassed) <= 0)
                                 flowersPluckable++;
                             tempK--;
@@ -79,9 +87,10 @@ namespace LeetCodeProject.Problems
                     daysPassed = distinctBloomDates[++distinctIndex];
                 }
 
-                foreach (var dayLogged in daysLog)
-                    if (dayLogged.Value > minimumDays)
-                        minimumDays = dayLogged.Value;
+                if (daysLog.Count == m)
+                    foreach (var dayLogged in daysLog)
+                        if (dayLogged.Value > minimumDays)
+                            minimumDays = dayLogged.Value;
             }
             catch(Exception e)
             {
