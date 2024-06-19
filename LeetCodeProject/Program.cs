@@ -12,7 +12,8 @@ namespace LeetCodeProject
             //AddTwoNumbers.Run();
             //LongestUniqueSubstring.Run();
             //MedianOfTwoSortedArray.Run();
-            DailyChallenge.Run();
+            //DailyChallenge.Run();
+            LongestPalindromicSubstring.Run();
 
             Console.ReadKey();
         }
