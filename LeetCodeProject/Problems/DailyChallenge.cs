@@ -15,6 +15,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for [1, 10, 3, 10, 2], 3, 1: " + MinDays([1, 10, 3, 10, 2], 3, 1));
             Console.WriteLine("Result for [1,10,3,10,2], 3, 2: " + MinDays([1, 10, 3, 10, 2], 3, 2));
             Console.WriteLine("Result for [7,7,7,7,12,7,7], 2, 3: " + MinDays([7, 7, 7, 7, 12, 7, 7], 2, 3));
+            Console.WriteLine("Result for [18,45,42,50,86,40,73,47,69,83,42,61,59,42,97,61,25,89,89,97,22,13,65], 5, 4: " + MinDays([18, 45, 42, 50, 86, 40, 73, 47, 69, 83, 42, 61, 59, 42, 97, 61, 25, 89, 89, 97, 22, 13, 65], 5, 4));
             Console.WriteLine("Result for [51,67,18,83,25,26,40,45,100,15,3,27,96,88,79,66,46,52,67,13,28,38,93,69,89,23,72,100,42,34,16], 2, 3: " + MinDays([51, 67, 18, 83, 25, 26, 40, 45, 100, 15, 3, 27, 96, 88, 79, 66, 46, 52, 67, 13, 28, 38, 93, 69, 89, 23, 72, 100, 42, 34, 16], 2, 11));
         }
 
@@ -47,7 +48,6 @@ namespace LeetCodeProject.Problems
                     if (daysLog.Count == m)
                         break;
 
-                    daysLog = new Dictionary<int, int>();
                     for (int i = 0; i < (bloomDay.Length - k + 1); i++)
                     {
                         if (daysLog.Count == m)
@@ -67,18 +67,20 @@ namespace LeetCodeProject.Problems
                         while (tempK > 1)
                         {
                             if (daysLog.ContainsKey((i + tempK) - 1))
-                            {
-                                i = (i + k) - 1;
-                                break;
-                            }
+                                daysLog.Remove((i + tempK) - 1);
 
                             if ((bloomDay[(i + tempK) - 1] - daysPassed) <= 0)
                                 flowersPluckable++;
+
                             tempK--;
                         }
 
                         if (flowersPluckable == k)
                         {
+                            foreach (var dayLogged in daysLog)
+                                if (i >= dayLogged.Key && i <= ((dayLogged.Key + k) - 1))
+                                    daysLog = new();
+
                             daysLog.Add(i, daysPassed);
                             i = (i + k) - 1;
                         }
