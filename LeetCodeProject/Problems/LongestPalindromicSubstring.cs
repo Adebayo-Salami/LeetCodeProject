@@ -14,6 +14,7 @@ namespace LeetCodeProject.Problems
 
             Console.WriteLine("Result for babad: " + LongestPalindrome("babad"));
             Console.WriteLine("Result for cbbd: " + LongestPalindrome("cbbd"));
+            Console.WriteLine("Result for aacabdkacaa: " + LongestPalindrome("aacabdkacaa"));
         }
 
         public static string LongestPalindrome(string s)
@@ -22,12 +23,39 @@ namespace LeetCodeProject.Problems
 
             try
             {
-                StringBuilder stringBuilder = new();
                 long longestLength = 0;
                 var sArrays = s.ToCharArray();
                 for(int i = 0; i < sArrays.Length; i++)
                 {
+                    int movingI = i;
+                    int lastIndex = sArrays.Length - 1;
+                    int movingLastIndex = lastIndex;
 
+                    int count = 0;
+                    while (movingI <= lastIndex && movingI <= movingLastIndex)
+                    {
+                        if (sArrays[movingI] == sArrays[movingLastIndex])
+                        {
+                            if (movingI != movingLastIndex) count += 2;
+                            else count++;
+
+                            movingI++;
+                            movingLastIndex--;
+                        }
+                        else
+                        {
+                            count = 0;
+                            movingI = i;
+                            lastIndex--;
+                            movingLastIndex = lastIndex;
+                        }
+                    }
+
+                    if (count > longestLength)
+                    {
+                        longestLength = count;
+                        ans = s[i..(lastIndex + 1)];
+                    }
                 }
             }
             catch(Exception e)
