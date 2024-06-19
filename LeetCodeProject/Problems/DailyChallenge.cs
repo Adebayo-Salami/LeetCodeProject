@@ -102,6 +102,50 @@ namespace LeetCodeProject.Problems
             return minimumDays;
         }
 
+        public static int OptMinDays(int[] bloomDay, int m, int k)
+        {
+            int n = bloomDay.Length;
+            if (m * k > n) return -1; // Impossible to create m bouquets
+
+            int left = 1; // Minimum possible day
+            int right = bloomDay.Max(); // Maximum possible day
+
+            while (left < right)
+            {
+                int mid = left + (right - left) / 2;
+                if (CanCreateBouquets(bloomDay, m, k, mid))
+                    right = mid; // Search in the left half
+                else
+                    left = mid + 1; // Search in the right half
+            }
+
+            return left;
+        }
+
+        private static bool CanCreateBouquets(int[] bloomDay, int m, int k, int day)
+        {
+            int bouquets = 0;
+            int adjacentFlowers = 0;
+
+            foreach (int bloom in bloomDay)
+            {
+                if (bloom <= day)
+                {
+                    adjacentFlowers++;
+                    if (adjacentFlowers == k)
+                    {
+                        bouquets++;
+                        adjacentFlowers = 0;
+                    }
+                }
+                else
+                {
+                    adjacentFlowers = 0;
+                }
+            }
+
+            return bouquets >= m;
+        }
 
         #endregion
     }
