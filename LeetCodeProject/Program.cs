@@ -11,7 +11,8 @@ namespace LeetCodeProject
             //TwoSum.Run();
             //AddTwoNumbers.Run();
             //LongestUniqueSubstring.Run();
-            MedianOfTwoSortedArray.Run();
+            //MedianOfTwoSortedArray.Run();
+            DailyChallenge.Run();
 
             Console.ReadKey();
         }
