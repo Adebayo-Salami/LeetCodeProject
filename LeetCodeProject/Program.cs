@@ -13,7 +13,8 @@ namespace LeetCodeProject
             //LongestUniqueSubstring.Run();
             //MedianOfTwoSortedArray.Run();
             //DailyChallenge.Run();
-            LongestPalindromicSubstring.Run();
+            //LongestPalindromicSubstring.Run();
+            ZigzagConversion.Run();
 
             Console.ReadKey();
         }
