@@ -14,7 +14,8 @@ namespace LeetCodeProject
             //MedianOfTwoSortedArray.Run();
             //DailyChallenge.Run();
             //LongestPalindromicSubstring.Run();
-            ZigzagConversion.Run();
+            //ZigzagConversion.Run();
+            MinimumLengthSubArray.Run();
 
             Console.ReadKey();
         }
