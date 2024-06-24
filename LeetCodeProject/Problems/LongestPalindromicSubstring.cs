@@ -17,7 +17,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for aacabdkacaa: " + LongestPalindrome("aacabdkacaa"));
         }
 
-        public static string LongestPalindrome(string s)
+        static string LongestPalindrome(string s)
         {
             var ans = String.Empty;
 
@@ -69,7 +69,7 @@ namespace LeetCodeProject.Problems
             return ans;
         }
 
-        public static string OptLongestPalindrome(string s)
+        static string OptLongestPalindrome(string s)
         {
             if (string.IsNullOrEmpty(s))
             {

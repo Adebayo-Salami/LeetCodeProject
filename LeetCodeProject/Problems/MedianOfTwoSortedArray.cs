@@ -23,7 +23,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for [1,2,3] & [4,5,6,7]: " + FindMedianSortedArrays([1,2,3], [4,5,6,7]));
         }
 
-        public static double FindMedianSortedArrays(int[] nums1, int[] nums2)
+        static double FindMedianSortedArrays(int[] nums1, int[] nums2)
         {
             double ans = 0;
 
@@ -145,7 +145,7 @@ namespace LeetCodeProject.Problems
             return ans;
         }
 
-        public static double OptFindMedianSortedArrays(int[] nums1, int[] nums2)
+        static double OptFindMedianSortedArrays(int[] nums1, int[] nums2)
         {
             int[] merged = new int[nums1.Length + nums2.Length];
             int i = 0, j = 0, k = 0;

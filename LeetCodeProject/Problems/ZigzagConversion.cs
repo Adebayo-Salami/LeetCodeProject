@@ -16,7 +16,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for PAYPALISHIRING: " + Convert("PAYPALISHIRING", 4));
         }
 
-        public static string Convert(string s, int numRows)
+        static string Convert(string s, int numRows)
         {
             var ans = String.Empty;
 
@@ -82,7 +82,7 @@ namespace LeetCodeProject.Problems
             return ans;
         }
 
-        public static string OptConvert(string s, int numRows)
+        static string OptConvert(string s, int numRows)
         {
             if (numRows == 1)
                 return s; // No zigzag pattern for a single row

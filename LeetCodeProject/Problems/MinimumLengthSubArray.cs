@@ -14,7 +14,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for [1,2,2,1,2] & 4: " + findMinimumLengthSubarray_Try3([1, 2, 2, 1, 2], 4));
         }
 
-        public static int findMaximumDistance(List<string> grid)
+        static int findMaximumDistance(List<string> grid)
         {
             var ans = -1;
 
@@ -30,7 +30,7 @@ namespace LeetCodeProject.Problems
             return ans;
         }
 
-        public static int findMinimumLengthSubarray_Try2(List<int> arr, int k)
+        static int findMinimumLengthSubarray_Try2(List<int> arr, int k)
         {
             int ans = -1;
 
@@ -105,7 +105,7 @@ namespace LeetCodeProject.Problems
             return ans;
         }
 
-        public static int findMinimumLengthSubarray(List<int> arr, int k)
+        static int findMinimumLengthSubarray(List<int> arr, int k)
         {
             int ans = -1;
 
@@ -149,7 +149,7 @@ namespace LeetCodeProject.Problems
             return ans;
         }
 
-        public static int findMinimumLengthSubarray_Try3(List<int> arr, int k)
+        static int findMinimumLengthSubarray_Try3(List<int> arr, int k)
         {
             int ans = -1;
 

@@ -28,7 +28,7 @@ namespace LeetCodeProject.Problems
             Console.WriteLine("Result for " + input5 + ": " + OptLengthOfLongestSubstring(input5));
         }
 
-        public static int LengthOfLongestSubstring(string s)
+        static int LengthOfLongestSubstring(string s)
         {
             int longestLength = 0;
 
@@ -88,7 +88,7 @@ namespace LeetCodeProject.Problems
             return longestLength;
         }
 
-        public static int OptLengthOfLongestSubstring(string s)
+        static int OptLengthOfLongestSubstring(string s)
         {
             int n = s.Length;
             int ans = 0; // for storing the result

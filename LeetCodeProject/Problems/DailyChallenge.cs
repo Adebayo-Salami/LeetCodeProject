@@ -26,7 +26,7 @@ namespace LeetCodeProject.Problems
          The garden consists of n flowers, the ith flower will bloom in the bloomDay[i] and then can be used in exactly one bouquet.
          Return the minimum number of days you need to wait to be able to make m bouquets from the garden. If it is impossible to make m bouquets return -1.
         */
-        public static int MinDays(int[] bloomDay, int m, int k)
+        static int MinDays(int[] bloomDay, int m, int k)
         {
             int minimumDays = -1;
          
@@ -102,7 +102,7 @@ namespace LeetCodeProject.Problems
             return minimumDays;
         }
 
-        public static int OptMinDays(int[] bloomDay, int m, int k)
+        static int OptMinDays(int[] bloomDay, int m, int k)
         {
             int n = bloomDay.Length;
             if (m * k > n) return -1; // Impossible to create m bouquets
@@ -122,7 +122,7 @@ namespace LeetCodeProject.Problems
             return left;
         }
 
-        private static bool CanCreateBouquets(int[] bloomDay, int m, int k, int day)
+        static bool CanCreateBouquets(int[] bloomDay, int m, int k, int day)
         {
             int bouquets = 0;
             int adjacentFlowers = 0;
