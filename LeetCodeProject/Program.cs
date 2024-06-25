@@ -16,7 +16,8 @@ namespace LeetCodeProject
             //LongestPalindromicSubstring.Run();
             //ZigzagConversion.Run();
             //MinimumLengthSubArray.Run();
-            ReverseInteger.Run();
+            //ReverseInteger.Run();
+            StringToInteger.Run();
 
             Console.ReadKey();
         }
