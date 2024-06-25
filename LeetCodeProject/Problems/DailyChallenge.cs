@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LeetCodeProject.Problems
 {
@@ -149,4 +152,88 @@ namespace LeetCodeProject.Problems
 
         #endregion
     }
+
+    class Tester2
+    {
+        static async Task Main()
+        {
+            try
+            {
+                var url = "https://coderbyte.com/api/challenges/json/json-cleaning";
+                var httpClient = new HttpClient();
+                var response = await httpClient.GetStringAsync(url);
+
+                // Deserialize the JSON response
+                var jsonObject = JsonSerializer.Deserialize<JsonElement>(response);
+
+                // Clean the object
+                CleanJsonObject(jsonObject);
+
+                // Convert the modified object back to a string
+                var modifiedObjectString = JsonSerializer.Serialize(jsonObject, new JsonSerializerOptions
+                {
+                    WriteIndented = true // Optional: Format the output for readability
+                });
+
+                // Log the modified object
+                Console.WriteLine(modifiedObjectString);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
+
+        static void CleanJsonObject(JsonElement jsonElement)
+        {
+            if (jsonElement.ValueKind == JsonValueKind.Object)
+            {
+                foreach (var property in jsonElement.EnumerateObject())
+                {
+                    if (property.Value.ValueKind == JsonValueKind.String)
+                    {
+                        var value = property.Value.GetString();
+                        if (string.IsNullOrEmpty(value) || value == "N/A" || value == "-")
+                        {
+                            // Remove the property by creating a new object without it
+                            var updatedObject = new JsonObject();
+                            foreach (var existingProperty in jsonElement.EnumerateObject())
+                            {
+                                if (existingProperty.Name != property.Name)
+                                {
+                                    updatedObject.Add(existingProperty.Name, existingProperty.Value.GetString());
+                                }
+                            }
+                        }
+                    }
+                    else if (property.Value.ValueKind == JsonValueKind.Array)
+                    {
+                        CleanJsonArray(property.Value);
+                    }
+                }
+            }
+        }
+
+        static void CleanJsonArray(JsonElement jsonElement)
+        {
+            for (int i = 0; i < jsonElement.GetArrayLength(); i++)
+            {
+                var arrayItem = jsonElement[i];
+                if (arrayItem.ValueKind == JsonValueKind.String)
+                {
+                    var value = arrayItem.GetString();
+                    if (string.IsNullOrEmpty(value) || value == "N/A" || value == "-")
+                    {
+                        // Set the array item to null
+                        //jsonElement[i] = JsonValueKind.Null;
+                    }
+                }
+                else if (arrayItem.ValueKind == JsonValueKind.Array)
+                {
+                    CleanJsonArray(arrayItem);
+                }
+            }
+        }
+    }
+
 }
