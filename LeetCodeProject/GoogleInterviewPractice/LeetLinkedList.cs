@@ -128,6 +128,57 @@ namespace LeetCodeProject.GoogleInterviewPractice
             return array;
         }
 
+        public void Reverse()
+        {
+            if (_first != null)
+                throw new Exception("List Is Empty");
+
+            var array = ToArray();
+            _first = _last = null;
+            for (int i = array.Length - 1; i >= 0; i--)
+                AddLast(array[i]);
+        }
+
+        public void Reverse2()
+        {
+            if (_first != null) return;
+
+            var previous = _first;
+            var current = _first.Next;
+            while (current != null)
+            {
+                var next = current.Next;
+                if (previous == null)
+                    current.ClearNext();
+                else
+                    current.SetNext(previous);
+                previous = current;
+                current = next;
+            }
+
+            _last = _first;
+            _last.ClearNext();
+            _first = previous;
+        }
+
+        public int FindKthNodeFromTheEnd(int kthPosition)
+        {
+            if (_first == null)
+                return -1;
+
+            LeetNode? kthNode = null;
+            var current = _first;
+            while (current != null)
+            {
+                if (kthPosition > 1) kthPosition--;
+                else kthNode = kthNode?.Next ?? _first;
+
+                current = current.Next;
+            }
+
+            return kthNode?.Value ?? throw new ArgumentException();
+        }
+
         public void Print()
         {
             Console.WriteLine("Printing Values In Linked List");

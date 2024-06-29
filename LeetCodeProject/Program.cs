@@ -84,16 +84,12 @@ namespace LeetCodeProject
         {
             var list = new LeetLinkedList();
             list.AddLast(10);
-            Console.WriteLine("Size of List: " + list.Size);
             list.AddLast(20);
-            Console.WriteLine("Size of List: " + list.Size);
             list.AddLast(30);
-            Console.WriteLine("Size of List: " + list.Size);
-            list.DeleteLast();
-            Console.WriteLine("Size of List: " + list.Size);
-            Console.WriteLine("Index of 30: " + list.IndexOf(40));
-            Console.WriteLine("Contains Value of 30: " + list.Contains(40));
+            list.AddLast(40);
+            list.AddLast(50);
             list.Print();
+            Console.WriteLine("Kth Node From the end. K = 3 : value: " + list.FindKthNodeFromTheEnd(6));
         }
     }
 }
