@@ -29,7 +29,8 @@ namespace LeetCodeProject
             //RunArrayClass();
             //RunLinkedListClass();
             //RunStackClass();
-            RunQueueClass();
+            //RunQueueClass();
+            RunHashClass();
         }
 
         static void RunArrayClass()
@@ -141,6 +142,34 @@ namespace LeetCodeProject
             queue2.Dequeue();
             queue2.Dequeue();
             Console.WriteLine("IsEmpty: " + queue2.IsEmpty);
+        }
+
+        static void RunHashClass()
+        {
+            LeetDictionary.FirstNonRepeatingChar("a green apple");
+            LeetDictionary.FirstRepeatedChar("a green apple");
+
+            var hashTable = new LeetHashTable();
+            hashTable.Put(3782, "tester");
+            hashTable.Put(31282, "tester2");
+
+            var hashTable2 = new LeetHashTable();
+            hashTable2.Put(6, "A");
+            hashTable2.Put(8, "B");
+            hashTable2.Put(11, "C");
+            hashTable2.Put(6, "A+");
+            //hashTable2.Remove(60);
+            Console.WriteLine("Get from Index 6 : " + hashTable2.Get(60));
+            Console.WriteLine("Done");
+
+            Console.WriteLine($"Most frequent value in [1, 2, 2, 3, 3, 3, 4] is {LeetDictionary.FindMostFrequentValue([1, 2, 2, 3, 3, 3, 4])}");
+            Console.WriteLine($"Most frequent value in [1, 2, 2, 3, 3, 3, 4, 2, 2] is {LeetDictionary.FindMostFrequentValue([1, 2, 2, 3, 3, 3, 4, 2, 2])}");
+
+            Console.WriteLine($"Number of 2 Pairs in [1, 7, 5, 9, 2, 12, 3] is {LeetDictionary.FindNumberOfPairsWithKthDiff([1, 7, 5, 9, 2, 12, 3], 2)}");
+            
+            Console.WriteLine($"Two sum of 9 in [2, 7, 11, 15] is {String.Join(',', LeetDictionary.FindTwoSum([2, 7, 11, 15], 9))}");
+            Console.WriteLine($"Two sum of 6 in [3,2,4] is {String.Join(',', LeetDictionary.FindTwoSum([3, 2, 4], 6))}");
+            Console.WriteLine($"Two sum of 6 in [3,3] is {String.Join(',', LeetDictionary.FindTwoSum([3, 3], 6))}");
         }
     }
 }
