@@ -88,7 +88,13 @@ namespace LeetCodeProject
             list.AddLast(30);
             list.AddLast(40);
             list.AddLast(50);
-            list.Print();
+            list.AddLoopToNthPosition(3);
+            Console.WriteLine("Is there loop in list: " + list.HasLoop());
+            Console.WriteLine("Printing List Middle Value(s)");
+            //list.PrintMiddle();
+            Console.WriteLine("");
+            Console.WriteLine("Done Printing List Middle Value(s)");
+            //list.Print();
             Console.WriteLine("Kth Node From the end. K = 3 : value: " + list.FindKthNodeFromTheEnd(1));
         }
     }

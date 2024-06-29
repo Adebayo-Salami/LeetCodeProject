@@ -179,6 +179,62 @@ namespace LeetCodeProject.GoogleInterviewPractice
             return kthNode?.Value ?? throw new ArgumentException();
         }
 
+        public void PrintMiddle()
+        {
+            if (_size == 0) return;
+
+            int middleIndex = _size / 2;
+            var current = _first;
+            LeetNode? prev = null;
+            for (int i = 1; i <= middleIndex; i++)
+            {
+                prev = current;
+                current = current.Next;
+            }
+
+            if (current != null)
+            {
+                Console.Write("Middle Value(s): " + current.Value);
+                if (_size % 2 == 0 && prev != null)
+                    Console.Write(" and " + prev.Value);
+            }
+            
+        }
+
+        public void AddLoopToNthPosition(int nthPosition)
+        {
+            if (nthPosition >= _size) throw new ArgumentOutOfRangeException();
+
+            int index = 1;
+            var current = _first;
+            while (index < nthPosition)
+            {
+                current = current?.Next;
+                index++;
+            }
+
+            _last.SetNext(current);
+            _last = current;
+        }
+
+        public bool HasLoop()
+        {
+            var slowMove = _first;
+            var fastMove = _first?.Next?.Next;
+            while (slowMove != null)
+            {
+                if (fastMove == slowMove)
+                    return true;
+                if (fastMove?.Next == slowMove)
+                    return true;
+
+                slowMove = slowMove.Next;
+                fastMove = fastMove?.Next?.Next;
+            }
+
+            return false;
+        }
+
         public void Print()
         {
             Console.WriteLine("Printing Values In Linked List");
