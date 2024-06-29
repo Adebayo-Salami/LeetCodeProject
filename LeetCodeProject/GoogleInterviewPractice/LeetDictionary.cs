@@ -172,4 +172,43 @@ namespace LeetCodeProject.GoogleInterviewPractice
         }
 
     }
+
+    public class LeetHashTableProbing   // Linear Probing Strategy For Handling Collision
+    {
+        private string[] _array = new string[5];
+        private int _size = 0;
+
+        public LeetHashTableProbing() { }
+
+        private int HashFunction(int key) => key % _array.Length;
+
+        public void Put(int key, string value)
+        {
+            if (_size == _array.Length)
+                throw new Exception("Table is Full");
+            key = Math.Abs(key);
+            int index = HashFunction(key);
+
+            if (_array[index] == null)
+                _array[index] = value;
+            else
+            {
+                int i = index;
+                while (_array[i] != null)
+                    if ((i + 1) >= _array.Length)
+                        i = (i + 1) % _array.Length;
+                    else
+                        i++;
+                _array[i] = value;
+            }
+
+            _size++;
+        }
+
+        public string Get(int key) => _array[HashFunction(Math.Abs(key))];
+
+        public void Remove(int key) => _array[HashFunction(Math.Abs(key))] = null;
+
+        public int Size => _size;
+    }
 }
