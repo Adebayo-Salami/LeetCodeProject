@@ -26,7 +26,8 @@ namespace LeetCodeProject
 
         static void RunGoogleInterviewPrepCode()
         {
-            RunArrayClass();
+            //RunArrayClass();
+            RunLinkedListClass();
         }
 
         static void RunArrayClass()
@@ -77,6 +78,22 @@ namespace LeetCodeProject
             Console.WriteLine("----Inserting 8 at index 1 now----");
             numbers4.InsertAt(8, 1);
             numbers4.Print();
+        }
+
+        static void RunLinkedListClass()
+        {
+            var list = new LeetLinkedList();
+            list.AddLast(10);
+            Console.WriteLine("Size of List: " + list.Size);
+            list.AddLast(20);
+            Console.WriteLine("Size of List: " + list.Size);
+            list.AddLast(30);
+            Console.WriteLine("Size of List: " + list.Size);
+            list.DeleteLast();
+            Console.WriteLine("Size of List: " + list.Size);
+            Console.WriteLine("Index of 30: " + list.IndexOf(40));
+            Console.WriteLine("Contains Value of 30: " + list.Contains(40));
+            list.Print();
         }
     }
 }
