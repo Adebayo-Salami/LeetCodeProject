@@ -164,7 +164,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
         public int FindKthNodeFromTheEnd(int kthPosition)
         {
             if (_first == null)
-                return -1;
+                throw new ArgumentException();
 
             LeetNode? kthNode = null;
             var current = _first;

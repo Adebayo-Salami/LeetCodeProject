@@ -89,7 +89,7 @@ namespace LeetCodeProject
             list.AddLast(40);
             list.AddLast(50);
             list.Print();
-            Console.WriteLine("Kth Node From the end. K = 3 : value: " + list.FindKthNodeFromTheEnd(6));
+            Console.WriteLine("Kth Node From the end. K = 3 : value: " + list.FindKthNodeFromTheEnd(1));
         }
     }
 }
