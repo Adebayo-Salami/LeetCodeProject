@@ -27,7 +27,9 @@ namespace LeetCodeProject
         static void RunGoogleInterviewPrepCode()
         {
             //RunArrayClass();
-            RunLinkedListClass();
+            //RunLinkedListClass();
+            //RunStackClass();
+            RunQueueClass();
         }
 
         static void RunArrayClass()
@@ -96,6 +98,49 @@ namespace LeetCodeProject
             Console.WriteLine("Done Printing List Middle Value(s)");
             //list.Print();
             Console.WriteLine("Kth Node From the end. K = 3 : value: " + list.FindKthNodeFromTheEnd(1));
+        }
+
+        static void RunStackClass()
+        {
+            string word1 = "(([1] + <2>))[a]";
+            Console.WriteLine($"Is {word1} balanced: {LeetStack.IsBalancedEpression(word1)}");
+
+            string word2 = "(([1] + <2>))[a]<";
+            Console.WriteLine($"Is {word2} balanced: {LeetStack.IsBalancedEpression(word2)}");
+
+            string word3 = "((1 + 2)";
+            Console.WriteLine($"Is {word3} balanced: {LeetStack.IsBalancedEpression(word3)}");
+        }
+
+        static void RunQueueClass()
+        {
+            var queue = new LeetQueue();
+            queue.Enqueue(10);
+            queue.Enqueue(20);
+            queue.Enqueue(30);
+            queue.Enqueue(40);
+            queue.Enqueue(50);
+            queue.Print();
+            queue.Reverse(3);
+            queue.Print();
+
+            var queue2 = new LeetQueue2();
+            queue2.Enqueue(10);
+            queue2.Enqueue(20);
+            queue2.Enqueue(30);
+            queue2.Enqueue(40);
+            queue2.Enqueue(50);
+            queue2.Print();
+            queue2.Dequeue();
+            queue2.Print();
+            Console.WriteLine("Peeking: " + queue2.Peek);
+            Console.WriteLine("Size: " + queue2.Size);
+            Console.WriteLine("IsEmpty: " + queue2.IsEmpty);
+            queue2.Dequeue();
+            queue2.Dequeue();
+            queue2.Dequeue();
+            queue2.Dequeue();
+            Console.WriteLine("IsEmpty: " + queue2.IsEmpty);
         }
     }
 }
