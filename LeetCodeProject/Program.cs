@@ -167,6 +167,7 @@ namespace LeetCodeProject
 
             Console.WriteLine($"Number of 2 Pairs in [1, 7, 5, 9, 2, 12, 3] is {LeetDictionary.FindNumberOfPairsWithKthDiff([1, 7, 5, 9, 2, 12, 3], 2)}");
             
+            Console.WriteLine($"Two sum of -8 in [-1,-2,-3,-4,-5] is {String.Join(',', LeetDictionary.FindTwoSum([-1, -2, -3, -4, -5], -8))}"); // Expected: [2,4]
             Console.WriteLine($"Two sum of 9 in [2, 7, 11, 15] is {String.Join(',', LeetDictionary.FindTwoSum([2, 7, 11, 15], 9))}");
             Console.WriteLine($"Two sum of 6 in [3,2,4] is {String.Join(',', LeetDictionary.FindTwoSum([3, 2, 4], 6))}");
             Console.WriteLine($"Two sum of 6 in [3,3] is {String.Join(',', LeetDictionary.FindTwoSum([3, 3], 6))}");

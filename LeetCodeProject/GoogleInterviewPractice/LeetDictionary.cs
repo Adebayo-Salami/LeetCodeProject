@@ -78,22 +78,20 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
         public static int[] FindTwoSum(int[] numbers, int k)
         {
-            k = Math.Abs(k);
             var dict = new Dictionary<int, HashSet<int>>();
             for (int i = 0; i < numbers.Length; i++)
-                if (!dict.TryAdd(Math.Abs(numbers[i]), new HashSet<int>() { i }))
-                    dict[Math.Abs(numbers[i])].Add(i);
+                if (!dict.TryAdd(numbers[i], new HashSet<int>() { i }))
+                    dict[numbers[i]].Add(i);
 
             foreach (var pair in dict)
-                if(pair.Key <= k)
-                {
-                    var partner = k - pair.Key;
-                    var pairIndex = pair.Value.First();
-                    var partnerPair = dict.FirstOrDefault(x => x.Key == partner);
-                    if (partnerPair.Value != null)
-                        if (partnerPair.Value.Any(x => x != pairIndex))
-                            return [pairIndex, partnerPair.Value.FirstOrDefault(x => x != pairIndex)];
-                }
+            {
+                var partner = k - pair.Key;
+                var pairIndex = pair.Value.First();
+                var partnerPair = dict.FirstOrDefault(x => x.Key == partner);
+                if (partnerPair.Value != null)
+                    if (partnerPair.Value.Any(x => x != pairIndex))
+                        return [pairIndex, partnerPair.Value.FirstOrDefault(x => x != pairIndex)];
+            }
 
             return [];
         }
