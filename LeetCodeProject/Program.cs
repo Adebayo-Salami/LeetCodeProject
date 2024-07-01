@@ -230,6 +230,11 @@ namespace LeetCodeProject
 
             Console.WriteLine("Is Tree 1 same with previous last upper input: " + tree4.IsEqual(tree3));
             Console.WriteLine("Is Tree 1 same with Tree 2: " + tree4.IsEqual(tree5));
+
+            Console.WriteLine("Testing Validating Binary Search Tree - Attach debugger");
+            Console.WriteLine("Is Binary Search Tree Valid: " + tree5.IsBinarySearchTree());
+            tree5.TestIsBinarySearchTree();
+            Console.WriteLine("Is Non-Binary Search Tree Valid: " + tree5.IsBinarySearchTree());
         }
     }
 }

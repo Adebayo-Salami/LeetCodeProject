@@ -29,6 +29,24 @@ namespace LeetCodeProject.GoogleInterviewPractice
             public void SetLeft(int value) => _left = new TreeNode(value);
 
             public void SetRight(int value) => _right = new TreeNode(value);
+
+            public void MakeTreeNonBinarySearch()
+            {
+                _value = 20;
+                _left = new TreeNode(10)
+                {
+                    _left = new TreeNode(6)
+                    {
+                        _left = new TreeNode(3),
+                        _right = new TreeNode(8)
+                    },
+                    _right = new TreeNode(21)
+                };
+                _right = new TreeNode(30)
+                {
+                    _left = new TreeNode(4)
+                };
+            }
         }
 
         private TreeNode? _tree { get; set; }
@@ -212,7 +230,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
         public bool IsEqual(LeetBinaryTree tree)
         {
-            return IsTreeEqual(_tree, tree._tree);
+            return IsTreeEqual(_tree, tree?._tree);
         }
 
         private bool IsTreeEqual(TreeNode? node, TreeNode? secondNode)
@@ -233,6 +251,31 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 return false;
 
             return true;
+        }
+
+        public void TestIsBinarySearchTree()
+        {
+            if (_tree == null)
+                return;
+            _tree.MakeTreeNonBinarySearch();
+        }
+
+        public bool IsBinarySearchTree()
+        {
+            return IsTreeBinarySearch(_tree, int.MaxValue, int.MinValue);
+        }
+
+        private bool IsTreeBinarySearch(TreeNode? node, int max, int min)
+        {
+            if (node == null)
+                return true;
+
+            if (IsLeafNode(node))
+                if (node.Value > min && node.Value < max)
+                    return true;
+                else return false;
+
+            return IsTreeBinarySearch(node.Left, node.Value, min) && IsTreeBinarySearch(node.Right, max, node.Value);
         }
     }
 }
