@@ -370,5 +370,46 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return TraverseAreSiblings(node.Left, left, right) || TraverseAreSiblings(node.Right, left, right);
         }
+
+        public List<int> GetAncestors(int value)
+        {
+            return TraverseAncestors(_tree, new List<int>(), value, out bool isFound);
+        }
+
+        private List<int> TraverseAncestors(TreeNode? node, List<int> ancestors, int value, out bool isFound)
+        {
+            isFound = false;
+            if (node == null)
+            {
+                ancestors = new List<int>();
+                return ancestors;
+            }
+
+            if (node.Value == value)
+            {
+                isFound = true;
+                return ancestors;
+            }
+
+            if (IsLeafNode(node))
+            {
+                ancestors = new List<int>();
+                return ancestors;
+            }
+
+            //ancestors.Add(node.Value);
+            var leftAncestors = TraverseAncestors(node.Left, ancestors, value, out isFound);
+            if (isFound)
+            {
+                leftAncestors.Add(node.Value);
+                return leftAncestors;
+            }
+
+            var rightAncestors = TraverseAncestors(node.Right, ancestors, value, out isFound);
+            if (isFound)
+                rightAncestors.Add(node.Value);
+
+            return rightAncestors;
+        }
     }
 }
