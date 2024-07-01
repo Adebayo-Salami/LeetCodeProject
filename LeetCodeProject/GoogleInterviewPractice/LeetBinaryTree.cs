@@ -113,23 +113,8 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
         public void PrintBreadthFirst() // Same Level
         {
-            if (_tree == null)
-                return;
-
-            Console.WriteLine(_tree.Value);
-            TraverseBreadthFirst(_tree);
-        }
-
-        private void TraverseBreadthFirst(TreeNode tree)
-        {
-            if (tree.Left != null)
-                Console.WriteLine(tree.Left.Value);
-            if (tree.Right != null)
-                Console.WriteLine(tree.Right.Value);
-
-            if (tree.Left != null)
-                TraverseBreadthFirst(tree.Left);
-
+            for (var i = 0; i <= GetTreeHeight(); i++)
+                PrintValuesAtDeptK(i);
         }
 
         public void PrintDepthFirstPreOrder()   // Root, Left, Right

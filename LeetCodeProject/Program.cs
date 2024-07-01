@@ -216,6 +216,8 @@ namespace LeetCodeProject
                 tree3.Insert(test3[i]);
             Console.WriteLine("Heigth of Tree: " + tree3.GetTreeHeight());
             Console.WriteLine("Minimum Value of Tree: " + tree3.GetTreeMinimumValue());
+            tree3.PrintBreadthFirst();
+            Console.WriteLine("Done -breath first");
 
             int[] test4 = { 7, 4, 9, 1, 6, 8, 10 };
             Console.WriteLine("Inserting Tree 1: [7, 4, 9, 1, 6, 8, 10]");
