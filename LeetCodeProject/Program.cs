@@ -189,6 +189,24 @@ namespace LeetCodeProject
             Console.WriteLine("17 exists: " + tree.Find(17));
             Console.WriteLine("22 exists: " + tree.Find(22));
             Console.WriteLine("Done");
+
+            int[] test2 = { 20, 10, 30, 6, 14, 24, 3, 8, 26 };
+            Console.WriteLine("Inserting [20, 10, 30, 6, 14, 24, 3, 8, 26]");
+            var tree2 = new LeetBinaryTree(test2[0]);
+            for (int i = 1; i < test2.Length; i++)
+                tree2.Insert(test2[i]);
+
+            Console.WriteLine("Printing the Value In Depth First - Pre-order");
+            tree2.PrintDepthFirstPreOrder();
+            Console.WriteLine("Done");
+
+            Console.WriteLine("Printing the Value In Depth First - In-order");
+            tree2.PrintDepthFirstInOrder();
+            Console.WriteLine("Done");
+
+            Console.WriteLine("Printing the Value In Depth First - Post-order");
+            tree2.PrintDepthFirstPostOrder();
+            Console.WriteLine("Done");
         }
     }
 }

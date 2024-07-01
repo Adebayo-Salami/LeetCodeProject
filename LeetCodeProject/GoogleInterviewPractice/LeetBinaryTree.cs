@@ -91,5 +91,79 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return false;
         }
+
+        public void PrintBreadthFirst() // Same Level
+        {
+            if (_tree == null)
+                return;
+
+            TraverseBreadthFirst(_tree);
+        }
+
+        private void TraverseBreadthFirst(TreeNode tree)
+        {
+            Console.WriteLine(tree.Value);
+
+            if (tree.Left != null)
+                TraverseBreadthFirst(tree.Left);
+
+        }
+
+        public void PrintDepthFirstPreOrder()   // Root, Left, Right
+        {
+            if (_tree == null)
+                return;
+
+            TraverseDepthFirstPreOrder(_tree);
+        }
+
+        private void TraverseDepthFirstPreOrder(TreeNode tree)
+        {
+            Console.WriteLine(tree.Value);
+
+            if (tree.Left != null)
+                TraverseDepthFirstPreOrder(tree.Left);
+
+            if (tree.Right != null)
+                TraverseDepthFirstPreOrder(tree.Right);
+        }
+
+        public void PrintDepthFirstInOrder()   // Left, Root, Right
+        {
+            if (_tree == null)
+                return;
+
+            TraverseDepthFirstInOrder(_tree);
+        }
+
+        private void TraverseDepthFirstInOrder(TreeNode tree)
+        {
+            if (tree.Left != null)
+                TraverseDepthFirstInOrder(tree.Left);
+
+            Console.WriteLine(tree.Value);
+
+            if (tree.Right != null)
+                TraverseDepthFirstInOrder(tree.Right);
+        }
+
+        public void PrintDepthFirstPostOrder()   // Left, Right, Root
+        {
+            if (_tree == null)
+                return;
+
+            TraverseDepthFirstPostOrder(_tree);
+        }
+
+        private void TraverseDepthFirstPostOrder(TreeNode tree)
+        {
+            if (tree.Left != null)
+                TraverseDepthFirstPostOrder(tree.Left);
+
+            if (tree.Right != null)
+                TraverseDepthFirstPostOrder(tree.Right);
+
+            Console.WriteLine(tree.Value);
+        }
     }
 }
