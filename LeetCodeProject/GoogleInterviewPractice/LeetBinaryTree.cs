@@ -348,5 +348,27 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return TraverseContains(node.Left, value) || TraverseContains(node.Right, value);
         }
+
+        public bool AreSiblings(int left, int right)
+        {
+            return TraverseAreSiblings(_tree, left, right);
+        }
+
+        private bool TraverseAreSiblings(TreeNode node, int left, int right)
+        {
+            if (node == null)
+                return false;
+
+            if (IsLeafNode(node))
+                return false;
+
+            if (node.Left == null || node.Right == null)
+                return false;
+
+            if (node.Left.Value == left && node.Right.Value == right)
+                return true;
+
+            return TraverseAreSiblings(node.Left, left, right) || TraverseAreSiblings(node.Right, left, right);
+        }
     }
 }

@@ -250,6 +250,10 @@ namespace LeetCodeProject
             Console.WriteLine("Contains 21 " + tree5.Contains(21));
             Console.WriteLine("Contains 8 " + tree5.Contains(8));
             Console.WriteLine("Contains 180 " + tree5.Contains(180));
+            Console.WriteLine("Are 6 and 21 siblings: " + tree5.AreSiblings(6, 21));
+            Console.WriteLine("Are 3 and 8 siblings: " + tree5.AreSiblings(3, 8));
+            Console.WriteLine("Are 10 and 30 siblings: " + tree5.AreSiblings(10, 30));
+            Console.WriteLine("Are 21 and 4 siblings: " + tree5.AreSiblings(21, 4));
         }
     }
 }
