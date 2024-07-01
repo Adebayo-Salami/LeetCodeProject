@@ -303,10 +303,15 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
         public int Max()
         {
-            return TraverseMax(_tree, int.MinValue);
+            if (_tree == null)
+                return -1;
+
+            return IsBinarySearchTree()
+                ? TraverseMax_BinarySearchTree(_tree)
+                : TraverseMax_BinaryTree(_tree, int.MinValue);
         }
 
-        private int TraverseMax(TreeNode? node, int maxValue)
+        private int TraverseMax_BinaryTree(TreeNode? node, int maxValue)
         {
             if (node == null)
                 return maxValue;
@@ -314,9 +319,34 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (node.Value > maxValue)
                 maxValue = node.Value;
 
-            maxValue = TraverseMax(node.Left, maxValue);
-            maxValue = TraverseMax(node.Right, maxValue);
+            maxValue = TraverseMax_BinaryTree(node.Left, maxValue);
+            maxValue = TraverseMax_BinaryTree(node.Right, maxValue);
             return maxValue;
+        }
+
+        private int TraverseMax_BinarySearchTree(TreeNode node)
+        {
+            int maxValue = node.Value;
+            if (node.Right != null)
+                maxValue = TraverseMax_BinarySearchTree(node.Right);
+
+            return maxValue;
+        }
+
+        public bool Contains(int value)
+        {
+            return TraverseContains(_tree, value);
+        }
+
+        private bool TraverseContains(TreeNode? node, int value)
+        {
+            if (node == null)
+                return false;
+
+            if (node.Value == value)
+                return true;
+
+            return TraverseContains(node.Left, value) || TraverseContains(node.Right, value);
         }
     }
 }

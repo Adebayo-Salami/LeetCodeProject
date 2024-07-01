@@ -189,6 +189,10 @@ namespace LeetCodeProject
             Console.WriteLine("17 exists: " + tree.Find(17));
             Console.WriteLine("22 exists: " + tree.Find(22));
             Console.WriteLine("Size of Tree: " + tree.Size);
+            Console.WriteLine("Max Value of Tree: " + tree.Max());
+            Console.WriteLine("Tree contains 1: " + tree.Contains(1));
+            Console.WriteLine("Tree contains 17: " + tree.Contains(17));
+            Console.WriteLine("Tree contains 173: " + tree.Contains(173));
             tree.GetTreeMinimumValue();
             Console.WriteLine("Done");
 
@@ -243,6 +247,9 @@ namespace LeetCodeProject
             tree5.PrintValuesAtDeptK(1);
             Console.WriteLine("Count Leaves: " + tree5.CountLeaves());
             Console.WriteLine("Maximum Value is " + tree5.Max());
+            Console.WriteLine("Contains 21 " + tree5.Contains(21));
+            Console.WriteLine("Contains 8 " + tree5.Contains(8));
+            Console.WriteLine("Contains 180 " + tree5.Contains(180));
         }
     }
 }
