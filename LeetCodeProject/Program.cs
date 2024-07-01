@@ -30,7 +30,8 @@ namespace LeetCodeProject
             //RunLinkedListClass();
             //RunStackClass();
             //RunQueueClass();
-            RunHashClass();
+            //RunHashClass();
+            RunBinaryTreeClass();
         }
 
         static void RunArrayClass()
@@ -171,6 +172,16 @@ namespace LeetCodeProject
             Console.WriteLine($"Two sum of 9 in [2, 7, 11, 15] is {String.Join(',', LeetDictionary.FindTwoSum([2, 7, 11, 15], 9))}");
             Console.WriteLine($"Two sum of 6 in [3,2,4] is {String.Join(',', LeetDictionary.FindTwoSum([3, 2, 4], 6))}");
             Console.WriteLine($"Two sum of 6 in [3,3] is {String.Join(',', LeetDictionary.FindTwoSum([3, 3], 6))}");
+        }
+
+        static void RunBinaryTreeClass()
+        {
+            int[] test1 = { 10, 5, 15, 6, 1, 8, 12, 18, 17 };
+            Console.WriteLine("Inserting [10, 5, 15, 6, 1, 8, 12, 18, 17]");
+            var tree = new LeetBinaryTree(test1[0]);
+            for (int i = 1; i < test1.Length; i++)
+                tree.Insert(test1[i]);
+            Console.WriteLine("Done");
         }
     }
 }
