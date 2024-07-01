@@ -270,10 +270,8 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (node == null)
                 return true;
 
-            if (IsLeafNode(node))
-                if (node.Value > min && node.Value < max)
-                    return true;
-                else return false;
+            if (node.Value <= min || node.Value >= max)
+                return false;
 
             return IsTreeBinarySearch(node.Left, node.Value, min) && IsTreeBinarySearch(node.Right, max, node.Value);
         }
