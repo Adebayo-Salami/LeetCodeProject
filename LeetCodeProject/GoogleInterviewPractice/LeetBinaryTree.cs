@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LeetCodeProject.GoogleInterviewPractice
 {
@@ -97,12 +98,16 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (_tree == null)
                 return;
 
+            Console.WriteLine(_tree.Value);
             TraverseBreadthFirst(_tree);
         }
 
         private void TraverseBreadthFirst(TreeNode tree)
         {
-            Console.WriteLine(tree.Value);
+            if (tree.Left != null)
+                Console.WriteLine(tree.Left.Value);
+            if (tree.Right != null)
+                Console.WriteLine(tree.Right.Value);
 
             if (tree.Left != null)
                 TraverseBreadthFirst(tree.Left);
@@ -164,6 +169,70 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 TraverseDepthFirstPostOrder(tree.Right);
 
             Console.WriteLine(tree.Value);
+        }
+
+        public int GetTreeHeight()
+        {
+            return TreeHeight(_tree);
+        }
+
+        private int TreeHeight(TreeNode? tree)
+        {
+            if (tree == null)
+                return -1;
+
+            if (IsLeafNode(tree))
+                return 0;
+
+            return 1 + Math.Max(TreeHeight(tree.Left), TreeHeight(tree.Right));
+        }
+
+        public int GetTreeMinimumValue()
+        {
+            return TreeMinimumValue(_tree);
+        }
+
+        private int TreeMinimumValue(TreeNode? tree)
+        {
+            if (tree == null)
+                return int.MaxValue;
+
+            if (IsLeafNode(tree))
+                return tree.Value;
+
+            var left = TreeMinimumValue(tree.Left);
+            var right = TreeMinimumValue(tree.Right);
+            return Math.Min(Math.Min(left, right), tree.Value);
+        }
+
+        private bool IsLeafNode(TreeNode node)
+        {
+            return node.Left == null && node.Right == null;
+        }
+
+        public bool IsEqual(LeetBinaryTree tree)
+        {
+            return IsTreeEqual(_tree, tree._tree);
+        }
+
+        private bool IsTreeEqual(TreeNode? node, TreeNode? secondNode)
+        {
+            if (node == null && secondNode != null)
+                return false;
+            if (secondNode == null && node != null)
+                return false;
+            if (secondNode == null && node == null)
+                return true;
+
+            if (node.Value != secondNode.Value)
+                return false;
+
+            if (!IsTreeEqual(node.Left, secondNode.Left))
+                return false;
+            if (!IsTreeEqual(node.Right, secondNode.Right))
+                return false;
+
+            return true;
         }
     }
 }

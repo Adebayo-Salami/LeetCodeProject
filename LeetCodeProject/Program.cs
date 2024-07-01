@@ -188,6 +188,7 @@ namespace LeetCodeProject
             Console.WriteLine("18 exists: " + tree.Find(18));
             Console.WriteLine("17 exists: " + tree.Find(17));
             Console.WriteLine("22 exists: " + tree.Find(22));
+            tree.GetTreeMinimumValue();
             Console.WriteLine("Done");
 
             int[] test2 = { 20, 10, 30, 6, 14, 24, 3, 8, 26 };
@@ -207,6 +208,28 @@ namespace LeetCodeProject
             Console.WriteLine("Printing the Value In Depth First - Post-order");
             tree2.PrintDepthFirstPostOrder();
             Console.WriteLine("Done");
+
+            int[] test3 = { 7, 4, 9, 1, 6, 8, 10 };
+            Console.WriteLine("Inserting [7, 4, 9, 1, 6, 8, 10]");
+            var tree3 = new LeetBinaryTree(test3[0]);
+            for (int i = 1; i < test3.Length; i++)
+                tree3.Insert(test3[i]);
+            Console.WriteLine("Heigth of Tree: " + tree3.GetTreeHeight());
+            Console.WriteLine("Minimum Value of Tree: " + tree3.GetTreeMinimumValue());
+
+            int[] test4 = { 7, 4, 9, 1, 6, 8, 10 };
+            Console.WriteLine("Inserting Tree 1: [7, 4, 9, 1, 6, 8, 10]");
+            var tree4 = new LeetBinaryTree(test3[0]);
+            for (int i = 1; i < test4.Length; i++)
+                tree4.Insert(test4[i]);
+            int[] test5 = { 7, 4, 9, 1, 6, 8, 10, 0 };
+            Console.WriteLine("Inserting Tree 2: [7, 4, 9, 1, 6, 8, 10, 0]");
+            var tree5 = new LeetBinaryTree(test5[0]);
+            for (int i = 1; i < test5.Length; i++)
+                tree5.Insert(test5[i]);
+
+            Console.WriteLine("Is Tree 1 same with previous last upper input: " + tree4.IsEqual(tree3));
+            Console.WriteLine("Is Tree 1 same with Tree 2: " + tree4.IsEqual(tree5));
         }
     }
 }
