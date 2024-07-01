@@ -235,6 +235,9 @@ namespace LeetCodeProject
             Console.WriteLine("Is Binary Search Tree Valid: " + tree5.IsBinarySearchTree());
             tree5.TestIsBinarySearchTree();
             Console.WriteLine("Is Non-Binary Search Tree Valid: " + tree5.IsBinarySearchTree());
+
+            Console.WriteLine("Printing out values at distance 3 from root");
+            tree5.PrintValuesAtDeptK(1);
         }
     }
 }

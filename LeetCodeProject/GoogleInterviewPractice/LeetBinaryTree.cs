@@ -275,5 +275,25 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return IsTreeBinarySearch(node.Left, node.Value, min) && IsTreeBinarySearch(node.Right, max, node.Value);
         }
+
+        public void PrintValuesAtDeptK(int k)
+        {
+            TraverseToDepthK(_tree, k);
+        }
+
+        private void TraverseToDepthK(TreeNode? node,  int depth)
+        {
+            if (node == null)
+                return;
+
+            if (depth == 0)
+                Console.WriteLine(node.Value);
+            else
+            {
+                depth--;
+                TraverseToDepthK(node.Left, depth);
+                TraverseToDepthK(node.Right, depth);
+            }
+        }
     }
 }
