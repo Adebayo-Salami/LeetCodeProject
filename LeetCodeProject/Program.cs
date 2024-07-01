@@ -242,6 +242,7 @@ namespace LeetCodeProject
             Console.WriteLine("Printing out values at distance 3 from root");
             tree5.PrintValuesAtDeptK(1);
             Console.WriteLine("Count Leaves: " + tree5.CountLeaves());
+            Console.WriteLine("Maximum Value is " + tree5.Max());
         }
     }
 }

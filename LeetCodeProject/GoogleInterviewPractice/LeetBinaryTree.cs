@@ -300,5 +300,23 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return TraverseCountLeaves(node.Left) + TraverseCountLeaves(node.Right);
         }
+
+        public int Max()
+        {
+            return TraverseMax(_tree, int.MinValue);
+        }
+
+        private int TraverseMax(TreeNode? node, int maxValue)
+        {
+            if (node == null)
+                return maxValue;
+
+            if (node.Value > maxValue)
+                maxValue = node.Value;
+
+            maxValue = TraverseMax(node.Left, maxValue);
+            maxValue = TraverseMax(node.Right, maxValue);
+            return maxValue;
+        }
     }
 }
