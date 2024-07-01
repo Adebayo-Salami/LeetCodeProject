@@ -62,5 +62,34 @@ namespace LeetCodeProject.GoogleInterviewPractice
                     InsertNode(node.Right, value);
             }
         }
+
+        public bool Find(int value)
+        {
+            if (_tree == null)
+                return false;
+            if (_tree.Value == value)
+                return true;
+
+            return FindNode(_tree, value);
+        }
+
+        private bool FindNode(TreeNode tree, int value)
+        {
+            if (tree.Value == value)
+                return true;
+
+            if (value < tree.Value)
+            {
+                if (tree.Left != null)
+                    return FindNode(tree.Left, value);
+            }
+            else
+            {
+                if (tree.Right != null)
+                    return FindNode(tree.Right, value);
+            }
+
+            return false;
+        }
     }
 }

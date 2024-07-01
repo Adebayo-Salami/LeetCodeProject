@@ -181,6 +181,13 @@ namespace LeetCodeProject
             var tree = new LeetBinaryTree(test1[0]);
             for (int i = 1; i < test1.Length; i++)
                 tree.Insert(test1[i]);
+
+            Console.WriteLine("10 exists: " + tree.Find(10));
+            Console.WriteLine("6 exists: " + tree.Find(6));
+            Console.WriteLine("62 exists: " + tree.Find(62));
+            Console.WriteLine("18 exists: " + tree.Find(18));
+            Console.WriteLine("17 exists: " + tree.Find(17));
+            Console.WriteLine("22 exists: " + tree.Find(22));
             Console.WriteLine("Done");
         }
     }
