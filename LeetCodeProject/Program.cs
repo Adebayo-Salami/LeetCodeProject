@@ -188,6 +188,7 @@ namespace LeetCodeProject
             Console.WriteLine("18 exists: " + tree.Find(18));
             Console.WriteLine("17 exists: " + tree.Find(17));
             Console.WriteLine("22 exists: " + tree.Find(22));
+            Console.WriteLine("Size of Tree: " + tree.Size);
             tree.GetTreeMinimumValue();
             Console.WriteLine("Done");
 
@@ -240,6 +241,7 @@ namespace LeetCodeProject
 
             Console.WriteLine("Printing out values at distance 3 from root");
             tree5.PrintValuesAtDeptK(1);
+            Console.WriteLine("Count Leaves: " + tree5.CountLeaves());
         }
     }
 }

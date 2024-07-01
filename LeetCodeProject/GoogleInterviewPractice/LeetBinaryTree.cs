@@ -50,6 +50,8 @@ namespace LeetCodeProject.GoogleInterviewPractice
         }
 
         private TreeNode? _tree { get; set; }
+        private int _size;
+        public int Size => _size + 1;
 
         public LeetBinaryTree(int value)
         {
@@ -62,6 +64,8 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 _tree = new TreeNode(value);
             else
                 InsertNode(_tree, value);
+
+            _size++;
         }
 
         private void InsertNode(TreeNode node, int value)
@@ -279,6 +283,22 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 TraverseToDepthK(node.Left, depth);
                 TraverseToDepthK(node.Right, depth);
             }
+        }
+
+        public int CountLeaves()
+        {
+            return TraverseCountLeaves(_tree);
+        }
+
+        private int TraverseCountLeaves(TreeNode? node)
+        {
+            if (node == null)
+                return 0;
+
+            if (IsLeafNode(node))
+                return 1;
+
+            return TraverseCountLeaves(node.Left) + TraverseCountLeaves(node.Right);
         }
     }
 }
