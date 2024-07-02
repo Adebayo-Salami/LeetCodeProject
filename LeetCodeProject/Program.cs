@@ -31,7 +31,8 @@ namespace LeetCodeProject
             //RunStackClass();
             //RunQueueClass();
             //RunHashClass();
-            RunBinaryTreeClass();
+            //RunBinaryTreeClass();
+            RunAVLBinaryTreeClass();
         }
 
         static void RunArrayClass()
@@ -257,6 +258,14 @@ namespace LeetCodeProject
             Console.WriteLine("Ancestors of 3: " + String.Join(',', tree5.GetAncestors(3)));
             Console.WriteLine("Ancestors of 21: " + String.Join(',', tree5.GetAncestors(21)));
             Console.WriteLine("Ancestors of 4: " + String.Join(',', tree5.GetAncestors(4)));
+        }
+
+        static void RunAVLBinaryTreeClass()
+        {
+            var tree = new LeetAVLBinaryTree();
+            int[] value = { 1, 2, 3, 4, 5 };
+            for (int i = 0; i < value.Length; i++)
+                tree.Insert(value[i]);
         }
     }
 }
