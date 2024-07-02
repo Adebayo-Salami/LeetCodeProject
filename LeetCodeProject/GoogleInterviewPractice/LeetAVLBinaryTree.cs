@@ -70,7 +70,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             else
                 Insert(_tree, value);
 
-            _tree = BalanceTree(_tree);
+            _tree = BalanceTree(_tree, out bool isSkewed);
         }
 
         private void Insert(TreeNode node, int value)
@@ -91,8 +91,9 @@ namespace LeetCodeProject.GoogleInterviewPractice
             }
         }
 
-        private TreeNode? BalanceTree(TreeNode? node)
+        private TreeNode? BalanceTree(TreeNode? node, out bool isSkewed)
         {
+            isSkewed = false;
             if (node == null)
                 return node;
 
@@ -100,8 +101,8 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (balanceFactor >= -1 && balanceFactor <= 1)
                 return node;
 
-            node?.SetRightNode(BalanceTree(node?.Right));
-            node?.SetLeftNode(BalanceTree(node?.Left));
+            node?.SetRightNode(BalanceTree(node?.Right, out isSkewed));
+            node?.SetLeftNode(BalanceTree(node?.Left, out isSkewed));
 
             balanceFactor = Height(node?.Left) - Height(node?.Right);
             if (balanceFactor >= -1 && balanceFactor <= 1)
@@ -109,17 +110,24 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             if (balanceFactor < 1)   // Left Side is lacking
             {
-                var nextRightNode = node?.Right;
-                node?.ClearRight();
-                nextRightNode?.SetLeftNode(node);
-                node = nextRightNode;
+                if (!isSkewed)
+                {
+                    var nextRightNode = node?.Right;
+                    node?.ClearRight();
+                    nextRightNode?.SetLeftNode(node);
+                    node = nextRightNode;
+                }
             }
             else // Right Side is lacking
             {
-                var nextLeftNode = node?.Left;
-                node?.ClearLeft();
-                nextLeftNode?.SetRightNode(node);
-                node = nextLeftNode;
+                if (!isSkewed)
+                {
+                    var nextLeftNode = node?.Left;
+                    node?.ClearLeft();
+                    nextLeftNode?.SetRightNode(node);
+                    node = nextLeftNode;
+                }
+                
             }
             return node;
         }
