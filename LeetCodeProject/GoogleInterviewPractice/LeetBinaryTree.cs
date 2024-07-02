@@ -411,5 +411,45 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return rightAncestors;
         }
+
+        private bool IsCousins(TreeNode root, int x, int y)
+        {
+
+            var q = new Queue<TreeNode>();
+            q.Enqueue(root);
+
+
+            var inLevel = new Dictionary<int, TreeNode>();
+
+
+            //while (q.Count > 0)
+            //{
+            //    var size = q.Count();
+            //    while (size > 0)
+            //    {
+            //        var node = q.Dequeue();
+            //        if (node.left != null)
+            //        {
+            //            q.Enqueue(node.left);
+            //            inLevel[node.left.val] = node;
+            //        }
+            //        if (node.right != null)
+            //        {
+            //            q.Enqueue(node.right);
+            //            inLevel[node.right.val] = node;
+            //        }
+            //        size--;
+            //    }
+            //    if (inLevel.ContainsKey(x) && inLevel.ContainsKey(y) &&
+            //       inLevel[x] != inLevel[y])
+            //    {
+            //        return true;
+            //    }
+            //    inLevel.Clear();
+            //}
+
+
+            return false;
+        }
     }
 }
