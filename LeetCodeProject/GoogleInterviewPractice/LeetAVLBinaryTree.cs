@@ -70,7 +70,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             else
                 Insert(_tree, value);
 
-            _tree = BalanceTree2(_tree);
+            _tree = BalanceTree(_tree);
         }
 
         private void Insert(TreeNode node, int value)
@@ -91,7 +91,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             }
         }
 
-        private TreeNode? BalanceTree2(TreeNode? node)
+        private TreeNode? BalanceTree(TreeNode? node)
         {
             if (node == null)
                 return node;
@@ -100,8 +100,8 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (balanceFactor >= -1 && balanceFactor <= 1)
                 return node;
 
-            node?.SetRightNode(BalanceTree2(node?.Right));
-            node?.SetLeftNode(BalanceTree2(node?.Left));
+            node?.SetRightNode(BalanceTree(node?.Right));
+            node?.SetLeftNode(BalanceTree(node?.Left));
 
             var leftHeight = Height(node?.Left);
             var rightHeight = Height(node?.Right);
@@ -165,74 +165,6 @@ namespace LeetCodeProject.GoogleInterviewPractice
                     bottomNode?.SetLeftNode(middleNode);
                     bottomNode?.SetRightNode(node);
                     node = bottomNode;
-                }
-            }
-            return node;
-        }
-
-        private TreeNode? BalanceTree(TreeNode? node, out bool isSkewed)
-        {
-            isSkewed = false;
-            if (node == null)
-                return node;
-
-            var balanceFactor = Height(node?.Left) - Height(node?.Right);
-            if (balanceFactor >= -1 && balanceFactor <= 1)
-                return node;
-
-            node?.SetRightNode(BalanceTree(node?.Right, out isSkewed));
-            node?.SetLeftNode(BalanceTree(node?.Left, out isSkewed));
-
-            balanceFactor = Height(node?.Left) - Height(node?.Right);
-            if (balanceFactor >= -1 && balanceFactor <= 1)
-                return node;
-
-            if (balanceFactor < 1)
-                if (node?.Right?.Left != null)
-                    isSkewed = true;
-
-            if (balanceFactor > 1)
-                if (node?.Left?.Right != null)
-                    isSkewed = true;
-
-            if (balanceFactor < 1)   // Left Side is lacking
-            {
-                if (!isSkewed)
-                {
-                    var nextRightNode = node?.Right;
-                    node?.ClearRight();
-                    nextRightNode?.SetLeftNode(node);
-                    node = nextRightNode;
-                }
-                else
-                {
-                    var bottomNode = node?.Right?.Left;
-                    node?.Right?.ClearLeft();
-                    var nextNode = node?.Right;
-                    node?.ClearRight();
-                    nextNode?.SetLeftNode(node);
-                    node = nextNode;
-                    node?.Left?.SetRightNode(bottomNode);
-                }
-            }
-            else // Right Side is lacking
-            {
-                if (!isSkewed)
-                {
-                    var nextLeftNode = node?.Left;
-                    node?.ClearLeft();
-                    nextLeftNode?.SetRightNode(node);
-                    node = nextLeftNode;
-                }
-                else
-                {
-                    var bottom = node?.Left?.Right;
-                    node?.Left?.ClearRight();
-                    var nextNode = node?.Left;
-                    node?.ClearLeft();
-                    nextNode?.SetRightNode(node);
-                    node = nextNode;
-                    node?.Right?.SetLeftNode(bottom);
                 }
             }
             return node;
