@@ -272,6 +272,10 @@ namespace LeetCodeProject
             for (int i = 0; i < value2.Length; i++)
                 tree2.Insert(value2[i]);
 
+            var tree3 = new LeetAVLBinaryTree();
+            int[] value3 = { 12, 3, 9, 4, 6, 2 };
+            for (int i = 0; i < value3.Length; i++)
+                tree3.Insert(value3[i]);
 
         }
     }

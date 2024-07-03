@@ -132,14 +132,11 @@ namespace LeetCodeProject.GoogleInterviewPractice
                     var bottomNode = node?.Right?.Left;
                     node?.ClearRight();
                     middleNode?.ClearLeft();
-                    middleNode?.SetLeftNode(node?.Left);
-                    node?.ClearLeft();
-                    middleNode?.SetRightNode(node);
-                    node = middleNode;
-                    if (bottomNode?.Value < node?.Value)
-                        node?.Left?.SetRightNode(bottomNode);
-                    else
-                        node?.Right?.SetLeftNode(bottomNode);
+
+                    bottomNode?.SetRightNode(middleNode);
+                    bottomNode?.SetLeftNode(node);
+                    node = bottomNode;
+
                 }
             }
             else // Right Side is lacking
@@ -161,7 +158,13 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 }
                 else
                 {
-
+                    var middleNode = node?.Left;
+                    var bottomNode = node?.Left?.Right;
+                    node?.ClearLeft();
+                    middleNode?.ClearRight();
+                    bottomNode?.SetLeftNode(middleNode);
+                    bottomNode?.SetRightNode(node);
+                    node = bottomNode;
                 }
             }
             return node;
