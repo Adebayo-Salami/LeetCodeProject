@@ -108,9 +108,18 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (balanceFactor >= -1 && balanceFactor <= 1)
                 return node;
 
+            //if (balanceFactor < 1)
+            //    if (Height(node?.Right?.Left) > 0)
+            //        isSkewed = true;
+
             if (balanceFactor < 1)
-                if (Height(node?.Right?.Left) > 0)
+            {
+                //var heu = Height(node?.Right?.Left);
+                if (node?.Right?.Left != null)
+                {
                     isSkewed = true;
+                }
+            }
 
             if (balanceFactor > 1)
                 if (Height(node?.Left?.Right) > 0)
@@ -133,8 +142,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
                     node?.ClearRight();
                     nextNode?.SetLeftNode(node);
                     node = nextNode;
-                    Insert(node, bottomNode.Value);
-                    BalanceTree(node, out bool notNeeded);
+                    node?.Left?.SetRightNode(bottomNode);
                 }
             }
             else // Right Side is lacking
