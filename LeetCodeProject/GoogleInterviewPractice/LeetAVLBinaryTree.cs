@@ -70,7 +70,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             else
                 Insert(_tree, value);
 
-            _tree = BalanceTree(_tree, out bool isSkewed);
+            _tree = BalanceTree2(_tree);
         }
 
         private void Insert(TreeNode node, int value)
@@ -91,6 +91,82 @@ namespace LeetCodeProject.GoogleInterviewPractice
             }
         }
 
+        private TreeNode? BalanceTree2(TreeNode? node)
+        {
+            if (node == null)
+                return node;
+
+            var balanceFactor = Height(node?.Left) - Height(node?.Right);
+            if (balanceFactor >= -1 && balanceFactor <= 1)
+                return node;
+
+            node?.SetRightNode(BalanceTree2(node?.Right));
+            node?.SetLeftNode(BalanceTree2(node?.Left));
+
+            var leftHeight = Height(node?.Left);
+            var rightHeight = Height(node?.Right);
+            balanceFactor = leftHeight - rightHeight;
+            if (balanceFactor >= -1 && balanceFactor <= 1)
+                return node;
+
+            if (balanceFactor < 1)   // Left Side is lacking
+            {
+                if(rightHeight > leftHeight)
+                {
+                    var nextRightNode = node?.Right;
+                    node?.ClearRight();
+                    var prevLeftNode = nextRightNode?.Left;
+                    nextRightNode?.SetLeftNode(node);
+                    node = nextRightNode;
+                    if(prevLeftNode != null)
+                    {
+                        if (prevLeftNode.Value < node?.Value)
+                            node?.Left?.SetRightNode(prevLeftNode);
+                        else
+                            node?.Right?.SetLeftNode(prevLeftNode);
+                    }
+                }
+                else
+                {
+                    var middleNode = node?.Right;
+                    var bottomNode = node?.Right?.Left;
+                    node?.ClearRight();
+                    middleNode?.ClearLeft();
+                    middleNode?.SetLeftNode(node?.Left);
+                    node?.ClearLeft();
+                    middleNode?.SetRightNode(node);
+                    node = middleNode;
+                    if (bottomNode?.Value < node?.Value)
+                        node?.Left?.SetRightNode(bottomNode);
+                    else
+                        node?.Right?.SetLeftNode(bottomNode);
+                }
+            }
+            else // Right Side is lacking
+            {
+                if(leftHeight > rightHeight)
+                {
+                    var nextLeftNode = node?.Left;
+                    node?.ClearLeft();
+                    var prevRightNode = nextLeftNode?.Right;
+                    nextLeftNode?.SetRightNode(node);
+                    node = nextLeftNode;
+                    if (prevRightNode != null)
+                    {
+                        if (prevRightNode.Value < node?.Value)
+                            node?.Left?.SetRightNode(prevRightNode);
+                        else
+                            node?.Right?.SetLeftNode(prevRightNode);
+                    }
+                }
+                else
+                {
+
+                }
+            }
+            return node;
+        }
+
         private TreeNode? BalanceTree(TreeNode? node, out bool isSkewed)
         {
             isSkewed = false;
@@ -108,21 +184,12 @@ namespace LeetCodeProject.GoogleInterviewPractice
             if (balanceFactor >= -1 && balanceFactor <= 1)
                 return node;
 
-            //if (balanceFactor < 1)
-            //    if (Height(node?.Right?.Left) > 0)
-            //        isSkewed = true;
-
             if (balanceFactor < 1)
-            {
-                //var heu = Height(node?.Right?.Left);
                 if (node?.Right?.Left != null)
-                {
                     isSkewed = true;
-                }
-            }
 
             if (balanceFactor > 1)
-                if (Height(node?.Left?.Right) > 0)
+                if (node?.Left?.Right != null)
                     isSkewed = true;
 
             if (balanceFactor < 1)   // Left Side is lacking
@@ -154,7 +221,16 @@ namespace LeetCodeProject.GoogleInterviewPractice
                     nextLeftNode?.SetRightNode(node);
                     node = nextLeftNode;
                 }
-                
+                else
+                {
+                    var bottom = node?.Left?.Right;
+                    node?.Left?.ClearRight();
+                    var nextNode = node?.Left;
+                    node?.ClearLeft();
+                    nextNode?.SetRightNode(node);
+                    node = nextNode;
+                    node?.Right?.SetLeftNode(bottom);
+                }
             }
             return node;
         }
