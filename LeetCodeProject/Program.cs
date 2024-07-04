@@ -295,6 +295,11 @@ namespace LeetCodeProject
             for (int i = 0; i < value.Length; i++)
                 tree.Insert(value[i]);
             tree.Remove();
+
+            var tree2 = new LeetHeap();
+            int[] value2 = { 10, 5, 17, 4, 22 };
+            for (int i = 0; i < value2.Length; i++)
+                tree2.Insert(value2[i]);
         }
     }
 }
