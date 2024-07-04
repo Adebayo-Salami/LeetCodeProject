@@ -300,6 +300,7 @@ namespace LeetCodeProject
             int[] value2 = { 10, 5, 17, 4, 22 };
             for (int i = 0; i < value2.Length; i++)
                 tree2.Insert(value2[i]);
+            tree2.Remove();
         }
     }
 }
