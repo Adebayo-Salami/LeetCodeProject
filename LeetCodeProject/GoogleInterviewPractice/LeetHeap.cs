@@ -195,7 +195,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             Remove(_tree);
         }
 
-        private void Remove(TreeNode node)
+        private void Remove(TreeNode node)  // Doesn't support removing when only one node exists on the tree
         {
             var lastNode = PluckLastNode(node, node, null, out var parentNode);
             if (parentNode?.Right == lastNode)
