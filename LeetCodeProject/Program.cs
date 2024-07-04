@@ -32,7 +32,8 @@ namespace LeetCodeProject
             //RunQueueClass();
             //RunHashClass();
             //RunBinaryTreeClass();
-            RunAVLBinaryTreeClass();
+            //RunAVLBinaryTreeClass();
+            RunHeapClass();
         }
 
         static void RunArrayClass()
@@ -285,6 +286,14 @@ namespace LeetCodeProject
             Console.WriteLine("Is Tree 2 a perfect node: " + tree2.IsPerfect());
             Console.WriteLine("Is Tree 3 a perfect node: " + tree3.IsPerfect());
             Console.WriteLine("Is Perfect Tree a perfect node: " + perfectTree.IsPerfect());
+        }
+
+        static void RunHeapClass()
+        {
+            var tree = new LeetHeap();
+            int[] value = { 15, 10, 3, 8, 12, 9, 4, 1, 24 };
+            for (int i = 0; i < value.Length; i++)
+                tree.Insert(value[i]);
         }
     }
 }
