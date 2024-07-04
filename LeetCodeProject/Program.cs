@@ -294,6 +294,7 @@ namespace LeetCodeProject
             int[] value = { 15, 10, 3, 8, 12, 9, 4, 1, 24 };
             for (int i = 0; i < value.Length; i++)
                 tree.Insert(value[i]);
+            tree.Remove();
         }
     }
 }

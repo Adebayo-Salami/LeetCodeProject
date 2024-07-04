@@ -186,5 +186,90 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return IsComplete(node.Left, height - 1) && IsComplete(node.Right, height - 1);
         }
+
+        public void Remove()
+        {
+            if (_tree == null)
+                return;
+
+            Remove(_tree);
+        }
+
+        private void Remove(TreeNode node)
+        {
+            var lastNode = PluckLastNode(node, node, null, out var parentNode);
+            if (parentNode?.Right == lastNode)
+                parentNode.ClearRight();
+            if (parentNode?.Left == lastNode)
+                parentNode.ClearLeft();
+
+            node.SetValue(lastNode.Value);
+            ArrangeNode(node);
+        }
+
+        private void ArrangeNode(TreeNode? node)
+        {
+            if (node == null)
+                return;
+
+            if(node.Left != null)
+                if(node.Left.Value > node.Value)
+                {
+                    var temp = node.Value;
+                    node.SetValue(node.Left.Value);
+                    node.Left.SetValue(temp);
+                    ArrangeNode(node.Left);
+                }
+
+            if(node.Right != null)
+                if(node.Right.Value > node.Value)
+                {
+                    var temp = node.Value;
+                    node.SetValue(node.Right.Value);
+                    node.Right.SetValue(temp);
+                    ArrangeNode(node.Right);
+                }
+
+        }
+
+        private TreeNode GetLastNode(TreeNode? node, TreeNode lastNode)
+        {
+            if (node == null)
+                return lastNode;
+
+            var leftHeight = Height(node.Left);
+            var rightHeight = Height(node.Right);
+            if (leftHeight > rightHeight)
+                return GetLastNode(node.Left, node);
+            else if (leftHeight == rightHeight)
+                return GetLastNode(node.Right, node);
+
+            throw new Exception("Should never get here in a heap!");
+        }
+
+        private TreeNode PluckLastNode(TreeNode? node, TreeNode lastNode, TreeNode? pNode, out TreeNode? parentNode)
+        {
+            parentNode = pNode;
+            if (node == null)
+                return lastNode;
+
+            var leftHeight = Height(node.Left);
+            var rightHeight = Height(node.Right);
+            
+            if (leftHeight > rightHeight)
+            {
+                if (node.Left != null)
+                    pNode = node;
+                return PluckLastNode(node.Left, node, pNode, out parentNode);
+            }
+            else if (leftHeight == rightHeight)
+            {
+                if (node.Right != null)
+                    pNode = node;
+                return PluckLastNode(node.Right, node, pNode, out parentNode);
+            }
+
+            throw new Exception("Should never get here in a heap!");
+        }
     }
 }
