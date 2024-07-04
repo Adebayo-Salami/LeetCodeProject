@@ -177,5 +177,41 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return 1 + Math.Max(Height(node.Left), Height(node.Right));
         }
+
+        private bool IsBalanced(TreeNode? node)
+        {
+            if (node == null)
+                return false;
+
+            var balanceFactor = Height(node?.Left) - Height(node?.Right);
+            if (balanceFactor >= -1 && balanceFactor <= 1)
+                return false;
+
+            return true;
+        }
+
+        public bool IsPerfect()
+        {
+            return IsPerfect(_tree);
+        }
+
+        private bool IsPerfect(TreeNode? node)
+        {
+            if (node == null)
+                return false;
+
+            if (IsLeafNode(node))
+                return true;
+
+            if (node.Left == null || node.Right == null)
+                return false;
+
+            return IsPerfect(node.Left) && IsPerfect(node.Right);
+        }
+
+        private bool IsLeafNode(TreeNode node)
+        {
+            return node.Left == null && node.Right == null;
+        }
     }
 }

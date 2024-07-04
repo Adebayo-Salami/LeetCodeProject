@@ -277,6 +277,14 @@ namespace LeetCodeProject
             for (int i = 0; i < value3.Length; i++)
                 tree3.Insert(value3[i]);
 
+            var perfectTree = new LeetAVLBinaryTree();
+            int[] perfectValues = { 6, 4, 8, 1, 5, 7, 9 };
+            for (int i = 0; i < perfectValues.Length; i++)
+                perfectTree.Insert(perfectValues[i]);
+
+            Console.WriteLine("Is Tree 2 a perfect node: " + tree2.IsPerfect());
+            Console.WriteLine("Is Tree 3 a perfect node: " + tree3.IsPerfect());
+            Console.WriteLine("Is Perfect Tree a perfect node: " + perfectTree.IsPerfect());
         }
     }
 }
