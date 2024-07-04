@@ -187,16 +187,29 @@ namespace LeetCodeProject.GoogleInterviewPractice
             return IsComplete(node.Left, height - 1) && IsComplete(node.Right, height - 1);
         }
 
-        public void Remove()
+        public int Remove()
         {
             if (_tree == null)
-                return;
+                throw new NullReferenceException();
 
-            Remove(_tree);
+            if (IsLeafNode(_tree))
+            {
+                int val = _tree.Value;
+                _tree = null;
+                return val;
+            }
+
+            return Remove(_tree);
         }
 
-        private void Remove(TreeNode node)  // Doesn't support removing when only one node exists on the tree
+        private bool IsLeafNode(TreeNode node)
         {
+            return node.Left == null && node.Right == null;
+        }
+
+        private int Remove(TreeNode node)  // Doesn't support removing when only one node exists on the tree
+        {
+            var val = node.Value;
             var lastNode = PluckLastNode(node, node, null, out var parentNode);
             if (parentNode?.Right == lastNode)
                 parentNode.ClearRight();
@@ -205,6 +218,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             node.SetValue(lastNode.Value);
             ArrangeNode(node);
+            return val;
         }
 
         private void ArrangeNode(TreeNode? node)
@@ -271,5 +285,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             throw new Exception("Should never get here in a heap!");
         }
+
+        public bool IsEmpty => _tree == null;
     }
 }

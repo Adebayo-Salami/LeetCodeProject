@@ -301,6 +301,14 @@ namespace LeetCodeProject
             for (int i = 0; i < value2.Length; i++)
                 tree2.Insert(value2[i]);
             tree2.Remove();
+
+            var heap = new LeetHeap();
+            int[] numbers = { 5, 3, 10, 1, 4, 2 };
+            for (int i = 0; i < numbers.Length; i++)
+                heap.Insert(numbers[i]);
+
+            while (!heap.IsEmpty)
+                Console.WriteLine(heap.Remove());
         }
     }
 }
