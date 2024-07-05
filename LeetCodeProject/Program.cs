@@ -18,8 +18,8 @@ namespace LeetCodeProject
             //ZigzagConversion.Run();
             //MinimumLengthSubArray.Run();
             //ReverseInteger.Run();
-            //StringToInteger.Run();
-            RunGoogleInterviewPrepCode();
+            StringToInteger.Run();
+            //RunGoogleInterviewPrepCode();
 
             Console.ReadKey();
         }
