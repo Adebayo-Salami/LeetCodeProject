@@ -58,5 +58,50 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 Insert(item, word, ++index);
             }
         }
+
+        public bool Contains(string word)
+        {
+            if (String.IsNullOrWhiteSpace(word))
+                return false;
+            return Contains(_root, word.Trim().ToUpper().ToCharArray(), 0);
+        }
+
+        private bool Contains(LeetTriesNode node, char[] word, int index)
+        {
+            if (word.Length == 0)
+                return false;
+
+            if (index >= word.Length)
+                return false;
+
+            bool isEndOfWord = index == (word.Length - 1);
+            char letter = word[index];
+            node.Children.TryGetValue(letter, out LeetTriesNode? item);
+            if (item == null)
+                return false;
+            else
+            {
+                if (isEndOfWord && item.IsEndOfWord) return true;
+                return Contains(item, word, ++index);
+            }
+        }
+
+        public void Print()
+        {
+            Print(_root, "");
+        }
+
+        private void Print(LeetTriesNode node, string word)
+        {
+            if (node == null)
+                return;
+
+            word = word + node.Value;
+            if (node.IsEndOfWord)
+                Console.WriteLine("Word found: " + word);
+
+            foreach (var child in node.Children.Values)
+                Print(child, word);
+        }
     }
 }

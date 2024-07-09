@@ -326,6 +326,17 @@ namespace LeetCodeProject
             tries.Insert("book");
             tries.Insert("border");
             tries.Insert("cat");
+
+            var tries2 = new LeetTries();
+            tries2.Insert("cat");
+            tries2.Insert("can");
+            tries2.Insert("canada");
+            Console.WriteLine("Contains cat : " + tries2.Contains("cat"));
+            Console.WriteLine("Contains canad : " + tries2.Contains("canad"));
+            Console.WriteLine("Contains Empty String : " + tries2.Contains(String.Empty));
+            Console.WriteLine("Contains Canada : " + tries2.Contains("Canada"));
+            Console.WriteLine("Contains null : " + tries2.Contains(null));
+            tries2.Print();
         }
     }
 }
