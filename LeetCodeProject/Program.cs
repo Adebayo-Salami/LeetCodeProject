@@ -33,7 +33,8 @@ namespace LeetCodeProject
             //RunHashClass();
             //RunBinaryTreeClass();
             //RunAVLBinaryTreeClass();
-            RunHeapClass();
+            //RunHeapClass();
+            RunTriesClass();
         }
 
         static void RunArrayClass()
@@ -317,9 +318,14 @@ namespace LeetCodeProject
             var heap2 = new ArrayLeetHeap(numbers2, false);
             Console.WriteLine("Is Max Heap: " + heap2.IsMaxHeap());
         }
-        //     1
-        //  3      2
-        //5   4  8
-        // [1, 3, 2, 5, 4, 8]
+
+        static void RunTriesClass()
+        {
+            var tries = new LeetTries();
+            tries.Insert("boy");
+            tries.Insert("book");
+            tries.Insert("border");
+            tries.Insert("cat");
+        }
     }
 }
