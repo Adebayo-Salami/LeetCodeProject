@@ -337,6 +337,19 @@ namespace LeetCodeProject
             Console.WriteLine("Contains Canada : " + tries2.Contains("Canada"));
             Console.WriteLine("Contains null : " + tries2.Contains(null));
             tries2.Print();
+            Console.WriteLine("-----------------");
+
+            var tries3 = new LeetTries();
+            tries3.Insert("car");
+            tries3.Insert("care");
+            tries3.Print();
+            Console.WriteLine("Removing car");
+            tries3.Remove("car");
+            tries3.Print();
+            Console.WriteLine("Removing care");
+            tries3.Remove("care");
+            tries3.Print();
+            Console.WriteLine("--------------");
         }
     }
 }

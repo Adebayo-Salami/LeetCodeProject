@@ -103,5 +103,46 @@ namespace LeetCodeProject.GoogleInterviewPractice
             foreach (var child in node.Children.Values)
                 Print(child, word);
         }
+
+        public void Remove(string word)
+        {
+            if (String.IsNullOrWhiteSpace(word))
+                return;
+
+            Remove(_root, word.Trim().ToUpper().ToCharArray(), 0);
+        }
+
+        private bool Remove(LeetTriesNode node, char[] word, int index)
+        {
+            if (node == null)
+                return false;
+
+            if (index >= word.Length)
+                return false;
+
+            bool isEndOfWord = index == (word.Length - 1);
+            char letter = word[index];
+            node.Children.TryGetValue(letter, out LeetTriesNode? item);
+            if (item == null)
+                return false;
+            else
+            {
+                if (isEndOfWord)
+                {
+                    if (!item.IsEndOfWord)
+                        return false;
+
+                    item.IsEndOfWord = false;
+                    return !item.Children.Any();
+                }
+                bool cleanUp = Remove(item, word, ++index);
+                if (cleanUp)
+                    item.Children.Remove(word[index]);
+                if (node == _root && cleanUp)
+                    node.Children.Remove(letter);
+            }
+
+            return !item.Children.Any();
+        }
     }
 }
