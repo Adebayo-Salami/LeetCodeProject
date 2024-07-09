@@ -311,7 +311,7 @@ namespace LeetCodeProject
                 Console.WriteLine(heap.Remove());
 
             int[] numbers2 = { 5, 3, 8, 4, 1, 2 };
-            var result = heap.KthLargestNumber(numbers2, 2);
+            var result = heap.KthLargestNumber(numbers2, 0);
             Console.WriteLine("2nd Largest number in { 5, 3, 8, 4, 1, 2 } is " + result);
         }
     }

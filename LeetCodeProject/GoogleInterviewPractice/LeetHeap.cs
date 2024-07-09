@@ -292,7 +292,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
         {
             int result = -1;
             if (k >= array.Length)
-                return result;
+                throw new InvalidOperationException();
 
             Heapify(array);
             for (int i = 0; i < k; i++)
@@ -306,6 +306,12 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 Heapify(array, i);
         }
 
+        private void NonOptimizedHeapify(int[] array)
+        {
+            for (int i = 0; i < array.Length; i++)
+                Heapify(array, i);
+        }
+
         private void Heapify(int[] array, int index)
         {
             var largerIndex = index;
@@ -316,7 +322,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             var rightChildIndex = GetRightChildIndex(index);
             if (rightChildIndex < array.Length)
-                if (array[rightChildIndex] > array[index])
+                if (array[rightChildIndex] > array[largerIndex])
                     largerIndex = rightChildIndex;
 
             if (index == largerIndex)
@@ -336,7 +342,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             for (int i = 1; i < array.Length - 1; i++)
                 newArray[i] = array[i];
 
-            Heapify(newArray, 0);
+            Heapify(newArray);
             return result;
         }
 
