@@ -313,6 +313,13 @@ namespace LeetCodeProject
             int[] numbers2 = { 5, 3, 8, 4, 1, 2 };
             var result = heap.KthLargestNumber(numbers2, 0);
             Console.WriteLine("2nd Largest number in { 5, 3, 8, 4, 1, 2 } is " + result);
+
+            var heap2 = new ArrayLeetHeap(numbers2, false);
+            Console.WriteLine("Is Max Heap: " + heap2.IsMaxHeap());
         }
+        //     1
+        //  3      2
+        //5   4  8
+        // [1, 3, 2, 5, 4, 8]
     }
 }
