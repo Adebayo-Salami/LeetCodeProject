@@ -18,8 +18,8 @@ namespace LeetCodeProject
             //ZigzagConversion.Run();
             //MinimumLengthSubArray.Run();
             //ReverseInteger.Run();
-            StringToInteger.Run();
-            //RunGoogleInterviewPrepCode();
+            //StringToInteger.Run();
+            RunGoogleInterviewPrepCode();
 
             Console.ReadKey();
         }
@@ -309,6 +309,10 @@ namespace LeetCodeProject
 
             while (!heap.IsEmpty)
                 Console.WriteLine(heap.Remove());
+
+            int[] numbers2 = { 5, 3, 8, 4, 1, 2 };
+            var result = heap.KthLargestNumber(numbers2, 2);
+            Console.WriteLine("2nd Largest number in { 5, 3, 8, 4, 1, 2 } is " + result);
         }
     }
 }

@@ -287,5 +287,70 @@ namespace LeetCodeProject.GoogleInterviewPractice
         }
 
         public bool IsEmpty => _tree == null;
+
+        public int KthLargestNumber(int[] array, int k)
+        {
+            int result = -1;
+            if (k >= array.Length)
+                return result;
+
+            Heapify(array);
+            for (int i = 0; i < k; i++)
+                result = RemoveHeapify(array, out array);
+            return result;
+        }
+
+        public void Heapify(int[] array)
+        {
+            for (int i = GetLastParentIndex(array.Length); i >= 0; i--)
+                Heapify(array, i);
+        }
+
+        private void Heapify(int[] array, int index)
+        {
+            var largerIndex = index;
+            var leftIndex = GetLeftChildIndex(index);
+            if (leftIndex < array.Length)
+                if (array[leftIndex] > array[index])
+                    largerIndex = leftIndex;
+
+            var rightChildIndex = GetRightChildIndex(index);
+            if (rightChildIndex < array.Length)
+                if (array[rightChildIndex] > array[index])
+                    largerIndex = rightChildIndex;
+
+            if (index == largerIndex)
+                return;
+
+            Swap(array, index, largerIndex);
+            Heapify(array, largerIndex);
+        }
+
+        private int RemoveHeapify(int[] array, out int[] newArray)
+        {
+            int result = array[0];
+
+            int lastValue = array[array.Length - 1];
+            newArray = new int[array.Length - 1];
+            newArray[0] = lastValue;
+            for (int i = 1; i < array.Length - 1; i++)
+                newArray[i] = array[i];
+
+            Heapify(newArray, 0);
+            return result;
+        }
+
+        private void Swap(int[] array, int first, int second)
+        {
+            var temp = array[first];
+            array[first] = array[second];
+            array[second] = temp;
+        }
+
+        private int GetLeftChildIndex(int index) => (index * 2 + 1);
+
+        private int GetRightChildIndex(int index) => (index * 2 + 2);
+
+        private int GetLastParentIndex(int arraySize) => arraySize / 2 - 1;
     }
 }
