@@ -34,7 +34,8 @@ namespace LeetCodeProject
             //RunBinaryTreeClass();
             //RunAVLBinaryTreeClass();
             //RunHeapClass();
-            RunTriesClass();
+            //RunTriesClass();
+            RunGraphClass();
         }
 
         static void RunArrayClass()
@@ -374,7 +375,24 @@ namespace LeetCodeProject
             Console.WriteLine("Auto Complete Suggestions For 'care' : " + String.Join(',', tries4.AutoComplete(input5)));
             var input6 = "e";
             Console.WriteLine("Auto Complete Suggestions For 'e' : " + String.Join(',', tries4.AutoComplete(input6)));
+            var input7 = "cargo";
+            Console.WriteLine("Auto Complete Suggestions For 'cargo' : " + String.Join(',', tries4.AutoComplete(input7)));
             Console.WriteLine("--------------------------");
+        }
+    
+        static void RunGraphClass()
+        {
+            var graph1 = new LeetGraphClass();
+            graph1.AddNode("A");
+            graph1.AddNode("B");
+            graph1.AddNode("C");
+            graph1.AddEdge("A", "B");
+            //graph1.AddEdge("B", "A");
+            graph1.AddEdge("A", "C");
+            //graph1.RemoveEdge("A", "C");
+            graph1.RemoveEdge("A", "D");
+            graph1.RemoveNode("B");
+            graph1.Print();
         }
     }
 }
