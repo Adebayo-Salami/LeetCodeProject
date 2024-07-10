@@ -22,6 +22,12 @@ namespace LeetCodeProject.GoogleInterviewPractice
             }
 
             public int Size => Children.Count;
+
+            public LeetTriesNode? GetChild(char c)
+            {
+                Children.TryGetValue(c, out LeetTriesNode? child);
+                return child;
+            }
         }
 
         private LeetTriesNode _root;
@@ -143,6 +149,54 @@ namespace LeetCodeProject.GoogleInterviewPractice
             }
 
             return !item.Children.Any();
+        }
+
+        public List<string> AutoComplete(string word)
+        {
+            if (String.IsNullOrWhiteSpace(word))
+                return new List<string>();
+
+            List<string> autoCompletedWords = new();
+            var wordChar = word.Trim().ToUpper().ToCharArray();
+            var nodeChild = _root.GetChild(wordChar[0]);
+            if (nodeChild != null)
+                AutoComplete(nodeChild, wordChar, 0, autoCompletedWords, "");
+
+            return autoCompletedWords;
+        }
+
+        private List<String> AutoComplete(LeetTriesNode node, char[] words,int index, List<string> autoCompletedWords, string word)
+        {
+            if (node == null)
+                return autoCompletedWords;
+
+            char letter = node.Value;
+            word = word + letter;
+            if(index < (words.Length - 1))
+            {
+                char wordLetter = words[index];
+                if (wordLetter == letter)
+                {
+                    char nextWordLetter = words[index + 1];
+                    var nextNode = node.GetChild(nextWordLetter);
+                    if (nextNode != null)
+                        return AutoComplete(nextNode, words, ++index, autoCompletedWords, word);
+                    else
+                        return autoCompletedWords;
+                }
+                else
+                    return autoCompletedWords;
+            }
+            else
+            {
+                if (node.IsEndOfWord)
+                    autoCompletedWords.Add(word);
+
+                foreach (var child in node.Children.Values)
+                    AutoComplete(child, [], 0, autoCompletedWords, word);
+            }
+
+            return autoCompletedWords;
         }
     }
 }

@@ -350,6 +350,31 @@ namespace LeetCodeProject
             tries3.Remove("care");
             tries3.Print();
             Console.WriteLine("--------------");
+
+            Console.WriteLine("--------------------Auto Complete-------------");
+            var tries4 = new LeetTries();
+            tries4.Insert("car");
+            tries4.Insert("card");
+            tries4.Insert("egg");
+            tries4.Insert("care");
+            tries4.Insert("careful");
+            Console.WriteLine("Printing words in trie");
+            tries4.Print();
+            Console.WriteLine("Testing Now");
+
+            var input1 = String.Empty;
+            Console.WriteLine("Auto Complete Suggestions For '' : " + String.Join(',', tries4.AutoComplete(input1)));
+            var input2 = "ca";
+            Console.WriteLine("Auto Complete Suggestions For 'ca' : " + String.Join(',', tries4.AutoComplete(input2)));
+            var input3 = "car";
+            Console.WriteLine("Auto Complete Suggestions For 'car' : " + String.Join(',', tries4.AutoComplete(input3)));
+            var input4 = "card";
+            Console.WriteLine("Auto Complete Suggestions For 'card' : " + String.Join(',', tries4.AutoComplete(input4)));
+            var input5 = "care";
+            Console.WriteLine("Auto Complete Suggestions For 'care' : " + String.Join(',', tries4.AutoComplete(input5)));
+            var input6 = "e";
+            Console.WriteLine("Auto Complete Suggestions For 'e' : " + String.Join(',', tries4.AutoComplete(input6)));
+            Console.WriteLine("--------------------------");
         }
     }
 }
