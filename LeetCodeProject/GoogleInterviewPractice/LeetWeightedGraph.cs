@@ -31,5 +31,15 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 _weight = weight;
             }
         }
+
+        public void AddNode(string value)
+        {
+
+        }
+
+        public void AddEdge(string from, string to, int weight)
+        {
+
+        }
     }
 }
