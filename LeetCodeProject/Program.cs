@@ -393,6 +393,38 @@ namespace LeetCodeProject
             graph1.RemoveEdge("A", "D");
             graph1.RemoveNode("B");
             graph1.Print();
+
+            var graph2 = new LeetGraphClass();
+            graph2.AddNode("A");
+            graph2.AddNode("B");
+            graph2.AddNode("C");
+            graph2.AddNode("D");
+            graph2.AddNode("E");
+            graph2.AddEdge("C", "A");
+            graph2.AddEdge("C", "B");
+            graph2.AddEdge("C", "D");
+            graph2.AddEdge("D", "E");
+            graph2.AddEdge("A", "B");
+            graph2.AddEdge("A", "E");
+            graph2.AddEdge("B", "E");
+            Console.WriteLine("Breadth First Result C: " + String.Join(',', graph2.TraversePrint_BreadthFirst("C")));
+            Console.WriteLine("Depth First Result C: " + String.Join(',', graph2.TraversePrint_DepthFirst("C")));
+
+            var graph3 = new LeetGraphClass();
+            graph3.AddNode("A");
+            graph3.AddNode("B");
+            graph3.AddNode("C");
+            graph3.AddNode("D");
+            graph3.AddEdge("A", "B");
+            graph3.AddEdge("B", "D");
+            graph3.AddEdge("D", "C");
+            graph3.AddEdge("A", "C");
+            Console.WriteLine("Depth First Result A: " + String.Join(',', graph3.TraversePrint_DepthFirst("A")));
+            Console.WriteLine("Depth First Result C: " + String.Join(',', graph3.TraversePrint_DepthFirst("C")));
+            Console.WriteLine("Depth First Result G: " + String.Join(',', graph3.TraversePrint_DepthFirst("G")));
+            Console.WriteLine("Breadth First Result A: " + String.Join(',', graph3.TraversePrint_BreadthFirst("A")));
+            Console.WriteLine("Breadth First Result C: " + String.Join(',', graph3.TraversePrint_BreadthFirst("C")));
+            Console.WriteLine("Breadth First Result G: " + String.Join(',', graph3.TraversePrint_BreadthFirst("G")));
         }
     }
 }
