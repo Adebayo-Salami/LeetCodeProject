@@ -164,34 +164,37 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
         public bool HasCycle()
         {
-            return HasCycle(_store.Values.ToList(), new HashSet<LeetGraphNode>(), new HashSet<LeetGraphNode>(), null);
+            var allNodes = _store.Values.ToList();
+            var visitingNodes = new HashSet<LeetGraphNode>();
+            var visitedNodes = new HashSet<LeetGraphNode>();
+            while (allNodes.Any())
+                if (HasCycle(allNodes, visitingNodes, visitedNodes, null))
+                    return true;
+
+            return false;
         }
 
-        private bool HasCycle(List<LeetGraphNode> allNodes, HashSet<LeetGraphNode> visitingNodes, HashSet<LeetGraphNode> visitedNode, LeetGraphNode nodeInView)
+        private bool HasCycle(List<LeetGraphNode> allNodes, HashSet<LeetGraphNode> visitingNodes, HashSet<LeetGraphNode> visitedNode, LeetGraphNode? node)
         {
-            if (!allNodes.Any())
+            if (!allNodes.Any() && !visitingNodes.Any())
                 return false;
 
-            if (nodeInView == null)
-            {
-                nodeInView = allNodes.First();
-                allNodes.Remove(nodeInView);
-                visitingNodes.Add(nodeInView);
-            }
+            var nodeInView = node ?? allNodes.First();
+            if (visitedNode.Contains(nodeInView))
+                return false;
+
+            if (visitingNodes.Contains(nodeInView))
+                return true;
+
+            allNodes.Remove(nodeInView);
+            visitingNodes.Add(nodeInView);
 
             foreach (var edge in _adjacentStore[nodeInView])
-            {
-                if (!allNodes.Contains(edge))
+                if (HasCycle(allNodes, visitingNodes, visitedNode, edge))
                     return true;
-                else
-                {
-                    var hasCycle = HasCycle(allNodes, visitingNodes, visitedNode, edge);
-                    if (hasCycle)
-                        return true;
-                }
-            }
 
-
+            visitingNodes.Remove(nodeInView);
+            visitedNode.Add(nodeInView);
             return false;
         }
     }

@@ -425,6 +425,32 @@ namespace LeetCodeProject
             Console.WriteLine("Breadth First Result A: " + String.Join(',', graph3.TraversePrint_BreadthFirst("A")));
             Console.WriteLine("Breadth First Result C: " + String.Join(',', graph3.TraversePrint_BreadthFirst("C")));
             Console.WriteLine("Breadth First Result G: " + String.Join(',', graph3.TraversePrint_BreadthFirst("G")));
+
+            var graph4 = new LeetGraphClass();
+            graph4.AddNode("A");
+            graph4.AddNode("B");
+            graph4.AddNode("C");
+            graph4.AddNode("D");
+            graph4.AddEdge("A", "B");
+            graph4.AddEdge("B", "C");
+            graph4.AddEdge("A", "C");
+            graph4.AddEdge("D", "A");
+            Console.WriteLine("-------------------------");
+            graph4.Print();
+            Console.WriteLine("Do we detect cycle in graph: " + graph4.HasCycle());
+
+            var graph5 = new LeetGraphClass();
+            graph5.AddNode("A");
+            graph5.AddNode("B");
+            graph5.AddNode("C");
+            graph5.AddNode("D");
+            graph5.AddEdge("A", "B");
+            graph5.AddEdge("B", "C");
+            graph5.AddEdge("C", "A");
+            graph5.AddEdge("D", "A");
+            Console.WriteLine("-------------------------");
+            graph5.Print();
+            Console.WriteLine("Do we detect cycle in graph: " + graph5.HasCycle());
         }
     }
 }
