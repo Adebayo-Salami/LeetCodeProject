@@ -134,5 +134,65 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return values;
         }
+
+        public string[] TopologicalSort()
+        {
+            Stack<LeetGraphNode> stack = new();
+            HashSet<LeetGraphNode> visited = new();
+
+            foreach (var node in _store.Values)
+                TopologicalSort(node, visited, stack);
+
+            List<string> sorted = new List<string>();
+            while (stack.Any())
+                sorted.Add(stack.Pop().Value);
+
+            return sorted.ToArray();
+        }
+
+        private void TopologicalSort(LeetGraphNode node, HashSet<LeetGraphNode> visited, Stack<LeetGraphNode> stach)
+        {
+            if (!visited.Contains(node))
+                return;
+
+            visited.Add(node);
+            foreach (var edge in _adjacentStore[node])
+                TopologicalSort(edge, visited, stach);
+
+            stach.Push(node);
+        }
+
+        public bool HasCycle()
+        {
+            return HasCycle(_store.Values.ToList(), new HashSet<LeetGraphNode>(), new HashSet<LeetGraphNode>(), null);
+        }
+
+        private bool HasCycle(List<LeetGraphNode> allNodes, HashSet<LeetGraphNode> visitingNodes, HashSet<LeetGraphNode> visitedNode, LeetGraphNode nodeInView)
+        {
+            if (!allNodes.Any())
+                return false;
+
+            if (nodeInView == null)
+            {
+                nodeInView = allNodes.First();
+                allNodes.Remove(nodeInView);
+                visitingNodes.Add(nodeInView);
+            }
+
+            foreach (var edge in _adjacentStore[nodeInView])
+            {
+                if (!allNodes.Contains(edge))
+                    return true;
+                else
+                {
+                    var hasCycle = HasCycle(allNodes, visitingNodes, visitedNode, edge);
+                    if (hasCycle)
+                        return true;
+                }
+            }
+
+
+            return false;
+        }
     }
 }
