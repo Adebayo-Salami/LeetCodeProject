@@ -16,6 +16,11 @@ namespace LeetCodeProject.GoogleInterviewPractice
             {
                 _value = value;
             }
+
+            public override string ToString()
+            {
+                return _value;
+            }
         }
 
         private class LeetWeightedGraphEdge
@@ -34,6 +39,11 @@ namespace LeetCodeProject.GoogleInterviewPractice
             public int Distance => _weight;
 
             public LeetWeightedGraphNode Destination => _to;
+
+            public override string ToString()
+            {
+                return _from + " -> " + _to;
+            }
         }
 
         private Dictionary<string, LeetWeightedGraphNode> _store;
