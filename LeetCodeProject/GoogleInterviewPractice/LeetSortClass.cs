@@ -11,13 +11,13 @@ namespace LeetCodeProject.GoogleInterviewPractice
         public static void RunTest()
         {
             int[] test1 = { 8, 2, 4, 1, 3 };
-            Console.WriteLine(String.Join(',', Sort(test1)));
+            Console.WriteLine(String.Join(',', SelectionSort(test1)));
 
             int[] test2 = { 7, 3, 1, 4, 6, 2, 3 };
-            Console.WriteLine(String.Join(',', Sort(test2)));
+            Console.WriteLine(String.Join(',', SelectionSort(test2)));
         }
 
-        public static int[] Sort(int[] numbers)
+        private static int[] BubbleSort(int[] numbers)
         {
             bool isSwapped = true;
             for(int i = 0; i < (numbers.Length - 1); i++)
@@ -43,6 +43,21 @@ namespace LeetCodeProject.GoogleInterviewPractice
             var temp = numbers[index];
             numbers[index] = numbers[newIndex];
             numbers[newIndex] = temp;
-        } 
+        }
+
+        private static int[] SelectionSort(int[] numbers)
+        {
+            for(int i = 0;i < (numbers.Length - 1);i++)
+            {
+                var lowestIndex = i;
+                for (int j = i + 1; j < numbers.Length; j++)
+                    if (numbers[j] < numbers[lowestIndex])
+                        lowestIndex = j;
+
+                if (lowestIndex != i)
+                    Swap(numbers, lowestIndex, i);
+            }
+            return numbers;
+        }
     }
 }
