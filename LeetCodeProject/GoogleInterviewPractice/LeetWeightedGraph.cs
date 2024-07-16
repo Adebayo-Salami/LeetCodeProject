@@ -168,17 +168,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 tracker.Add(vertice, new LeetWeight(null, int.MaxValue));
             tracker[location].Distance = 0;
             GetShortestDistance(location, tracker, 0, new HashSet<LeetWeightedGraphNode>(), new PriorityQueue<LeetWeightedGraphNode, int>());
-            var current = tracker[destination];
-            int distance = 0;
-            while (current.Location != location)
-            {
-                distance += current.Distance;
-                if (current.Location == null)
-                    break;
-                current = tracker[current.Location];
-            }
-
-            return distance;
+            return tracker[destination].Distance;
         }
 
         private void GetShortestDistance(LeetWeightedGraphNode currentLocation, Dictionary<LeetWeightedGraphNode, LeetWeight> tracker, int distance, HashSet<LeetWeightedGraphNode> visitedLocations, PriorityQueue<LeetWeightedGraphNode, int> destinations)
