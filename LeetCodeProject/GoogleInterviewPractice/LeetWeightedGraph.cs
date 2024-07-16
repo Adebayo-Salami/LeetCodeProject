@@ -171,6 +171,37 @@ namespace LeetCodeProject.GoogleInterviewPractice
             return tracker[destination].Distance;
         }
 
+        public string GetShortestPath(string from, string to)
+        {
+            _store.TryGetValue(from, out var location);
+            if (location == null)
+                return String.Empty;
+
+            _store.TryGetValue(to, out var destination);
+            if (destination == null)
+                return String.Empty;
+
+            Dictionary<LeetWeightedGraphNode, LeetWeight> tracker = new();
+            foreach (var vertice in _store.Values)
+                tracker.Add(vertice, new LeetWeight(null, int.MaxValue));
+            tracker[location].Distance = 0;
+            GetShortestDistance(location, tracker, 0, new HashSet<LeetWeightedGraphNode>(), new PriorityQueue<LeetWeightedGraphNode, int>());
+            var current = tracker[destination];
+            var stack = new Stack<string>();
+            stack.Push(to);
+            while(current != null)
+            {
+                if (current.Location == null)
+                    break;
+                stack.Push(current.Location.ToString());
+                current = tracker[current.Location];
+            }
+            var locations = new List<string>();
+            while (stack.Count > 0)
+                locations.Add(stack.Pop());
+            return String.Join(" -> ", locations);
+        }
+
         private void GetShortestDistance(LeetWeightedGraphNode currentLocation, Dictionary<LeetWeightedGraphNode, LeetWeight> tracker, int distance, HashSet<LeetWeightedGraphNode> visitedLocations, PriorityQueue<LeetWeightedGraphNode, int> destinations)
         {
             if (!visitedLocations.Contains(currentLocation))
@@ -186,7 +217,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
                             tracker[destination.Destination].Distance = newDistance;
                             tracker[destination.Destination].Location = currentLocation;
                         }
-                        destinations.Enqueue(destination.Destination, destination.Distance);
+                        destinations.Enqueue(destination.Destination, destination.Distance);    // This should be in the above if statement line 204/205
                     }
                 }
             }

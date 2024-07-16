@@ -477,7 +477,18 @@ namespace LeetCodeProject
             graph2.AddEdge("D", "C", 1);
             graph2.AddEdge("D", "B", 6);
             graph2.AddEdge("B", "E", 1);
-            Console.WriteLine("Shortest path from A - E: " + graph2.GetShortestDistance("A", "E"));
+            Console.WriteLine("Shortest Distance from A - E: " + graph2.GetShortestDistance("A", "E"));
+            Console.WriteLine("Shortest Path from A - E: " + graph2.GetShortestPath("A", "E"));
+
+            var graph3 = new LeetWeightedGraph();
+            graph3.AddNode("A");
+            graph3.AddNode("B");
+            graph3.AddNode("C");
+            graph3.AddEdge("A", "B", 1);
+            graph3.AddEdge("B", "C", 2);
+            graph3.AddEdge("A", "C", 10);
+            Console.WriteLine("Shortest Distance from A - C: " + graph3.GetShortestDistance("A", "C"));
+            Console.WriteLine("Shortest Path from A - C: " + graph3.GetShortestPath("A", "C"));
         }
     }
 }
