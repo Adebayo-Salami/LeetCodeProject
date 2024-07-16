@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LeetCodeProject.GoogleInterviewPractice
 {
-    public static class LeetBubbleSort
+    public static class LeetSortClass
     {
         public static void RunTest()
         {
@@ -23,7 +23,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             for(int i = 0; i < (numbers.Length - 1); i++)
             {
                 isSwapped = false;
-                for(int j = 1, k = 0; j < numbers.Length; j++, k++)
+                for(int j = 1, k = 0; j < (numbers.Length - i); j++, k++)
                 {
                     if (numbers[k] > numbers[j])
                     {
