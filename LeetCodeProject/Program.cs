@@ -474,6 +474,7 @@ namespace LeetCodeProject
             graph2.AddEdge("A", "C", 4);
             graph2.AddEdge("A", "D", 2);
             graph2.AddEdge("D", "E", 5);
+            graph2.AddEdge("D", "C", 1);
             graph2.AddEdge("D", "B", 6);
             graph2.AddEdge("B", "E", 1);
             Console.WriteLine("Shortest path from A - E: " + graph2.GetShortestDistance("A", "E"));
