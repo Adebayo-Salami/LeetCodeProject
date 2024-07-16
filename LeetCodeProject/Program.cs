@@ -506,6 +506,22 @@ namespace LeetCodeProject
             graph5.AddEdge("B", "C", 0);
             graph5.AddEdge("C", "A", 0);
             Console.WriteLine("Does Graph Have Cycle: " + graph5.HasCycle());
+
+            var graph6 = new LeetWeightedGraph();
+            graph6.AddNode("A");
+            graph6.AddNode("B");
+            graph6.AddNode("C");
+            graph6.AddNode("D");
+            graph6.AddEdge("A", "B", 3);
+            graph6.AddEdge("A", "C", 1);
+            graph6.AddEdge("C", "B", 2);
+            graph6.AddEdge("B", "D", 4);
+            graph6.AddEdge("D", "C", 5);
+            Console.WriteLine("Before Span");
+            graph6.Print();
+            graph6.MakeSpanningTree();
+            Console.WriteLine("Has been made a spanning tree");
+            graph6.Print();
         }
     }
 }

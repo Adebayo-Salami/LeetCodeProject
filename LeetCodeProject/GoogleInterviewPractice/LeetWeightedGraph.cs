@@ -60,6 +60,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
             public int Distance => _weight;
 
             public LeetWeightedGraphNode Destination => _to;
+            public LeetWeightedGraphNode Location => _from;
 
             public override string ToString()
             {
@@ -255,6 +256,47 @@ namespace LeetCodeProject.GoogleInterviewPractice
             }
 
             return false;
+        }
+
+        public void MakeSpanningTree()
+        {
+            if (_store.Count == 0)
+                return;
+
+            var allNodes = new HashSet<LeetWeightedGraphNode>();
+            var allEdges = new HashSet<LeetWeightedGraphEdge>();
+            MakeSpanningTree(_store.First().Value, allNodes, allEdges, new PriorityQueue<LeetWeightedGraphEdge, int>());
+            _store = new Dictionary<string, LeetWeightedGraphNode>();
+            _adjacentStore = new Dictionary<LeetWeightedGraphNode, HashSet<LeetWeightedGraphEdge>>();
+            foreach (var node in allNodes)
+                AddNode(node.ToString());
+            foreach (var edge in allEdges)
+                AddEdge(edge.Location.ToString(), edge.Destination.ToString(), edge.Distance);
+        }
+
+        private void MakeSpanningTree(LeetWeightedGraphNode current, HashSet<LeetWeightedGraphNode> visited, HashSet<LeetWeightedGraphEdge> edges, PriorityQueue<LeetWeightedGraphEdge, int> queue)
+        {
+            if(visited.Contains(current) && queue.Count > 0)
+            {
+                var nextCurrentNode = queue.Dequeue();
+                if (!visited.Contains(nextCurrentNode.Destination))
+                    edges.Add(nextCurrentNode);
+                MakeSpanningTree(nextCurrentNode.Destination, visited, edges, queue);
+                return;
+            }
+
+            visited.Add(current);
+            foreach (var edge in _adjacentStore[current])
+                if (!visited.Contains(edge.Destination))
+                    queue.Enqueue(edge, edge.Distance);
+
+            if (queue.Count == 0)
+                return;
+
+            var nextCurrent = queue.Dequeue();
+            if (!visited.Contains(nextCurrent.Destination))
+                edges.Add(nextCurrent);
+            MakeSpanningTree(nextCurrent.Destination, visited, edges, queue);
         }
     }
 }
