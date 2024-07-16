@@ -36,7 +36,8 @@ namespace LeetCodeProject
             //RunHeapClass();
             //RunTriesClass();
             //RunGraphClass();
-            RunWeightedGraphClass();
+            //RunWeightedGraphClass();
+            LeetBubbleSort.RunTest();
         }
 
         static void RunArrayClass()
