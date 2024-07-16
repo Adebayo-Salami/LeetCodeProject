@@ -11,10 +11,10 @@ namespace LeetCodeProject.GoogleInterviewPractice
         public static void RunTest()
         {
             int[] test1 = { 8, 2, 4, 1, 3 };
-            Console.WriteLine(String.Join(',', SelectionSort(test1)));
+            Console.WriteLine(String.Join(',', InsertionSort(test1)));
 
             int[] test2 = { 7, 3, 1, 4, 6, 2, 3 };
-            Console.WriteLine(String.Join(',', SelectionSort(test2)));
+            Console.WriteLine(String.Join(',', InsertionSort(test2)));
         }
 
         private static int[] BubbleSort(int[] numbers)
@@ -57,6 +57,23 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 if (lowestIndex != i)
                     Swap(numbers, lowestIndex, i);
             }
+            return numbers;
+        }
+
+        private static int[] InsertionSort(int[] numbers)
+        {
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                var currentValue = numbers[i];
+                int insertIndex = i;
+                while(insertIndex > 0 && numbers[insertIndex - 1] > currentValue)
+                {
+                    numbers[insertIndex] = numbers[insertIndex - 1];
+                    insertIndex--;
+                }
+                numbers[insertIndex] = currentValue;
+            }
+
             return numbers;
         }
     }
