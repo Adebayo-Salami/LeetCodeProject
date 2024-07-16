@@ -489,6 +489,23 @@ namespace LeetCodeProject
             graph3.AddEdge("A", "C", 10);
             Console.WriteLine("Shortest Distance from A - C: " + graph3.GetShortestDistance("A", "C"));
             Console.WriteLine("Shortest Path from A - C: " + graph3.GetShortestPath("A", "C"));
+
+            var graph4 = new LeetWeightedGraph();
+            graph4.AddNode("A");
+            graph4.AddNode("B");
+            graph4.AddNode("C");
+            graph4.AddEdge("A", "B", 0);
+            graph4.AddEdge("B", "C", 0);
+            Console.WriteLine("Does Graph Have Cycle: " + graph4.HasCycle());
+
+            var graph5 = new LeetWeightedGraph();
+            graph5.AddNode("A");
+            graph5.AddNode("B");
+            graph5.AddNode("C");
+            graph5.AddEdge("A", "B", 0);
+            graph5.AddEdge("B", "C", 0);
+            graph5.AddEdge("C", "A", 0);
+            Console.WriteLine("Does Graph Have Cycle: " + graph5.HasCycle());
         }
     }
 }

@@ -227,5 +227,34 @@ namespace LeetCodeProject.GoogleInterviewPractice
             var nextLocation = destinations.Dequeue();
             GetShortestDistance(nextLocation, tracker, tracker[nextLocation].Distance, visitedLocations, destinations);
         }
+
+        public bool HasCycle()
+        {
+            var visitedNodes = new HashSet<LeetWeightedGraphNode>();
+            foreach (var node in _store.Values)
+                if (!visitedNodes.Contains(node))
+                    if (HasCycle(node, null, visitedNodes))
+                        return true;
+
+            return false;
+        }
+
+        private bool HasCycle(LeetWeightedGraphNode current, LeetWeightedGraphNode? previous, HashSet<LeetWeightedGraphNode> visitedNodes)
+        {
+            if (visitedNodes.Contains(current))
+                return true;
+
+            visitedNodes.Add(current);
+            foreach (var nextNode in _adjacentStore[current])
+            {
+                if (nextNode.Destination == previous)
+                    continue;
+
+                if (HasCycle(nextNode.Destination, current, visitedNodes))
+                    return true;
+            }
+
+            return false;
+        }
     }
 }
