@@ -35,7 +35,8 @@ namespace LeetCodeProject
             //RunAVLBinaryTreeClass();
             //RunHeapClass();
             //RunTriesClass();
-            RunGraphClass();
+            //RunGraphClass();
+            RunWeightedGraphClass();
         }
 
         static void RunArrayClass()
@@ -451,6 +452,17 @@ namespace LeetCodeProject
             Console.WriteLine("-------------------------");
             graph5.Print();
             Console.WriteLine("Do we detect cycle in graph: " + graph5.HasCycle());
+        }
+    
+        static void RunWeightedGraphClass()
+        {
+            var graph = new LeetWeightedGraph();
+            graph.AddNode("A");
+            graph.AddNode("B");
+            graph.AddNode("C");
+            graph.AddEdge("A", "B", 3);
+            graph.AddEdge("A", "C", 2);
+            graph.Print();
         }
     }
 }

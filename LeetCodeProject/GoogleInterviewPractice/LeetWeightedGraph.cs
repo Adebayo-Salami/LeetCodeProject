@@ -58,6 +58,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
         public void AddNode(string value)
         {
             _store.TryAdd(value, new LeetWeightedGraphNode(value));
+            _adjacentStore.TryAdd(_store[value], new HashSet<LeetWeightedGraphEdge>());
         }
 
         public void AddEdge(string from, string to, int weight)
@@ -85,6 +86,13 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 return -1;
 
             return GetShortestDistance(startingPoint, startingPoint, destination, int.MaxValue);
+        }
+
+        public void Print()
+        {
+            foreach (var vertice in _store.Values)
+                foreach (var edge in _adjacentStore[vertice])
+                    Console.WriteLine(edge);
         }
 
         private int GetShortestDistance(LeetWeightedGraphNode startingPoint, LeetWeightedGraphNode current, LeetWeightedGraphNode destination, int distance)
