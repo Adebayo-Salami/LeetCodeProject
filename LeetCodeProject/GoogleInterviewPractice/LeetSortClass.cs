@@ -11,10 +11,10 @@ namespace LeetCodeProject.GoogleInterviewPractice
         public static void RunTest()
         {
             int[] test1 = { 8, 2, 4, 1, 3 };
-            Console.WriteLine(String.Join(',', InsertionSort(test1)));
+            Console.WriteLine(String.Join(',', CountingSort(test1)));
 
             int[] test2 = { 7, 3, 1, 4, 6, 2, 3 };
-            Console.WriteLine(String.Join(',', InsertionSort(test2)));
+            Console.WriteLine(String.Join(',', CountingSort(test2)));
 
             int[] test3 = { 7, 3, 5, 2, 3, 1, 5, 8 };
             QuickSort(test3);
@@ -148,6 +148,31 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 if (numbers[i] <= pivot)
                     Swap(numbers, i, ++boundary);
             return boundary;
+        }
+
+        private static int[] CountingSort(int[] numbers)
+        {
+            int[] sortedNumbers = new int[GetLargestValue(numbers) + 1];
+            for (int i = 0; i < numbers.Length; i++)
+                sortedNumbers[numbers[i]]++;
+
+            for (int i = 0, j = 0; i < sortedNumbers.Length; i++)
+                while (sortedNumbers[i] > 0)
+                {
+                    numbers[j++] = i;
+                    sortedNumbers[i]--;
+                }
+
+            return numbers;
+        }
+
+        private static int GetLargestValue(int[] numbers)
+        {
+            int largestNo = numbers[0];
+            for (int i = 1; i < numbers.Length; i++)
+                if (numbers[i] > largestNo)
+                    return numbers[i];
+            return largestNo;
         }
     }
 }
