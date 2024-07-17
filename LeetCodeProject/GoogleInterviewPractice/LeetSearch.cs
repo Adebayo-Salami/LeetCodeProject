@@ -11,7 +11,7 @@ namespace LeetCodeProject.GoogleInterviewPractice
         public static void RunTest()
         {
             int[] test1 = { 3, 5, 6, 9, 11, 18, 20, 21, 24, 30 };
-            Console.WriteLine("Index of 6 is " + TernarySearch_Recursive(test1, 21));
+            Console.WriteLine("Index of 6 is " + ExponentialSearch(test1, 182));
         }
 
         private static int BinarySearch_Iteration(int[] numbers, int k)
@@ -90,6 +90,33 @@ namespace LeetCodeProject.GoogleInterviewPractice
         {
             var partition = (right - left) / 2;
             return (left + partition, right - partition);
+        }
+
+        private static int ExponentialSearch(int[] numbers, int target)
+        {
+            if (numbers.Length == 0)
+                return -1;
+
+
+            for(int previousBound = 0, bound = (numbers.Length > 2 ? 2 : numbers.Length -1); bound < numbers.Length;)
+            {
+                if(numbers[bound] >= target)
+                {
+                    for (int i = previousBound; i <= bound; i++)
+                        if (numbers[i] == target)
+                            return i;
+                    return -1;
+                }
+
+                previousBound = bound;
+                bound = bound + bound;
+                if (previousBound == numbers.Length - 1)
+                    break;
+                if (bound >= numbers.Length)
+                    bound = numbers.Length - 1;
+            }
+
+            return -1;
         }
     }
 }
