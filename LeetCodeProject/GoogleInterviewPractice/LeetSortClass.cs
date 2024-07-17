@@ -76,5 +76,44 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             return numbers;
         }
+
+        private static void MergeSort(int[] numbers)
+        {
+            if (numbers.Length < 2)
+                return;
+
+            var middle = numbers.Length / 2;
+
+            int[] left = new int[middle];
+            for (int i = 0; i < middle; i++)
+                left[i] = numbers[i];
+
+            int[] right = new int[numbers.Length - middle];
+            for (int i = middle; i < numbers.Length; i++)
+                right[i - middle] = numbers[i];
+
+            MergeSort(left);
+            MergeSort(right);
+
+            MergeSort(left, right, numbers);
+        }
+
+        private static void MergeSort(int[] left, int[] right, int[] result)
+        {
+            int i = 0, j = 0, k = 0;
+            while (i < left.Length && j < right.Length)
+            {
+                if (left[i] <= right[j])
+                    result[k++] = left[i++];
+                else
+                    result[k++] = right[j++];
+            }
+
+            while (i < left.Length)
+                result[k++] = left[i++];
+
+            while (j < right.Length)
+                result[k++] = right[j++];
+        }
     }
 }
