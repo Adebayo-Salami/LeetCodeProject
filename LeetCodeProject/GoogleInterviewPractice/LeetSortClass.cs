@@ -17,11 +17,11 @@ namespace LeetCodeProject.GoogleInterviewPractice
             Console.WriteLine(String.Join(',', CountingSort(test2)));
 
             int[] test3 = { 7, 3, 5, 2, 3, 1, 5, 8 };
-            QuickSort(test3);
+            BucketSort(test3, 3);
             Console.WriteLine(String.Join(',', test3));
 
             int[] test4 = { 15, 6, 3, 1, 22, 10, 13 };
-            QuickSort(test4);
+            BucketSort(test4, 3);
             Console.WriteLine(String.Join(',', test4));
         }
 
@@ -173,6 +173,29 @@ namespace LeetCodeProject.GoogleInterviewPractice
                 if (numbers[i] > largestNo)
                     return numbers[i];
             return largestNo;
+        }
+
+        private static void BucketSort(int[] numbers, int bucketCount)
+        {
+            var buckets = new LinkedList<int>[bucketCount];
+            for ( int i = 0; i < numbers.Length; i++)
+            {
+                var index = numbers[i] / bucketCount;
+                if (index >= buckets.Length)
+                    index = buckets.Length - 1;
+                if (buckets[index] == null)
+                    buckets[index] = new LinkedList<int>();
+                buckets[index].AddLast(numbers[i]);
+            }
+
+            int insertingI = 0;
+            foreach (var bucket in buckets)
+            {
+                var bucketArray = bucket.ToArray();
+                QuickSort(bucketArray);
+                for (int z = 0; z < bucketArray.Length; z++)
+                    numbers[insertingI++] = bucketArray[z];
+            }
         }
     }
 }
