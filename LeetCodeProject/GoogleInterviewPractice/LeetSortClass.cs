@@ -15,6 +15,14 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             int[] test2 = { 7, 3, 1, 4, 6, 2, 3 };
             Console.WriteLine(String.Join(',', InsertionSort(test2)));
+
+            int[] test3 = { 7, 3, 5, 2, 3, 1, 5, 8 };
+            QuickSort(test3);
+            Console.WriteLine(String.Join(',', test3));
+
+            int[] test4 = { 15, 6, 3, 1, 22, 10, 13 };
+            QuickSort(test4);
+            Console.WriteLine(String.Join(',', test4));
         }
 
         private static int[] BubbleSort(int[] numbers)
@@ -114,6 +122,32 @@ namespace LeetCodeProject.GoogleInterviewPractice
 
             while (j < right.Length)
                 result[k++] = right[j++];
+        }
+
+        private static void QuickSort(int[] numbers)
+        {
+            QuickSort(numbers, 0, numbers.Length - 1);
+        }
+
+        private static void QuickSort(int[] numbers, int start, int end)
+        {
+            if (start >= end)
+                return;
+
+            var boundary = Partition(numbers, start, end);
+
+            QuickSort(numbers, start, boundary - 1);
+            QuickSort(numbers, boundary + 1, end);
+        }
+
+        private static int Partition(int[] numbers, int start, int end)
+        {
+            var pivot = numbers[end];
+            int boundary = start - 1;
+            for (int i = start; i <= end; i++)
+                if (numbers[i] <= pivot)
+                    Swap(numbers, i, ++boundary);
+            return boundary;
         }
     }
 }
