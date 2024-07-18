@@ -19,7 +19,8 @@ namespace LeetCodeProject
             //MinimumLengthSubArray.Run();
             //ReverseInteger.Run();
             //StringToInteger.Run();
-            RunGoogleInterviewPrepCode();
+            //RunGoogleInterviewPrepCode();
+            LeetProblem.Run();
 
             Console.ReadKey();
         }
