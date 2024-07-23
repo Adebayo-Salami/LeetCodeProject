@@ -16,6 +16,9 @@ namespace LeetCodeProject.Problems
             Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
             Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
             Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
+
+            Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
+            Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
         }
 
         public static bool IsPalindrome(int x)
@@ -146,6 +149,49 @@ namespace LeetCodeProject.Problems
             {
                 return firstMatch && IsRegularExpressionMatchEd(s.Substring(1), p.Substring(1));
             }
+        }
+
+        static int MaxArea_ContainerWithMostWater(int[] height)
+        {
+            int maxArea = 0;
+            for(int i = 0; i < (height.Length - 1); i++)
+            {
+                for(int j = i + 1; j < height.Length; j++)
+                {
+                    int lowestHeight = height[i] < height[j] ? height[i] : height[j];
+                    int possibleArea = (j - i) * lowestHeight;
+                    if (possibleArea > maxArea)
+                        maxArea = possibleArea;
+                }
+            }
+
+            return maxArea;
+        }
+
+        static int MaxArea_ContainerWithMostWater2(int[] height)
+        {
+            int maxArea = 0;
+            int left = 0;
+            int right = height.Length - 1;
+
+            while (left < right)
+            {
+                int width = right - left;
+                int currentHeight = Math.Min(height[left], height[right]);
+                int currentArea = width * currentHeight;
+                maxArea = Math.Max(maxArea, currentArea);
+
+                if (height[left] < height[right])
+                {
+                    left++;
+                }
+                else
+                {
+                    right--;
+                }
+            }
+
+            return maxArea;
         }
     }
 }
