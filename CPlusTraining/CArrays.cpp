@@ -1,5 +1,6 @@
 #include "CArrays.h"
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -104,6 +105,13 @@ void CArrays::DynamicResizing()
 
     delete[] numbers;
     numbers = nullptr;
+}
+
+void CArrays::SmartPointers()
+{
+    unique_ptr<int> x(new int);
+    auto numbers = make_unique<int[]>(10);
+    auto y = make_unique<int>();
 }
 
 void CArrays::Swap(int numbers[], int i, int j)

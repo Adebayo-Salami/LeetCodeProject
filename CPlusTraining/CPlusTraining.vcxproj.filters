@@ -21,9 +21,15 @@
     <ClCompile Include="CArrays.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CStrings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CArrays.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CStrings.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

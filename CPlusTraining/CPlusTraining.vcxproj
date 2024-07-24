@@ -130,9 +130,11 @@
   <ItemGroup>
     <ClCompile Include="CArrays.cpp" />
     <ClCompile Include="CPlusTraining.cpp" />
+    <ClCompile Include="CStrings.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CArrays.h" />
+    <ClInclude Include="CStrings.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

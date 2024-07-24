@@ -10,6 +10,7 @@ public:
 	void PrintArray(int numbers[], size_t size);
 	int FindNumberInArray(int numbers[], size_t size, int target);
 	void DynamicResizing();
+	void SmartPointers();
 
 private:
 	void Swap(int numbers[], int i, int j);
