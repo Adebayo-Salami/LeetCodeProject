@@ -6,3 +6,8 @@ void Customer::Print()
 		<< "Name: " << Name << endl
 		<< "Email:" << Email << endl;
 }
+
+bool Customer::operator==(const Customer& customer) const
+{
+	return (ID == customer.ID && Name == customer.Name && Email == customer.Email);
+}

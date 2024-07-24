@@ -36,6 +36,7 @@ void CStrings::CStringPractice()
 	customerA.Name = fullName;
 	customerA.Email = "test@test.com";
 	customerA.Print();
+	auto [id, name, email] { customerA }; // Structural Binding || Destructuring || Unpacking
 }
 
 bool CStrings::ValidateCustomerNo(string customerNumber)

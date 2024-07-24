@@ -10,5 +10,6 @@ struct Customer
 	string Name;
 	string Email;
 	void Print();
+	bool operator == (const Customer& customer) const; //cpp reference .com operator overloading
 };
 
