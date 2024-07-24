@@ -49,6 +49,9 @@ void CArrays::ArraysPractice() {
     // delete[] numbers;
     // number = nullptr
     // numbers = nullptr
+
+    cout << "Running Dynamic Resizing " << endl;
+    DynamicResizing();
 }
 
 void CArrays::Array_BubbleSort(int numbers[], size_t size)
@@ -71,6 +74,36 @@ int CArrays::FindNumberInArray(int numbers[], size_t size, int target)
         if (numbers[i] == target)
             return i;
     return -1;
+}
+
+void CArrays::DynamicResizing()
+{
+    int* numbers = new int[5];
+    int entries = 0;
+    int size = 5;
+
+    while (true) {
+        cout << "Number: ";
+        cin >> numbers[entries++];
+        if (cin.fail())
+            break;
+
+        if (entries == size) {
+            size *= 2;
+            int* resizedNumbers = new int[size];
+            for (int i = 0; i < entries; i++)
+                resizedNumbers[i] = numbers[i];
+            delete[] numbers;
+            numbers = resizedNumbers;
+        }
+    }
+
+    cout << "Numbers User entered " << endl;
+    for (int i = 0; i < (entries - 1); i++)
+        cout << numbers[i] << endl;
+
+    delete[] numbers;
+    numbers = nullptr;
 }
 
 void CArrays::Swap(int numbers[], int i, int j)
