@@ -25,6 +25,30 @@ void CArrays::ArraysPractice() {
     for (int row = 0; row < rows; row++)
         for (int col = 0; col < columns; col++)
             cout << matrix[row][col] << endl;
+
+    cout << "Printing in reverse order " << endl;
+    int numbers3[] = { 10, 20, 30 };
+    int* ptr = numbers3 + (size(numbers3) - 1);
+    cout << *ptr << endl;
+    int currentPosition = size(numbers3) - 1;
+    while (currentPosition >= 0) {
+        cout << *ptr-- << endl;
+        currentPosition--;
+    }
+
+    while (ptr >= numbers3)
+        cout << *ptr-- << endl;
+
+    // Stack - get automatic cleanup once object goes out of scope 
+    // int numbers[1000]
+
+    // Heap (Free Store) - Developers responsible for memory cleanup - can cause memory leak
+    // int* numbers = new int[10];
+    // int* number = new int;
+    // delete number
+    // delete[] numbers;
+    // number = nullptr
+    // numbers = nullptr
 }
 
 void CArrays::Array_BubbleSort(int numbers[], size_t size)
