@@ -1,4 +1,7 @@
 #pragma once
+
+#include <iostream>
+
 class CStrings
 {
 public:
@@ -7,6 +10,6 @@ public:
 	void CStringPractice();
 
 private:
-
+	bool ValidateCustomerNo(std::string customerNumber);
 };
 
