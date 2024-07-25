@@ -36,7 +36,24 @@ void CStrings::CStringPractice()
 	customerA.Name = fullName;
 	customerA.Email = "test@test.com";
 	customerA.Print();
-	auto [id, name, email] { customerA }; // Structural Binding || Destructuring || Unpacking
+	auto [id, name4, email] { customerA }; // Structural Binding || Destructuring || Unpacking
+
+	int first;
+	while (true) {
+		cout << "First ";
+		cin >> first;
+		if (cin.fail()) {
+			cout << "Ener a valid number!" << endl;
+			cin.clear();
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		}
+		else
+			break;
+	}
+
+	int second;
+	HandlingInputErrors(second, "Second: ");
+	cout << "You entered " << first << " and " << second << endl;
 }
 
 bool CStrings::ValidateCustomerNo(string customerNumber)
@@ -54,4 +71,19 @@ bool CStrings::ValidateCustomerNo(string customerNumber)
 	}
 
 	return (digitsCount >= 4 && alphaCount >= 2);
+}
+
+void CStrings::HandlingInputErrors(int& variable, const string& message)
+{
+begin:
+	cout << message;
+	cin >> variable;
+	if (cin.fail()) {
+		cout << "Enter a valid number!" << endl;
+		cin.clear();
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		goto begin;
+	}
+	else
+		return;
 }
