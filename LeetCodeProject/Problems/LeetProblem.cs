@@ -22,6 +22,12 @@ namespace LeetCodeProject.Problems
 
             var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
             ReverseKGroup(testReverseKGroup1, 2);
+
+            ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
+            MergeKLists(testMergeKLists);
+
+            ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
+            MergeKLists(testMergeKLists2);
         }
 
         public static bool IsPalindrome(int x)
@@ -270,6 +276,34 @@ namespace LeetCodeProject.Problems
             }
 
             return result ?? head;
+        }
+
+        static ListNode MergeKLists(ListNode[] lists)
+        {
+            PriorityQueue<ListNode, int> queue = new();
+            foreach(var list in lists)
+            {
+                var current = list;
+                while (current != null)
+                {
+                    queue.Enqueue(current, current.val);
+                    current = current.next;
+                }
+            }
+
+            if (queue.Count == 0)
+                return null;
+
+            ListNode result = new ListNode(queue.Dequeue().val);
+            var current2 = result;
+            while (queue.Count > 0)
+            {
+                current2.next = queue.Dequeue();
+                current2 = current2.next;
+            }
+            current2.next = null;
+
+            return result;
         }
     }
 }
