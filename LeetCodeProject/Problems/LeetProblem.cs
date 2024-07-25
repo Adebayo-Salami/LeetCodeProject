@@ -19,6 +19,9 @@ namespace LeetCodeProject.Problems
 
             Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
             Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+
+            var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+            ReverseKGroup(testReverseKGroup1, 2);
         }
 
         public static bool IsPalindrome(int x)
@@ -239,6 +242,34 @@ namespace LeetCodeProject.Problems
 
 
             return -1;
+        }
+
+        static ListNode ReverseKGroup(ListNode head, int k)
+        {
+            ListNode x = head, y = null, result = null;
+            Stack<ListNode> stack = new();
+            while(x != null)
+            {
+                stack.Push(x);
+                x = x.next;
+                if (stack.Count == k)
+                {
+                    if (y == null)
+                    {
+                        y = stack.Pop();
+                        result = y;
+                    }
+
+                    while (stack.Count > 0)
+                    {
+                        y.next = stack.Pop();
+                        y = y.next;
+                    }
+                    y.next = x;
+                }
+            }
+
+            return result ?? head;
         }
     }
 }
