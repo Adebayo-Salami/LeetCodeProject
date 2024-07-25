@@ -1,6 +1,8 @@
 #include "CStrings.h"
 #include <iostream>
 #include "Customer.h"
+#include <fstream>
+#include <iomanip>
 
 using namespace std;
 
@@ -54,6 +56,8 @@ void CStrings::CStringPractice()
 	int second;
 	HandlingInputErrors(second, "Second: ");
 	cout << "You entered " << first << " and " << second << endl;
+
+	PlayWithFiles();
 }
 
 bool CStrings::ValidateCustomerNo(string customerNumber)
@@ -86,4 +90,18 @@ begin:
 	}
 	else
 		return;
+}
+
+void CStrings::PlayWithFiles()
+{
+	ofstream file;
+	file.open("data.csv");
+	if (file.is_open()) {
+		// CSV: Comma Seprated Value
+		file << "id, title, year\n"
+			<< "1, Terminator 1, 1984\n"
+			<< "2, Terminator 2, 1991\n";
+		//file << setw(20) << "Hello" << setw(20) << "World" << endl;
+		file.close();
+	}
 }

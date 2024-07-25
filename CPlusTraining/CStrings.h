@@ -12,5 +12,6 @@ public:
 private:
 	bool ValidateCustomerNo(std::string customerNumber);
 	void HandlingInputErrors(int& variable, const std::string& messag);
+	void PlayWithFiles();
 };
 
