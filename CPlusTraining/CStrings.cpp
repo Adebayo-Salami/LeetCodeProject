@@ -4,6 +4,7 @@
 #include <fstream>
 #include <iomanip>
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -167,4 +168,26 @@ void CStrings::PastWork()
 	int second;
 	HandlingInputErrors(second, "Second: ");
 	cout << "You entered " << first << " and " << second << endl;
+
+	double number = 12.34;
+	stringstream stream;
+	stream << fixed << setprecision(2) << number;
+	string str = stream.str();
+	cout << str << endl;
+
+	str = "10 20";
+	stream.str(str);
+	int first;
+	stream >> first;
+	int second;
+	stream >> second;
+	cout << first + second;
+
+	str = "Terminator 1,1984";
+	stream.str(str);
+	Movie movie3;
+	getline(stream, movie3.title, ',');
+	string year;
+	getline(stream, year);
+	movie3.year = stoi(year);
 }
