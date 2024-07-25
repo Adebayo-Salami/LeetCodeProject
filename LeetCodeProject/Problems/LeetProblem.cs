@@ -305,5 +305,46 @@ namespace LeetCodeProject.Problems
 
             return result;
         }
+
+        // https://leetcode.com/problems/substring-with-concatenation-of-all-words/
+        static IList<int> FindSubstring(string s, string[] words)
+        {
+            List<int> result = new();
+            int tempCount = 0;
+            int tempIndex = 0;
+            int? startingIndex = null, endingIndex = null;
+            StringBuilder buildStr = new();
+            for(int i  = 0; i < words.Length; i++)
+            {
+                buildStr.Append(words[i]);
+                if (words.Contains(buildStr.ToString()))
+                {
+                    if (startingIndex.HasValue)
+                    {
+
+                    }
+                    else
+                    {
+                        var word = words.First(x => x == buildStr.ToString());
+                        startingIndex = i - (word.Length - 1);
+                        endingIndex = i;
+                        tempIndex = startingIndex.Value;
+                        tempCount++;
+                        buildStr = new StringBuilder();
+                    }
+                }
+
+                if(tempCount == words.Length)
+                {
+                    result.Add(tempIndex);
+                    tempCount = 0;
+                    tempIndex = 0;
+                    startingIndex = null;
+                    endingIndex = null;
+                }
+            }
+
+            return [];
+        }
     }
 }
