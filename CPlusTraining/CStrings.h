@@ -13,5 +13,12 @@ private:
 	bool ValidateCustomerNo(std::string customerNumber);
 	void HandlingInputErrors(int& variable, const std::string& messag);
 	void PlayWithFiles();
+	void PlayWithBinaryFiles();
+	void PastWork();
 };
 
+struct Movie {
+	int id;
+	std::string title;
+	int year;
+};
