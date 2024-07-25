@@ -13,11 +13,6 @@ struct Customer
 	bool operator == (const Customer& customer) const; //cpp reference .com operator overloading
 };
 
-ostream& operator << (ostream& stream, const Customer& customer) {
-	stream << customer.ID << endl;
-	return stream;
-}
-
 enum CustomerStatus {
 	PAYING = 1,
 	OWNING,

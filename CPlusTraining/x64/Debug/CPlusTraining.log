@@ -1,3 +1,4 @@
 ﻿  CStrings.cpp
-Customer.obj : error LNK2005: "class std::basic_ostream<char,struct std::char_traits<char> > & __cdecl operator<<(class std::basic_ostream<char,struct std::char_traits<char> > &,struct Customer const &)" (??6@YAAEAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AEAV01@AEBUCustomer@@@Z) already defined in CStrings.obj
-C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\x64\Debug\CPlusTraining.exe : fatal error LNK1169: one or more multiply defined symbols found
+  Customer.cpp
+  Generating Code...
+  CPlusTraining.vcxproj -> C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\x64\Debug\CPlusTraining.exe
