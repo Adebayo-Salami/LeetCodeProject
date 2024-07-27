@@ -19,6 +19,34 @@ Point Point::operator+(int second) const
 	return Point(x + second, y + second);
 }
 
+Point& Point::operator+=(const Point& other)
+{
+	this->x += other.x;
+	this->y += other.y;
+	return *this;
+}
+
+Point& Point::operator=(const Point& other)
+{
+	x = other.x;
+	y = other.y;
+	return *this;
+}
+
+Point& Point::operator++()
+{
+	this->x++;
+	this->y++;
+	return *this;
+}
+
+Point Point::operator++(int)
+{
+	Point copy = *this;
+	operator++();
+	return copy;
+}
+
 int Point::GetX() const
 {
 	return x;
