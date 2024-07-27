@@ -133,6 +133,7 @@
     <ClCompile Include="CStrings.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="TextBox.cpp" />
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -140,6 +141,7 @@
     <ClInclude Include="CStrings.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="TextBox.h" />
     <ClInclude Include="Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
