@@ -1,5 +1,18 @@
 #include "Customer.h"
 
+#include <iostream>
+
+template<typename T>
+T Larger(T first, T second) {
+	return (first > second) ? first : second;
+}
+
+template<typename K, typename V>
+void Display(K key, V value) {
+	std::cout << key << " = " << value << std::endl;
+}
+
+
 void Customer::Print()
 {
 	cout << "ID: " << ID << endl
