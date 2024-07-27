@@ -9,6 +9,16 @@ bool Point::operator==(const Point& other) const
 	return (x == other.x) && (y == other.y);
 }
 
+Point Point::operator+(const Point& second) const
+{
+	return Point(x + second.x, y + second.y);
+}
+
+Point Point::operator+(int second) const
+{
+	return Point(x + second, y + second);
+}
+
 int Point::GetX() const
 {
 	return x;
@@ -37,5 +47,13 @@ std::strong_ordering Point::operator<=>(const Point& other) const
 std::ostream& operator<<(std::ostream& stream, const Point& point)
 {
 	stream << point.GetX() << " and " << point.GetY() << std::endl;
+	return stream;
+}
+
+std::istream& operator>>(std::istream& stream, Point& point)
+{
+	int value;
+	stream >> value;
+	point.SetX(value);
 	return stream;
 }
