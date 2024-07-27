@@ -10,6 +10,11 @@ using namespace std;
 
 void CStrings::CStringPractice()
 {
+	int x = 10, y = 20;
+	auto result = x <=> y;
+	if (result == strong_ordering::less)
+		cout << "Its less";
+
 	PlayWithBinaryFiles();
 }
 
