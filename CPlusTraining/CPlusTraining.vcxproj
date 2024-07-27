@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AccountLocked.cpp" />
     <ClCompile Include="CArrays.cpp" />
     <ClCompile Include="CPlusTraining.cpp" />
     <ClCompile Include="CStrings.cpp" />
@@ -137,6 +138,7 @@
     <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AccountLocked.h" />
     <ClInclude Include="CArrays.h" />
     <ClInclude Include="CStrings.h" />
     <ClInclude Include="Customer.h" />
