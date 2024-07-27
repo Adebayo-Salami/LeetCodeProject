@@ -47,7 +47,12 @@ Point Point::operator++(int)
 	return copy;
 }
 
-int Point::GetX() const
+Point::operator int() const
+{
+	return this->x;
+}
+
+inline int Point::GetX() const
 {
 	return x;
 }

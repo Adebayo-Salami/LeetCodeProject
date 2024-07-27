@@ -133,12 +133,14 @@
     <ClCompile Include="CStrings.cpp" />
     <ClCompile Include="Customer.cpp" />
     <ClCompile Include="Point.cpp" />
+    <ClCompile Include="Widget.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CArrays.h" />
     <ClInclude Include="CStrings.h" />
     <ClInclude Include="Customer.h" />
     <ClInclude Include="Point.h" />
+    <ClInclude Include="Widget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

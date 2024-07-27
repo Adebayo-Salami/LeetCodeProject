@@ -25,6 +25,9 @@ public:
 	Point& operator=(const Point& other);	// Delete together with copy constructor
 	Point& operator++();	//prefix
 	Point operator++(int);	//postfix
+	Point& operator[](int index) = delete;	//Subscript operator
+	//Point& operator*(); //Indirection operator
+	explicit operator int() const; // Type Conversion - use static_cast<int>() because of explicit
 
 private:
 	int x;
