@@ -31,5 +31,11 @@ void Point::SetY(int y)
 
 std::strong_ordering Point::operator<=>(const Point& other) const
 {
-	return x <=> other.x;
+	return (x <=> other.x);
+}
+
+std::ostream& operator<<(std::ostream& stream, const Point& point)
+{
+	stream << point.GetX() << " and " << point.GetY() << std::endl;
+	return stream;
 }

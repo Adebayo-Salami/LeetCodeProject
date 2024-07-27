@@ -5,6 +5,7 @@
 #include <iomanip>
 #include <string>
 #include <sstream>
+#include "Point.h"
 
 using namespace std;
 
@@ -13,7 +14,11 @@ void CStrings::CStringPractice()
 	int x = 10, y = 20;
 	auto result = x <=> y;
 	if (result == strong_ordering::less)
-		cout << "Its less";
+		cout << "Its less" << endl;
+
+	Point pointA{ 10, 20 };
+	Point pointB{ 30, 30 };
+	cout << "Printing point A (" << pointA << ") and Point B (" << pointB << ")" << endl;
 
 	PlayWithBinaryFiles();
 }
@@ -148,7 +153,7 @@ void CStrings::PastWork()
 		cout << isspace(lastName[0]) << endl;
 	}
 
-	string str = R"(c:\folder\eded\den\dede'de)";
+	string strPath = R"(c:\folder\eded\den\dede'de)";
 
 	Customer customerA{};
 	customerA.ID = 1;
@@ -180,16 +185,16 @@ void CStrings::PastWork()
 	string str = stream.str();
 	cout << str << endl;
 
-	str = "10 20";
-	stream.str(str);
-	int first;
-	stream >> first;
-	int second;
-	stream >> second;
-	cout << first + second;
+	string str2 = "10 20";
+	stream.str(str2);
+	int first2;
+	stream >> first2;
+	int second2;
+	stream >> second2;
+	cout << first2 + second2;
 
-	str = "Terminator 1,1984";
-	stream.str(str);
+	string str3 = "Terminator 1,1984";
+	stream.str(str3);
 	Movie movie3;
 	getline(stream, movie3.title, ',');
 	string year;

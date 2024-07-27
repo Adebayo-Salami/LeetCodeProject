@@ -1,2 +1,3 @@
 ﻿  CStrings.cpp
+C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\CPlusTraining\CStrings.cpp(111,6): warning C4101: 'numbers': unreferenced local variable
   CPlusTraining.vcxproj -> C:\Users\Adebayo Salami\Documents\Work\Test\LeetCodeProject\x64\Debug\CPlusTraining.exe
