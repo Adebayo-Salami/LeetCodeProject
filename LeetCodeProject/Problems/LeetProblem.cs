@@ -30,7 +30,7 @@ namespace LeetCodeProject.Problems
             //MergeKLists(testMergeKLists2);
             //Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
             //Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
-            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["word", "good", "best", "good"])));
+            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["word", "good", "best", "good"])));
         }
 
         public static bool IsPalindrome(int x)
