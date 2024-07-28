@@ -337,7 +337,13 @@ namespace LeetCodeProject.Problems
                 {
                     foreach (var index in sDict[word[0]])
                     {
-                        wordHDict.TryAdd(index, word);
+                        if (!wordHDict.TryAdd(index, word))
+                        {
+                            // Resolve Conflict
+                            //if (s.Length > (index + 1))
+                            //    if (s[index + 1] == word[1])
+                            //        wordHDict[index] = word;
+                        }
                         queue.Enqueue(word, index);
                         queueIndexs.Add(index);
                     }
@@ -398,12 +404,6 @@ namespace LeetCodeProject.Problems
 
                     word = nextWord.Value;
 
-                    //var nextWordAvailable = wordHDict.Any(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
-                    //if (!nextWordAvailable)
-                    //    break;
-
-                    //var nextWord = wordHDict.First(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
-                    //word = nextWord.Value;
                     for (int i = 0; i < word.Length; i++)
                     {
                         if (sDict.ContainsKey(word[i]))
