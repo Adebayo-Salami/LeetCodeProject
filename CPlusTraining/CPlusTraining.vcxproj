@@ -133,6 +133,7 @@
     <ClCompile Include="CPlusTraining.cpp" />
     <ClCompile Include="CStrings.cpp" />
     <ClCompile Include="Customer.cpp" />
+    <ClCompile Include="interval_map.cpp" />
     <ClCompile Include="Pair.cpp" />
     <ClCompile Include="Point.cpp" />
     <ClCompile Include="TextBox.cpp" />
@@ -143,6 +144,7 @@
     <ClInclude Include="CArrays.h" />
     <ClInclude Include="CStrings.h" />
     <ClInclude Include="Customer.h" />
+    <ClInclude Include="interval_map.h" />
     <ClInclude Include="Pair.h" />
     <ClInclude Include="Point.h" />
     <ClInclude Include="TextBox.h" />
