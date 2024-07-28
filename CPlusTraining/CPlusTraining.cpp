@@ -10,7 +10,8 @@ int main()
 	//CStrings().CStringPractice();
 
 	interval_map<int, char> imap('A');
-	imap.assign(1, 3, 'B');
+	imap.assign(1, 5, 'B');
+	imap.assign(2, 4, 'C');
 	auto resul = imap[0];
 	resul = imap[1];
 	resul = imap[2];

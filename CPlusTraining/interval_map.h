@@ -12,52 +12,74 @@ public:
 	{}
 
 	void assign(K const& keyBegin, K const& keyEnd, V const& val) {
-		if (!(keyBegin < keyEnd)) return;
+		if (!(keyBegin < keyEnd))
+			return;
 
 		auto itBegin = m_map.lower_bound(keyBegin);
 		auto itEnd = m_map.lower_bound(keyEnd);
 
-		if (itBegin == m_map.end() || itBegin->first != keyBegin) {
-			if (itBegin != m_map.begin()) {
-				auto prev = std::prev(itBegin);
-				if (prev->second != val) {
-					itBegin = m_map.emplace_hint(itBegin, keyBegin, prev->second);
-				}
-			}
-			else {
-				if (m_valBegin != val) {
-					itBegin = m_map.emplace_hint(itBegin, keyBegin, m_valBegin);
-				}
-			}
+		if (m_map.empty()) {
+			m_map.emplace(keyBegin, val);
+			m_map.emplace(keyEnd, m_valBegin);
 		}
-
-		if (itEnd == m_map.end() || itEnd->first != keyEnd) {
-			if (itEnd != m_map.begin()) {
+		else {
+			if (itEnd->first > keyEnd) {
 				auto prev = std::prev(itEnd);
-				if (prev->second != val) {
-					itEnd = m_map.emplace_hint(itEnd, keyEnd, prev->second);
-				}
+				m_map.emplace(keyEnd, prev->second);
 			}
-			else {
-				if (m_valBegin != val) {
-					itEnd = m_map.emplace_hint(itEnd, keyEnd, m_valBegin);
-				}
-			}
+			m_map.emplace(keyBegin, val);
+			auto itBegin = m_map.lower_bound(keyBegin);
+			itEnd = m_map.lower_bound(keyEnd);
+			m_map.erase(std::next(itBegin), itEnd);
 		}
 
-		m_map.erase(std::next(itBegin), itEnd);
 
-		itBegin->second = val;
-		auto it = itBegin;
-		while (it != m_map.end()) {
-			auto next = std::next(it);
-			if (next != m_map.end() && next->second == it->second) {
-				m_map.erase(next);
-			}
-			else {
-				it = next;
-			}
-		}
+
+
+		//auto itBegin = m_map.lower_bound(keyBegin);
+		//auto itEnd = m_map.lower_bound(keyEnd);
+
+		//if (itBegin == m_map.end() || itBegin->first != keyBegin) {
+		//	if (itBegin != m_map.begin()) {
+		//		auto prev = std::prev(itBegin);
+		//		if (prev->second != val) {
+		//			itBegin = m_map.emplace_hint(itBegin, keyBegin, prev->second);
+		//		}
+		//	}
+		//	else {
+		//		if (m_valBegin != val) {
+		//			itBegin = m_map.emplace_hint(itBegin, keyBegin, m_valBegin);
+		//		}
+		//	}
+		//}
+
+		//if (itEnd == m_map.end() || itEnd->first != keyEnd) {
+		//	if (itEnd != m_map.begin()) {
+		//		auto prev = std::prev(itEnd);
+		//		if (prev->second != val) {
+		//			itEnd = m_map.emplace_hint(itEnd, keyEnd, prev->second);
+		//		}
+		//	}
+		//	else {
+		//		if (m_valBegin != val) {
+		//			itEnd = m_map.emplace_hint(itEnd, keyEnd, m_valBegin);
+		//		}
+		//	}
+		//}
+
+		//m_map.erase(std::next(itBegin), itEnd);
+
+		//itBegin->second = val;
+		//auto it = itBegin;
+		//while (it != m_map.end()) {
+		//	auto next = std::next(it);
+		//	if (next != m_map.end() && next->second == it->second) {
+		//		m_map.erase(next);
+		//	}
+		//	else {
+		//		it = next;
+		//	}
+		//}
 	}
 
 	V const& operator[](K const& key) const {
