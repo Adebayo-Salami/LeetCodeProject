@@ -29,7 +29,8 @@ namespace LeetCodeProject.Problems
             //ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
             //MergeKLists(testMergeKLists2);
             //Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
-            Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
+            //Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
+            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["word", "good", "best", "good"])));
         }
 
         public static bool IsPalindrome(int x)
@@ -329,7 +330,7 @@ namespace LeetCodeProject.Problems
                 {
                     foreach (var index in sDict[word[0]])
                     {
-                        wordHDict.Add(index, word);
+                        wordHDict.TryAdd(index, word);
                         queue.Enqueue(word, index);
                         queueIndexs.Add(index);
                     }
@@ -339,7 +340,7 @@ namespace LeetCodeProject.Problems
 
             // Comparison
             int comparator = 0;
-            List<int> result = new List<int>();
+            List<int> result = new ();
             while(queue.Count > 0)
             {
                 var word = queue.Dequeue();
