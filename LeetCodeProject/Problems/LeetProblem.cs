@@ -438,5 +438,57 @@ namespace LeetCodeProject.Problems
 
             return result.ToList();
         }
+
+        static IList<int> FindSubstring2(string s, string[] words)
+        {
+            var result = new List<int>();
+            if (s == null || words == null || words.Length == 0) return result;
+
+            int wordLength = words[0].Length;
+            int totalWordsLength = wordLength * words.Length;
+            var wordCount = new Dictionary<string, int>();
+
+            foreach (var word in words)
+            {
+                if (wordCount.ContainsKey(word))
+                {
+                    wordCount[word]++;
+                }
+                else
+                {
+                    wordCount[word] = 1;
+                }
+            }
+
+            for (int i = 0; i <= s.Length - totalWordsLength; i++)
+            {
+                var seenWords = new Dictionary<string, int>();
+                int j = 0;
+                while (j < words.Length)
+                {
+                    string word = s.Substring(i + j * wordLength, wordLength);
+                    if (wordCount.ContainsKey(word))
+                    {
+                        if (seenWords.ContainsKey(word))
+                        {
+                            seenWords[word]++;
+                        }
+                        else
+                        {
+                            seenWords[word] = 1;
+                        }
+                        if (seenWords[word] > wordCount[word]) break;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    j++;
+                }
+                if (j == words.Length) result.Add(i);
+            }
+
+            return result;
+        }
     }
 }
