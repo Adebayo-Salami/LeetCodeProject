@@ -30,7 +30,8 @@ namespace LeetCodeProject.Problems
             //MergeKLists(testMergeKLists2);
             //Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
             //Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
-            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
+            //Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
+            Console.WriteLine("Indexes Found in bccbcc, [bc, cc, cb] | Expected [8] : Output: " + String.Join(',', FindSubstring("bccbcc", ["bc", "cc", "cb"])));
         }
 
         public static bool IsPalindrome(int x)
@@ -346,7 +347,7 @@ namespace LeetCodeProject.Problems
 
             // Comparison
             int comparator = 0;
-            List<int> result = new ();
+            HashSet<int> result = new ();
             while(queue.Count > 0)
             {
                 var word = queue.Dequeue();
@@ -435,7 +436,7 @@ namespace LeetCodeProject.Problems
             }
 
 
-            return result.Distinct().ToList();
+            return result.ToList();
         }
     }
 }
