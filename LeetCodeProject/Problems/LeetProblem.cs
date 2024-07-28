@@ -30,7 +30,7 @@ namespace LeetCodeProject.Problems
             //MergeKLists(testMergeKLists2);
             //Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
             //Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
-            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["word", "good", "best", "good"])));
+            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
         }
 
         public static bool IsPalindrome(int x)
@@ -324,8 +324,14 @@ namespace LeetCodeProject.Problems
             PriorityQueue<string, int> queue = new ();
             List<int> queueIndexs = new List<int>();
             Dictionary<int, string> wordHDict = new();
+            Dictionary<string, int> wordDuplicatesCount = new();
             foreach(var word in words)
             {
+                if (wordDuplicatesCount.ContainsKey(word))
+                    wordDuplicatesCount[word]++;
+                else
+                    wordDuplicatesCount.Add(word, 0);
+
                 if (sDict.ContainsKey(word[0]))
                 {
                     foreach (var index in sDict[word[0]])
@@ -346,6 +352,9 @@ namespace LeetCodeProject.Problems
                 var word = queue.Dequeue();
                 int wordIndex = queueIndexs[comparator];
                 int wordsFound = 0;
+                Dictionary<string, int> wordDuplicatesCountCopy = new();
+                foreach (var item in wordDuplicatesCount)
+                    wordDuplicatesCountCopy.Add(item.Key, item.Value);
 
                 int currentWordIndex = wordIndex + 1;
                 bool isGoodToGo = true;
@@ -373,12 +382,27 @@ namespace LeetCodeProject.Problems
 
                 while(wordsFound != words.Length && isGoodToGo)
                 {
-                    var nextWordAvailable = wordHDict.Any(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
+                    var nextWordAvailable = wordHDict.Any(x => x.Key == currentWordIndex);
                     if (!nextWordAvailable)
                         break;
 
-                    var nextWord = wordHDict.First(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
+                    var nextWord = wordHDict.First(x => x.Key == currentWordIndex);
+                    if (wordsChecked.Contains(nextWord.Value))
+                    {
+                        if (wordDuplicatesCountCopy[nextWord.Value] == 0)
+                            break;
+                        else
+                            wordDuplicatesCountCopy[nextWord.Value]--;
+                    }
+
                     word = nextWord.Value;
+
+                    //var nextWordAvailable = wordHDict.Any(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
+                    //if (!nextWordAvailable)
+                    //    break;
+
+                    //var nextWord = wordHDict.First(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
+                    //word = nextWord.Value;
                     for (int i = 0; i < word.Length; i++)
                     {
                         if (sDict.ContainsKey(word[i]))
@@ -411,7 +435,7 @@ namespace LeetCodeProject.Problems
             }
 
 
-            return result;
+            return result.Distinct().ToList();
         }
     }
 }
