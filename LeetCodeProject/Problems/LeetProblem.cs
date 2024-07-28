@@ -11,23 +11,25 @@ namespace LeetCodeProject.Problems
         public static void Run()
         {
             // s = 'aab' p = "c*a*b" - IsRegularExpressionMatch
-            Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
-            Console.WriteLine(" mississippi - mis*is*p* Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*p*"));
-            Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
-            Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
-            Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
+            //Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
+            //Console.WriteLine(" mississippi - mis*is*p* Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*p*"));
+            //Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
+            //Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
+            //Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
 
-            Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
-            Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+            //Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
+            //Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
 
-            var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-            ReverseKGroup(testReverseKGroup1, 2);
+            //var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+            //ReverseKGroup(testReverseKGroup1, 2);
 
-            ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
-            MergeKLists(testMergeKLists);
+            //ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
+            //MergeKLists(testMergeKLists);
 
-            ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
-            MergeKLists(testMergeKLists2);
+            //ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
+            //MergeKLists(testMergeKLists2);
+            //Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
+            Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
         }
 
         public static bool IsPalindrome(int x)
@@ -309,42 +311,106 @@ namespace LeetCodeProject.Problems
         // https://leetcode.com/problems/substring-with-concatenation-of-all-words/
         static IList<int> FindSubstring(string s, string[] words)
         {
-            List<int> result = new();
-            int tempCount = 0;
-            int tempIndex = 0;
-            int? startingIndex = null, endingIndex = null;
-            StringBuilder buildStr = new();
-            for(int i  = 0; i < words.Length; i++)
+            Dictionary<char, List<int>> sDict = new();
+            for(int i = 0; i < s.Length; i++)
             {
-                buildStr.Append(words[i]);
-                if (words.Contains(buildStr.ToString()))
-                {
-                    if (startingIndex.HasValue)
-                    {
+                if (sDict.ContainsKey(s[i]))
+                    sDict[s[i]].Add(i);
+                else
+                    sDict.Add(s[i], [i]);
+            }
 
+            PriorityQueue<string, int> queue = new ();
+            List<int> queueIndexs = new List<int>();
+            Dictionary<int, string> wordHDict = new();
+            foreach(var word in words)
+            {
+                if (sDict.ContainsKey(word[0]))
+                {
+                    foreach (var index in sDict[word[0]])
+                    {
+                        wordHDict.Add(index, word);
+                        queue.Enqueue(word, index);
+                        queueIndexs.Add(index);
+                    }
+                }
+            }
+            queueIndexs.Sort();
+
+            // Comparison
+            int comparator = 0;
+            List<int> result = new List<int>();
+            while(queue.Count > 0)
+            {
+                var word = queue.Dequeue();
+                int wordIndex = queueIndexs[comparator];
+                int wordsFound = 0;
+
+                int currentWordIndex = wordIndex + 1;
+                bool isGoodToGo = true;
+                List<string> wordsChecked = [word];
+                for(int i = 1; i < word.Length; i++)
+                {
+                    if (sDict.ContainsKey(word[i]))
+                    {
+                        if (sDict[word[i]].Contains(currentWordIndex))
+                            currentWordIndex++;
+                        else
+                        {
+                            isGoodToGo = false;
+                            break;
+                        }
                     }
                     else
                     {
-                        var word = words.First(x => x == buildStr.ToString());
-                        startingIndex = i - (word.Length - 1);
-                        endingIndex = i;
-                        tempIndex = startingIndex.Value;
-                        tempCount++;
-                        buildStr = new StringBuilder();
+                        isGoodToGo = false;
+                        break;
                     }
                 }
+                if (isGoodToGo)
+                    wordsFound++;
 
-                if(tempCount == words.Length)
+                while(wordsFound != words.Length && isGoodToGo)
                 {
-                    result.Add(tempIndex);
-                    tempCount = 0;
-                    tempIndex = 0;
-                    startingIndex = null;
-                    endingIndex = null;
+                    var nextWordAvailable = wordHDict.Any(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
+                    if (!nextWordAvailable)
+                        break;
+
+                    var nextWord = wordHDict.First(x => x.Key == currentWordIndex && !wordsChecked.Contains(x.Value));
+                    word = nextWord.Value;
+                    for (int i = 0; i < word.Length; i++)
+                    {
+                        if (sDict.ContainsKey(word[i]))
+                        {
+                            if (sDict[word[i]].Contains(currentWordIndex))
+                                currentWordIndex++;
+                            else
+                            {
+                                isGoodToGo = false;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            isGoodToGo = false;
+                            break;
+                        }
+                    }
+                    if (isGoodToGo)
+                        wordsFound++;
+                    else
+                        break;
+                    wordsChecked.Add(word);
                 }
+
+
+                if (wordsFound == words.Length)
+                    result.Add(wordIndex);
+                comparator++;
             }
 
-            return [];
+
+            return result;
         }
     }
 }
