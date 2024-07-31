@@ -11,27 +11,28 @@ namespace LeetCodeProject.Problems
         public static void Run()
         {
             // s = 'aab' p = "c*a*b" - IsRegularExpressionMatch
-            //Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
-            //Console.WriteLine(" mississippi - mis*is*p* Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*p*"));
-            //Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
-            //Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
-            //Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
+            // Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
+            // Console.WriteLine(" mississippi - mis*is*p* Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*p*"));
+            // Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
+            // Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
+            // Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
 
-            //Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
-            //Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+            // Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
+            // Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
 
-            //var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-            //ReverseKGroup(testReverseKGroup1, 2);
+            // var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+            // ReverseKGroup(testReverseKGroup1, 2);
 
-            //ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
-            //MergeKLists(testMergeKLists);
+            // ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
+            // MergeKLists(testMergeKLists);
 
-            //ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
-            //MergeKLists(testMergeKLists2);
-            //Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
-            //Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
-            //Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
-            Console.WriteLine("Indexes Found in bccbcc, [bc, cc, cb] | Expected [8] : Output: " + String.Join(',', FindSubstring("bccbcc", ["bc", "cc", "cb"])));
+            // ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
+            // MergeKLists(testMergeKLists2);
+            // Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
+            // Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
+            // Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
+            // Console.WriteLine("Indexes Found in bccbcc, [bc, cc, cb] | Expected [8] : Output: " + String.Join(',', FindSubstring("bccbcc", ["bc", "cc", "cb"])));
+            Console.WriteLine("Longest Valid Parentheses in ()(() is " + LongestValidParentheses("()(()"));
         }
 
         public static bool IsPalindrome(int x)
@@ -489,6 +490,155 @@ namespace LeetCodeProject.Problems
             }
 
             return result;
+        }
+
+        static int LongestValidParentheses(string s)
+        {
+            if (String.IsNullOrWhiteSpace(s))
+                return 0;
+            if (s.Length == 1)
+                return 0;
+
+            int validityCount = 0;
+            int middleIndex = s.Length / 2;
+            Stack<char> leftStack = new();
+            Stack<char> rightStack = new();
+            for (int i = middleIndex, ii = middleIndex - 1, j = middleIndex + 1, jj = middleIndex + 2; ;)
+            {
+                if ((i >= 0 && j < s.Length) && s[i] == '(' && s[j] == ')')
+                {
+                    i--;
+                    j++;
+                    ii--;
+                    jj++;
+                    validityCount++;
+                }
+                else
+                {
+                    if(ii >= 0)
+                    {
+                        if (s[ii] == '(' && s[i] == ')')
+                        {
+                            i = --ii;
+                            ii--;
+                            validityCount++;
+                        }
+                        else
+                        {
+                            if(leftStack.Count > 0)
+                            {
+                                char lastItem = leftStack.Pop();
+                                if(s[i] == '(' && lastItem == ')')
+                                {
+                                    validityCount++;
+                                    continue;
+                                }
+                                leftStack.Push(lastItem);
+                            }
+
+                            if(rightStack.Count > 0)
+                            {
+                                char lastItem = rightStack.Pop();
+                                if (s[i] == '(' && lastItem == ')')
+                                {
+                                    validityCount++;
+                                    continue;
+                                }
+                                rightStack.Push(lastItem);
+                            }
+
+                            leftStack.Push(s[i]);
+                            i--;
+                            ii--;
+                        }
+                    }
+
+                    if(jj < s.Length)
+                    {
+                        if (s[j] == '(' && s[jj] == ')')
+                        {
+                            j = ++jj;
+                            jj++;
+                            validityCount++;
+                        }
+                        else
+                        {
+                            if (rightStack.Count > 0)
+                            {
+                                char lastItem = rightStack.Pop();
+                                if (lastItem == '(' && s[j] == ')')
+                                {
+                                    validityCount++;
+                                    continue;
+                                }
+                                rightStack.Push(lastItem);
+                            }
+
+                            if (leftStack.Count > 0)
+                            {
+                                char lastItem = leftStack.Pop();
+                                if (lastItem == '(' && s[j] == ')')
+                                {
+                                    validityCount++;
+                                    continue;
+                                }
+                                leftStack.Push(lastItem);
+                            }
+
+                            rightStack.Push(s[j]);
+                            j++;
+                            jj++;
+                        }
+                    }
+
+                    if (i >= 0 && ii < 0)
+                        leftStack.Push(s[i]);
+                    if (j < s.Length && jj >= s.Length)
+                        rightStack.Push(s[j]);
+
+                    if (ii < 0)
+                        i--;
+
+                    if (jj >= s.Length)
+                        j++;
+                }
+
+                if (i < 0 && j >= s.Length)
+                    break;
+            }
+
+            return validityCount * 2;
+        }
+
+        static int LongestValidParentheses2(string s)
+        {
+            if (string.IsNullOrEmpty(s)) return 0;
+
+            int maxLength = 0;
+            Stack<int> stack = new Stack<int>();
+            stack.Push(-1);
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == '(')
+                {
+                    stack.Push(i);
+                }
+                else
+                {
+                    stack.Pop();
+                    if (stack.Count == 0)
+                    {
+                        stack.Push(i);
+                    }
+                    else
+                    {
+                        maxLength = Math.Max(maxLength, i - stack.Peek());
+                    }
+                }
+            }
+
+            return maxLength;
         }
     }
 }
