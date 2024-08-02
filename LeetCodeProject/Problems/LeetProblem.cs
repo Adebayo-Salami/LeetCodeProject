@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,7 +33,13 @@ namespace LeetCodeProject.Problems
             // Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
             // Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
             // Console.WriteLine("Indexes Found in bccbcc, [bc, cc, cb] | Expected [8] : Output: " + String.Join(',', FindSubstring("bccbcc", ["bc", "cc", "cb"])));
-            Console.WriteLine("Longest Valid Parentheses in ()(() is " + LongestValidParentheses("()(()"));
+            //Console.WriteLine("Longest Valid Parentheses in ()(() is " + LongestValidParentheses("()(()"));
+            //Console.WriteLine("Trapped Water [0,1,0,2,1,0,1,3,2,1,2,1] is " + Trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
+            //GenerateParenthesis(3);
+            //Console.WriteLine("Is Wildcard Match s =  | p = ****** : " + IsWildcardMatch("", "******"));
+            //Console.Write("ThreeSumClosest: [-1,2,1,-4], target = 1" + ThreeSumClosest([-1, 2, 1, -4], 1));
+            //Console.Write("ContainsNearbyAlmostDuplicate: [1, 2, 3, 1], 3, 0" + ContainsNearbyAlmostDuplicate([1, 2, 3, 1], 3, 0));
+            Console.WriteLine(MaxEnvelopes([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [5, 5], [6, 7], [7, 8]]));
         }
 
         public static bool IsPalindrome(int x)
@@ -246,13 +253,6 @@ namespace LeetCodeProject.Problems
             }
 
             return result;
-        }
-
-        static int ThreeSumClosest(int[] nums, int target)
-        {
-
-
-            return -1;
         }
 
         static ListNode ReverseKGroup(ListNode head, int k)
@@ -640,5 +640,273 @@ namespace LeetCodeProject.Problems
 
             return maxLength;
         }
+
+        static int Trap(int[] height)
+        {
+            if (height.Length <= 1)
+                return 0;
+
+            int left = 0, leftMax = 0, right = height.Length - 1, rightMax = 0;
+            int trappedWater = 0;
+            while(left < right)
+            {
+                if(height[left] < height[right])
+                {
+                    if (height[left] > leftMax)
+                        leftMax = height[left];
+                    else
+                        trappedWater += (leftMax - height[left]);
+
+                    left++;
+                }
+                else
+                {
+                    if (height[right] > rightMax)
+                        rightMax = height[right];
+                    else
+                        trappedWater += (rightMax - height[right]);
+
+                    right--;
+                }
+            }
+
+            return trappedWater;
+        }
+
+        static IList<string> GenerateParenthesis(int n)
+        {
+            if (n <= 0)
+                return [];
+
+            var list = new List<string>();
+            GenerateParenthesisList(list, "", 0, 0, n);
+            return list;
+        }
+
+        static void GenerateParenthesisList(List<string> list, string word, int open, int close, int max)
+        {
+            if(word.Length == max * 2)
+            {
+                list.Add(word);
+                return;
+            }
+
+            if (open < max)
+            {
+                GenerateParenthesisList(list, word + "(", open + 1, close, max);
+            }
+            else if(close < open)
+            {
+                GenerateParenthesisList(list, word + ")", open, close + 1, max);
+            }
+        }
+
+        static bool IsWildcardMatch(string s, string p)
+        {
+            if (p.Length == 0 && s.Length == 0)
+                return true;
+            if (s.Length == 0 && p == "*")
+                return true;
+            if (p.Length == 0)
+                return false;
+            if (s.Length == 0)
+            {
+                for (int i = 0; i < p.Length; i++)
+                    if (p[i] != '*')
+                        return false;
+
+                return true;
+            }
+            if (p.Length == 1 && p == "*")
+                return true;
+            return IsWildCardMatching(s, p, 0, 0);
+        }
+
+        static bool IsWildCardMatching(string s, string p, int sIndex, int pIndex, bool isWild = false)
+        {
+            if (sIndex == s.Length && !isWild && pIndex != p.Length)
+                return false;
+            if (sIndex == s.Length)
+                return true;
+            if (sIndex + 1 == s.Length && isWild && pIndex == p.Length)
+                return true;
+            if (pIndex == p.Length && isWild)
+            {
+                if (sIndex + 1 == s.Length)
+                    return true;
+                else
+                    pIndex--;
+            }
+            if (pIndex == p.Length)
+                return false;
+
+            if (p[pIndex] == '?')
+                return IsWildCardMatching(s, p, ++sIndex, ++pIndex);
+            if (p[pIndex] == '*')
+                return IsWildCardMatching(s, p, sIndex, ++pIndex, true);
+
+            if (s[sIndex] == p[pIndex])
+                return IsWildCardMatching(s, p, ++sIndex, ++pIndex);
+
+            if(isWild)
+                return IsWildCardMatching(s, p, ++sIndex, pIndex, true);
+
+            return false;
+        }
+
+        static bool IsWildCardMatched(string s, string p)
+        {
+            int sLen = s.Length, pLen = p.Length;
+            bool[,] dp = new bool[sLen + 1, pLen + 1];
+            dp[0, 0] = true;
+
+            for (int j = 1; j <= pLen; j++)
+            {
+                if (p[j - 1] == '*')
+                {
+                    dp[0, j] = dp[0, j - 1];
+                }
+            }
+
+            for (int i = 1; i <= sLen; i++)
+            {
+                for (int j = 1; j <= pLen; j++)
+                {
+                    if (p[j - 1] == '*')
+                    {
+                        dp[i, j] = dp[i - 1, j] || dp[i, j - 1];
+                    }
+                    else if (p[j - 1] == '?' || s[i - 1] == p[j - 1])
+                    {
+                        dp[i, j] = dp[i - 1, j - 1];
+                    }
+                }
+            }
+
+            return dp[sLen, pLen];
+        }
+
+        static int ThreeSumClosest(int[] nums, int target)
+        {
+            Array.Sort(nums);
+            int left = 0, middle = nums.Length / 2, right = nums.Length - 1;
+            int closestSum = 0;
+            while(left < right && middle > left && middle < right)
+            {
+                closestSum = nums[left] + nums[middle] + nums[right];
+                if (closestSum < target)
+                    left++;
+                else if (closestSum == target)
+                    return target;
+                else if (closestSum > target)
+                    right--;
+
+                middle = ((right - left) / 2) + left;
+            }
+
+            return closestSum;
+        }
+
+        static int ThreeSumClosest2(int[] nums, int target)
+        {
+            Array.Sort(nums);
+            int closestSum = nums[0] + nums[1] + nums[2];
+
+            for (int i = 0; i < nums.Length - 2; i++)
+            {
+                int left = i + 1, right = nums.Length - 1;
+
+                while (left < right)
+                {
+                    int currentSum = nums[i] + nums[left] + nums[right];
+
+                    if (Math.Abs(currentSum - target) < Math.Abs(closestSum - target))
+                    {
+                        closestSum = currentSum;
+                    }
+
+                    if (currentSum < target)
+                    {
+                        left++;
+                    }
+                    else if (currentSum > target)
+                    {
+                        right--;
+                    }
+                    else
+                    {
+                        return currentSum; // Exact match
+                    }
+                }
+            }
+
+            return closestSum;
+        }
+
+        static bool ContainsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff)
+        {
+            if (nums == null || nums.Length < 2) return false;
+
+            SortedSet<long> set = new SortedSet<long>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (i > indexDiff)
+                {
+                    set.Remove(nums[i - indexDiff - 1]);
+                }
+
+                long num = (long)nums[i];
+
+                if (set.GetViewBetween(num - valueDiff, num + valueDiff).Count > 0)
+                {
+                    return true;
+                }
+
+                set.Add(num);
+            }
+
+            return false;
+        }
+
+        static int MaxEnvelopes(int[][] envelopes)
+        {
+            if (envelopes == null || envelopes.Length == 0) return 0;
+
+            // Sort envelopes: first by width in ascending order, then by height in descending order
+            Array.Sort(envelopes, (a, b) => {
+                if (a[0] == b[0]) return b[1] - a[1];
+                return a[0] - b[0];
+            });
+
+            // Extract the heights and find the longest increasing subsequence
+            int[] heights = new int[envelopes.Length];
+            for (int i = 0; i < envelopes.Length; i++)
+            {
+                heights[i] = envelopes[i][1];
+            }
+
+            return LengthOfLIS(heights);
+        }
+
+        static int LengthOfLIS(int[] nums)
+        {
+            List<int> lis = new List<int>();
+            foreach (int num in nums)
+            {
+                int pos = lis.BinarySearch(num);
+                if (pos < 0) pos = ~pos;
+                if (pos < lis.Count)
+                {
+                    lis[pos] = num;
+                }
+                else
+                {
+                    lis.Add(num);
+                }
+            }
+            return lis.Count;
+        }
+
     }
 }
