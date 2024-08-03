@@ -44,7 +44,8 @@ namespace LeetCodeProject.Problems
             //Console.WriteLine("Product of [1,2,3,4]: " + String.Join(',', ProductExceptSelf([1, 2, 3, 4])));
             //Console.WriteLine("Max Value of [-2,1,-3,4,-1,2,1,-5,4]: " + MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
             //Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
-            Console.WriteLine("Max FindMin Value of [3,1,2]: " + FindMin([3, 1, 2]));
+            //Console.WriteLine("Max FindMin Value of [3,1,2]: " + FindMin([3, 1, 2]));
+            Console.WriteLine("Max Search Value of 1 in [8,1,2,3,4,5,6,7]: " + Search([8, 1, 2, 3, 4, 5, 6, 7], 6));
         }
 
         public static bool IsPalindrome(int x)
@@ -1081,6 +1082,81 @@ namespace LeetCodeProject.Problems
             }
 
             return -1;
+        }
+
+        static int Search(int[] nums, int target)
+        {
+            int left = 0, right = nums.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+
+                if (nums[mid] == target)
+                {
+                    return mid;
+                }
+
+                // Check if the left half is sorted
+                if (nums[left] <= nums[mid])
+                {
+                    if (nums[left] <= target && target < nums[mid])
+                    {
+                        right = mid - 1;
+                    }
+                    else
+                    {
+                        left = mid + 1;
+                    }
+                }
+                else
+                {
+                    if (nums[mid] < target && target <= nums[right])
+                    {
+                        left = mid + 1;
+                    }
+                    else
+                    {
+                        right = mid - 1;
+                    }
+                }
+            }
+
+            return -1;
+        }
+
+        static IList<IList<int>> ThreeSumTT(int[] nums)
+        {
+            if (nums.Length < 3)
+                return [];
+
+            Array.Sort(nums);
+            
+            List<IList<int>> result = new();
+            for(int i = 0; i < nums.Length; i++)
+            {
+                int left = i + 1, right = nums.Length - 1;
+                while (left < right)
+                {
+                    int lumSum = nums[left] + nums[i] + nums[right];
+                    if (lumSum == 0)
+                    {
+                        result.Add(new List<int>() { nums[left], nums[i], nums[right] });
+                        while (left < right && nums[left + 1] == nums[left]) left++;
+                        while (left < right && nums[right - 1] == nums[right]) right--;
+                        left++;
+                        right--;
+                    }
+                    else if (lumSum < 0)
+                        left++;
+                    else
+                        right--;
+                }
+                while (i < nums.Length && nums[i] == nums[i + 1]) i++;
+                if (i + 1 == (nums.Length - 1) && nums[i] == nums[i + 1]) break;
+            }
+
+            return result;
         }
 
     }
