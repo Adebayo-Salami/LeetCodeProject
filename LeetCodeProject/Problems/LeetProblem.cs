@@ -43,7 +43,8 @@ namespace LeetCodeProject.Problems
             //Console.WriteLine("Two Sum {2,7,11,15} 9 " + TwoSum([2, 7, 11, 15], 9));
             //Console.WriteLine("Product of [1,2,3,4]: " + String.Join(',', ProductExceptSelf([1, 2, 3, 4])));
             //Console.WriteLine("Max Value of [-2,1,-3,4,-1,2,1,-5,4]: " + MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
-            Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
+            //Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
+            Console.WriteLine("Max FindMin Value of [3,1,2]: " + FindMin([3, 1, 2]));
         }
 
         public static bool IsPalindrome(int x)
@@ -1050,6 +1051,36 @@ namespace LeetCodeProject.Problems
             }
 
             return result;
+        }
+
+        static int FindMin(int[] nums)
+        {
+            if (nums.Length == 1)
+                return nums[0];
+
+            if (nums.Length == 2)
+                return nums[0] < nums[1] ? nums[0] : nums[1];
+
+            int left = 0, right = nums.Length - 1;
+            int middle = nums.Length / 2;
+            while (left < right)
+            {
+                if (nums[middle] > nums[right])
+                {
+                    left = middle;
+                    middle = ((right - left) / 2) + left;
+                }
+                else
+                {
+                    right = middle;
+                    middle = ((right + left) / 2);
+                }
+
+                if ((left + 1) == right || left == right)
+                    return nums[left] < nums[right] ? nums[left] : nums[right];
+            }
+
+            return -1;
         }
 
     }
