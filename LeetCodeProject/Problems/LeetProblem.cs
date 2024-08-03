@@ -45,7 +45,8 @@ namespace LeetCodeProject.Problems
             //Console.WriteLine("Max Value of [-2,1,-3,4,-1,2,1,-5,4]: " + MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
             //Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
             //Console.WriteLine("Max FindMin Value of [3,1,2]: " + FindMin([3, 1, 2]));
-            Console.WriteLine("Max Search Value of 1 in [8,1,2,3,4,5,6,7]: " + Search([8, 1, 2, 3, 4, 5, 6, 7], 6));
+            //Console.WriteLine("Max Search Value of 1 in [8,1,2,3,4,5,6,7]: " + Search([8, 1, 2, 3, 4, 5, 6, 7], 6));
+            Console.WriteLine("Max Capacity Value of [1,8,6,2,5,4,8,3,7]: " + MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
         }
 
         public static bool IsPalindrome(int x)
@@ -1157,6 +1158,24 @@ namespace LeetCodeProject.Problems
             }
 
             return result;
+        }
+
+        static int MaxArea(int[] height)
+        {
+            int left = 0, maxCapacity = 0, right = height.Length - 1;
+            while(left < right)
+            {
+                int capacity = (Math.Min(height[left], height[right])) * (right - left);
+                if (capacity > maxCapacity)
+                    maxCapacity = capacity;
+
+                if (height[left] < height[right])
+                    left++;
+                else
+                    right--;
+            }
+
+            return maxCapacity;
         }
 
     }
