@@ -39,7 +39,11 @@ namespace LeetCodeProject.Problems
             //Console.WriteLine("Is Wildcard Match s =  | p = ****** : " + IsWildcardMatch("", "******"));
             //Console.Write("ThreeSumClosest: [-1,2,1,-4], target = 1" + ThreeSumClosest([-1, 2, 1, -4], 1));
             //Console.Write("ContainsNearbyAlmostDuplicate: [1, 2, 3, 1], 3, 0" + ContainsNearbyAlmostDuplicate([1, 2, 3, 1], 3, 0));
-            Console.WriteLine(MaxEnvelopes([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [5, 5], [6, 7], [7, 8]]));
+            //Console.WriteLine(MaxEnvelopes([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [5, 5], [6, 7], [7, 8]]));
+            //Console.WriteLine("Two Sum {2,7,11,15} 9 " + TwoSum([2, 7, 11, 15], 9));
+            //Console.WriteLine("Product of [1,2,3,4]: " + String.Join(',', ProductExceptSelf([1, 2, 3, 4])));
+            //Console.WriteLine("Max Value of [-2,1,-3,4,-1,2,1,-5,4]: " + MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+            Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
         }
 
         public static bool IsPalindrome(int x)
@@ -97,7 +101,7 @@ namespace LeetCodeProject.Problems
                 return true;
             }
 
-            if(pattern == ".*")
+            if (pattern == ".*")
                 return true;
 
             return IsRegularExpressionMatch2(s, pattern, 0, 0);
@@ -135,7 +139,7 @@ namespace LeetCodeProject.Problems
 
             if (pattern[pIndex] == '*' && prevPattern.HasValue && prevPattern != s[sIndex])
             {
-                if(pIndex < (pattern.Length - 1) && pattern[pIndex + 1] == '.')
+                if (pIndex < (pattern.Length - 1) && pattern[pIndex + 1] == '.')
                     return IsRegularExpressionMatch2(s, pattern, sIndex + 2, ++pIndex);
 
                 for (int i = pIndex; i < pattern.Length; i++)
@@ -175,9 +179,9 @@ namespace LeetCodeProject.Problems
         static int MaxArea_ContainerWithMostWater(int[] height)
         {
             int maxArea = 0;
-            for(int i = 0; i < (height.Length - 1); i++)
+            for (int i = 0; i < (height.Length - 1); i++)
             {
-                for(int j = i + 1; j < height.Length; j++)
+                for (int j = i + 1; j < height.Length; j++)
                 {
                     int lowestHeight = height[i] < height[j] ? height[i] : height[j];
                     int possibleArea = (j - i) * lowestHeight;
@@ -259,7 +263,7 @@ namespace LeetCodeProject.Problems
         {
             ListNode x = head, y = null, result = null;
             Stack<ListNode> stack = new();
-            while(x != null)
+            while (x != null)
             {
                 stack.Push(x);
                 x = x.next;
@@ -286,7 +290,7 @@ namespace LeetCodeProject.Problems
         static ListNode MergeKLists(ListNode[] lists)
         {
             PriorityQueue<ListNode, int> queue = new();
-            foreach(var list in lists)
+            foreach (var list in lists)
             {
                 var current = list;
                 while (current != null)
@@ -315,7 +319,7 @@ namespace LeetCodeProject.Problems
         static IList<int> FindSubstring(string s, string[] words)
         {
             Dictionary<char, List<int>> sDict = new();
-            for(int i = 0; i < s.Length; i++)
+            for (int i = 0; i < s.Length; i++)
             {
                 if (sDict.ContainsKey(s[i]))
                     sDict[s[i]].Add(i);
@@ -323,11 +327,11 @@ namespace LeetCodeProject.Problems
                     sDict.Add(s[i], [i]);
             }
 
-            PriorityQueue<string, int> queue = new ();
+            PriorityQueue<string, int> queue = new();
             List<int> queueIndexs = new List<int>();
             Dictionary<int, string> wordHDict = new();
             Dictionary<string, int> wordDuplicatesCount = new();
-            foreach(var word in words)
+            foreach (var word in words)
             {
                 if (wordDuplicatesCount.ContainsKey(word))
                     wordDuplicatesCount[word]++;
@@ -354,8 +358,8 @@ namespace LeetCodeProject.Problems
 
             // Comparison
             int comparator = 0;
-            HashSet<int> result = new ();
-            while(queue.Count > 0)
+            HashSet<int> result = new();
+            while (queue.Count > 0)
             {
                 var word = queue.Dequeue();
                 int wordIndex = queueIndexs[comparator];
@@ -367,7 +371,7 @@ namespace LeetCodeProject.Problems
                 int currentWordIndex = wordIndex + 1;
                 bool isGoodToGo = true;
                 List<string> wordsChecked = [word];
-                for(int i = 1; i < word.Length; i++)
+                for (int i = 1; i < word.Length; i++)
                 {
                     if (sDict.ContainsKey(word[i]))
                     {
@@ -388,7 +392,7 @@ namespace LeetCodeProject.Problems
                 if (isGoodToGo)
                     wordsFound++;
 
-                while(wordsFound != words.Length && isGoodToGo)
+                while (wordsFound != words.Length && isGoodToGo)
                 {
                     var nextWordAvailable = wordHDict.Any(x => x.Key == currentWordIndex);
                     if (!nextWordAvailable)
@@ -515,7 +519,7 @@ namespace LeetCodeProject.Problems
                 }
                 else
                 {
-                    if(ii >= 0)
+                    if (ii >= 0)
                     {
                         if (s[ii] == '(' && s[i] == ')')
                         {
@@ -525,10 +529,10 @@ namespace LeetCodeProject.Problems
                         }
                         else
                         {
-                            if(leftStack.Count > 0)
+                            if (leftStack.Count > 0)
                             {
                                 char lastItem = leftStack.Pop();
-                                if(s[i] == '(' && lastItem == ')')
+                                if (s[i] == '(' && lastItem == ')')
                                 {
                                     validityCount++;
                                     continue;
@@ -536,7 +540,7 @@ namespace LeetCodeProject.Problems
                                 leftStack.Push(lastItem);
                             }
 
-                            if(rightStack.Count > 0)
+                            if (rightStack.Count > 0)
                             {
                                 char lastItem = rightStack.Pop();
                                 if (s[i] == '(' && lastItem == ')')
@@ -553,7 +557,7 @@ namespace LeetCodeProject.Problems
                         }
                     }
 
-                    if(jj < s.Length)
+                    if (jj < s.Length)
                     {
                         if (s[j] == '(' && s[jj] == ')')
                         {
@@ -648,9 +652,9 @@ namespace LeetCodeProject.Problems
 
             int left = 0, leftMax = 0, right = height.Length - 1, rightMax = 0;
             int trappedWater = 0;
-            while(left < right)
+            while (left < right)
             {
-                if(height[left] < height[right])
+                if (height[left] < height[right])
                 {
                     if (height[left] > leftMax)
                         leftMax = height[left];
@@ -685,7 +689,7 @@ namespace LeetCodeProject.Problems
 
         static void GenerateParenthesisList(List<string> list, string word, int open, int close, int max)
         {
-            if(word.Length == max * 2)
+            if (word.Length == max * 2)
             {
                 list.Add(word);
                 return;
@@ -695,7 +699,7 @@ namespace LeetCodeProject.Problems
             {
                 GenerateParenthesisList(list, word + "(", open + 1, close, max);
             }
-            else if(close < open)
+            else if (close < open)
             {
                 GenerateParenthesisList(list, word + ")", open, close + 1, max);
             }
@@ -748,7 +752,7 @@ namespace LeetCodeProject.Problems
             if (s[sIndex] == p[pIndex])
                 return IsWildCardMatching(s, p, ++sIndex, ++pIndex);
 
-            if(isWild)
+            if (isWild)
                 return IsWildCardMatching(s, p, ++sIndex, pIndex, true);
 
             return false;
@@ -791,7 +795,7 @@ namespace LeetCodeProject.Problems
             Array.Sort(nums);
             int left = 0, middle = nums.Length / 2, right = nums.Length - 1;
             int closestSum = 0;
-            while(left < right && middle > left && middle < right)
+            while (left < right && middle > left && middle < right)
             {
                 closestSum = nums[left] + nums[middle] + nums[right];
                 if (closestSum < target)
@@ -874,7 +878,8 @@ namespace LeetCodeProject.Problems
             if (envelopes == null || envelopes.Length == 0) return 0;
 
             // Sort envelopes: first by width in ascending order, then by height in descending order
-            Array.Sort(envelopes, (a, b) => {
+            Array.Sort(envelopes, (a, b) =>
+            {
                 if (a[0] == b[0]) return b[1] - a[1];
                 return a[0] - b[0];
             });
@@ -906,6 +911,145 @@ namespace LeetCodeProject.Problems
                 }
             }
             return lis.Count;
+        }
+
+        static int[] TwoSum(int[] numbers, int k)
+        {
+            if (numbers.Length == 0)
+                return [];
+
+            Dictionary<int, int> numbersIndexing = new();
+            for (int i = 0; i < numbers.Length; i++)
+            {
+                var pairNo = k - numbers[i];
+                if (numbersIndexing.ContainsValue(pairNo))
+                {
+                    var pairIndex = numbersIndexing.First(x => x.Value == pairNo);
+                    return [pairIndex.Key, i];
+                }
+                numbersIndexing.Add(i, numbers[i]);
+            }
+
+            return [];
+        }
+
+        static int MaxProfit(int[] prices)
+        {
+            if (prices == null || prices.Length == 0) return 0;
+
+            int minPrice = int.MaxValue;
+            int maxProfit = 0;
+
+            foreach (int price in prices)
+            {
+                if (price < minPrice)
+                {
+                    minPrice = price;
+                }
+                else if (price - minPrice > maxProfit)
+                {
+                    maxProfit = price - minPrice;
+                }
+            }
+
+            return maxProfit;
+        }
+
+        static bool ContainsDuplicate(int[] nums)
+        {
+            if (nums.Length == 0) return false;
+
+            Dictionary<int, int> distinct = new();
+            for (int i = 0; i < nums.Length; i++)
+                if (!distinct.TryAdd(nums[i], i))
+                    return true;
+
+            return false;
+        }
+
+        static int[] ProductExceptSelf(int[] nums)
+        {
+            if (nums.Length == 0)
+                return [];
+
+            int[] ascendingMultiplication = new int[nums.Length];
+            int[] descendingMultiplication = new int[nums.Length];
+            int ascVal = 0, descVal = 0;
+            for(int i = 0, j = nums.Length -1; i < nums.Length; i++, j--)
+            {
+                if(i == 0)
+                {
+                    ascVal = nums[i];
+                    ascendingMultiplication[i] = ascVal;
+                }
+                else
+                {
+                    ascVal *= nums[i];
+                    ascendingMultiplication[i] = ascVal;
+                }
+
+                if(j == nums.Length - 1)
+                {
+                    descVal = nums[j];
+                    descendingMultiplication[j] = descVal;
+                }
+                else
+                {
+                    descVal *= nums[j];
+                    descendingMultiplication[j] = descVal;
+                }
+            }
+
+            int[] resultingArray = new int[nums.Length];
+            resultingArray[0] = descendingMultiplication[1];
+            resultingArray[resultingArray.Length - 1] = ascendingMultiplication[ascendingMultiplication.Length - 2];
+            for(int i = 1; i <= (nums.Length - 2); i++)
+            {
+                resultingArray[i] = ascendingMultiplication[i - 1] * descendingMultiplication[i + 1];
+            }
+
+            return resultingArray;
+        }
+
+        static int MaxSubArray(int[] nums)
+        {
+            int maxSoFar = nums[0];
+            int maxEndingHere = nums[0];
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                maxEndingHere = Math.Max(nums[i], maxEndingHere + nums[i]);
+                maxSoFar = Math.Max(maxSoFar, maxEndingHere);
+            }
+
+            return maxSoFar;
+        }
+
+        static int MaxProduct(int[] nums)
+        {
+            if (nums == null || nums.Length == 0) return 0;
+
+            int maxProduct = nums[0];
+            int minProduct = nums[0];
+            int result = nums[0];
+
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] < 0)
+                {
+                    // Swap maxProduct and minProduct when encountering a negative number
+                    int temp = maxProduct;
+                    maxProduct = minProduct;
+                    minProduct = temp;
+                }
+
+                maxProduct = Math.Max(nums[i], maxProduct * nums[i]);
+                minProduct = Math.Min(nums[i], minProduct * nums[i]);
+
+                result = Math.Max(result, maxProduct);
+            }
+
+            return result;
         }
 
     }
