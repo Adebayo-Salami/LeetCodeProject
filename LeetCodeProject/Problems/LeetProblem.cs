@@ -6,11 +6,12 @@ namespace LeetCodeProject.Problems
     {
         public static void Run()
         {
-            CanFinish(2, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]);
+            Insert([[1, 3], [6, 9]], [2, 5]);
         }
 
         static void PreviousTestParameters()
         {
+            CanFinish(2, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]);
             Console.WriteLine("Ways of Climbing Stairs: 44 - " + ClimbStairs3(4));
             Console.WriteLine("Max Capacity Value of [1,8,6,2,5,4,8,3,7]: " + MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
             Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
@@ -1386,9 +1387,26 @@ namespace LeetCodeProject.Problems
                     else
                         newIntervals[i - difference][0] = newIntervalStart;
 
-                    while(i < intervals.Length)
+                    while(i < intervals.Length && !isInserted)
                     {
+                        subIntervalStart = intervals[i][1];
+                        subIntervalEnd = intervals[i][1];
+                        if(subIntervalEnd >= newIntervalEnd)
+                        {
+                            newIntervals[i - difference][1] = subIntervalEnd;
+                            isInserted = true;
+                            continue;
+                        }
+                        else if(subIntervalStart > newIntervalEnd)
+                        {
+                            difference--;
+                            newIntervals[i - difference][1] = newIntervalEnd;
+                            isInserted = true;
+                            continue;
+                        }
 
+                        difference++;
+                        i++;
                     }
                 }
             }
