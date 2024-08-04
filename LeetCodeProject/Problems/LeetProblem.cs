@@ -7,12 +7,18 @@ namespace LeetCodeProject.Problems
     {
         public static void Run()
         {
-            SetZeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]]);
-            
+            var treeNode = new TreeNode(3);
+            treeNode.left = new TreeNode(9);
+            treeNode.right = new TreeNode(20);
+            treeNode.right.left = new TreeNode(15);
+            treeNode.right.right = new TreeNode(7);
+            MaxDepth(treeNode);
         }
 
         static void PreviousTestParameters()
         {
+            LengthOfLongestSubstring("dvdf");
+            SetZeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]]);
             ReverseList2(new ListNode() { val = 1, next = new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))) });
             Insert([[1, 5]], [0, 3]);
             CanFinish(2, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]);
@@ -1465,6 +1471,65 @@ namespace LeetCodeProject.Problems
                         matrix[row][col] = 0;
                 }
             }
+        }
+
+        static int LengthOfLongestSubstring(string s)
+        {
+            if (s.Length == 0)
+                return 0;
+
+            Dictionary<char, int> holdCharacters = new();
+            int longestUniqueSubstring = 0;
+            int currentLongesUniqueSubstring = 0;
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (holdCharacters.ContainsKey(s[i]))
+                {
+                    if (currentLongesUniqueSubstring > longestUniqueSubstring)
+                        longestUniqueSubstring = currentLongesUniqueSubstring;
+                    currentLongesUniqueSubstring = 0;
+                    i = holdCharacters[s[i]];
+                    holdCharacters = new();
+                }
+                else
+                {
+                    currentLongesUniqueSubstring++;
+                    holdCharacters.Add(s[i], i);
+                }
+            }
+            if (currentLongesUniqueSubstring > longestUniqueSubstring)
+                longestUniqueSubstring = currentLongesUniqueSubstring;
+
+            return longestUniqueSubstring;
+        }
+
+        private class TreeNode
+        {
+            public int val;
+            public TreeNode left;
+            public TreeNode right;
+            public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null)
+            {
+                this.val = val;
+                this.left = left;
+                this.right = right;
+            }
+        }
+
+        static int MaxDepth(TreeNode root)
+        {
+            return MaxDepthRecursivelly(root) + 1;
+        }
+
+        static int MaxDepthRecursivelly(TreeNode root)
+        {
+            if (root == null)
+                return -1;
+
+            int leftDepth = MaxDepthRecursivelly(root.left) + 1;
+            int rightDepth = MaxDepthRecursivelly(root.right) + 1;
+
+            return Math.Max(leftDepth, rightDepth);
         }
     }
 }
