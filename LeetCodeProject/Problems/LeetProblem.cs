@@ -1,4 +1,5 @@
 ﻿using LeetCodeProject.GoogleInterviewPractice;
+using System.Linq;
 
 namespace LeetCodeProject.Problems
 {
@@ -6,11 +7,14 @@ namespace LeetCodeProject.Problems
     {
         public static void Run()
         {
-            Insert([[1, 3], [6, 9]], [2, 5]);
+            SetZeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]]);
+            
         }
 
         static void PreviousTestParameters()
         {
+            ReverseList2(new ListNode() { val = 1, next = new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))) });
+            Insert([[1, 5]], [0, 3]);
             CanFinish(2, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]);
             Console.WriteLine("Ways of Climbing Stairs: 44 - " + ClimbStairs3(4));
             Console.WriteLine("Max Capacity Value of [1,8,6,2,5,4,8,3,7]: " + MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
@@ -1364,54 +1368,103 @@ namespace LeetCodeProject.Problems
 
         static int[][] Insert(int[][] intervals, int[] newInterval)
         {
-            int newIntervalStart = newInterval[0];
-            int newIntervalEnd = newInterval[1];
+            List<int[]> result = new List<int[]>();
+            int i = 0;
+            int n = intervals.Length;
 
-            int[][] newIntervals = new int[intervals.Length][];
-            int difference = 0;
-            bool isInserted = false;
-            for(int i = 0; i < intervals.Length; i++)
+            // Add all intervals before the new interval
+            while (i < n && intervals[i][1] < newInterval[0])
             {
-                int subIntervalStart = intervals[i - difference][0];
-                int subIntervalEnd = intervals[i - difference][1];
+                result.Add(intervals[i]);
+                i++;
+            }
 
-                if(subIntervalEnd > newIntervalStart || isInserted)
-                {
-                    newIntervals[i - difference][0] = subIntervalStart;
-                    newIntervals[i - difference][1] = subIntervalEnd;
-                }
-                else
-                {
-                    if (subIntervalStart < newIntervalStart)
-                        newIntervals[i - difference][0] = subIntervalStart;
-                    else
-                        newIntervals[i - difference][0] = newIntervalStart;
+            // Merge overlapping intervals
+            while (i < n && intervals[i][0] <= newInterval[1])
+            {
+                newInterval[0] = Math.Min(newInterval[0], intervals[i][0]);
+                newInterval[1] = Math.Max(newInterval[1], intervals[i][1]);
+                i++;
+            }
+            result.Add(newInterval);
 
-                    while(i < intervals.Length && !isInserted)
+            // Add all intervals after the new interval
+            while (i < n)
+            {
+                result.Add(intervals[i]);
+                i++;
+            }
+
+            return result.ToArray();
+        }
+
+        static ListNode ReverseList(ListNode head)
+        {
+            Stack<ListNode> stack = new();
+            var current = head;
+            while (current != null)
+            {
+                stack.Push(current);
+                current = current.next;
+            }
+
+            var newHead = stack.Pop();
+            current = newHead;
+            while(stack.Count > 0)
+            {
+                current.next = stack.Pop();
+                current = current.next;
+            }
+
+            return current;
+        }
+
+        static ListNode ReverseList2(ListNode head)
+        {
+            if (head == null)
+                return head;
+
+            var prev = head;
+            var current = head.next;
+            prev.next = null;
+            while (current != null)
+            {
+                var currentNext = current.next;
+                current.next = prev;
+                prev = current;
+                current = currentNext;
+            }
+
+            return prev;
+        }
+
+        static void SetZeroes(int[][] matrix)
+        {
+            HashSet<int> registerColumn = new();
+            HashSet<int> registerRow = new();
+            for(int row = 0; row < matrix.Length; row++)
+            {
+                for(int col = 0; col < matrix[row].Length; col++)
+                {
+                    if(matrix[row][col] == 0)
                     {
-                        subIntervalStart = intervals[i][1];
-                        subIntervalEnd = intervals[i][1];
-                        if(subIntervalEnd >= newIntervalEnd)
-                        {
-                            newIntervals[i - difference][1] = subIntervalEnd;
-                            isInserted = true;
-                            continue;
-                        }
-                        else if(subIntervalStart > newIntervalEnd)
-                        {
-                            difference--;
-                            newIntervals[i - difference][1] = newIntervalEnd;
-                            isInserted = true;
-                            continue;
-                        }
-
-                        difference++;
-                        i++;
+                        registerColumn.Add(col);
+                        registerRow.Add(row);
                     }
                 }
             }
 
-            return newIntervals;
+            for (int row = 0; row < matrix.Length; row++)
+            {
+                for (int col = 0; col < matrix[row].Length; col++)
+                {
+                    if (registerRow.Contains(row))
+                        matrix[row][col] = 0;
+
+                    if (registerColumn.Contains(col))
+                        matrix[row][col] = 0;
+                }
+            }
         }
     }
 }
