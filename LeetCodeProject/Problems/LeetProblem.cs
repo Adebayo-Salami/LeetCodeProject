@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using LeetCodeProject.GoogleInterviewPractice;
 
 namespace LeetCodeProject.Problems
 {
@@ -11,42 +6,60 @@ namespace LeetCodeProject.Problems
     {
         public static void Run()
         {
-            // s = 'aab' p = "c*a*b" - IsRegularExpressionMatch
-            // Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
-            // Console.WriteLine(" mississippi - mis*is*p* Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*p*"));
-            // Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
-            // Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
-            // Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
+            CanFinish(2, [[0, 10], [3, 18], [5, 5], [6, 11], [11, 14], [13, 1], [15, 1], [17, 4]]);
+        }
 
-            // Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
-            // Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
-
-            // var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
-            // ReverseKGroup(testReverseKGroup1, 2);
-
-            // ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
-            // MergeKLists(testMergeKLists);
-
-            // ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
-            // MergeKLists(testMergeKLists2);
-            // Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
-            // Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
-            // Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
-            // Console.WriteLine("Indexes Found in bccbcc, [bc, cc, cb] | Expected [8] : Output: " + String.Join(',', FindSubstring("bccbcc", ["bc", "cc", "cb"])));
-            //Console.WriteLine("Longest Valid Parentheses in ()(() is " + LongestValidParentheses("()(()"));
-            //Console.WriteLine("Trapped Water [0,1,0,2,1,0,1,3,2,1,2,1] is " + Trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
-            //GenerateParenthesis(3);
-            //Console.WriteLine("Is Wildcard Match s =  | p = ****** : " + IsWildcardMatch("", "******"));
-            //Console.Write("ThreeSumClosest: [-1,2,1,-4], target = 1" + ThreeSumClosest([-1, 2, 1, -4], 1));
-            //Console.Write("ContainsNearbyAlmostDuplicate: [1, 2, 3, 1], 3, 0" + ContainsNearbyAlmostDuplicate([1, 2, 3, 1], 3, 0));
-            //Console.WriteLine(MaxEnvelopes([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [5, 5], [6, 7], [7, 8]]));
-            //Console.WriteLine("Two Sum {2,7,11,15} 9 " + TwoSum([2, 7, 11, 15], 9));
-            //Console.WriteLine("Product of [1,2,3,4]: " + String.Join(',', ProductExceptSelf([1, 2, 3, 4])));
-            //Console.WriteLine("Max Value of [-2,1,-3,4,-1,2,1,-5,4]: " + MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
-            //Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
-            //Console.WriteLine("Max FindMin Value of [3,1,2]: " + FindMin([3, 1, 2]));
-            //Console.WriteLine("Max Search Value of 1 in [8,1,2,3,4,5,6,7]: " + Search([8, 1, 2, 3, 4, 5, 6, 7], 6));
+        static void PreviousTestParameters()
+        {
+            Console.WriteLine("Ways of Climbing Stairs: 44 - " + ClimbStairs3(4));
             Console.WriteLine("Max Capacity Value of [1,8,6,2,5,4,8,3,7]: " + MaxArea([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+            Console.WriteLine(" aab - c*a*b Matches: " + IsRegularExpressionMatch2("aab", "c*a*b"));
+            Console.WriteLine(" mississippi - mis*is*p* Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*p*"));
+            Console.WriteLine(" mississippi - mis*is*ip*. Matches: " + IsRegularExpressionMatch2("mississippi", "mis*is*ip*."));
+            Console.WriteLine(" abcd - d* Matches: " + IsRegularExpressionMatch2("abcd", "d*"));
+            Console.WriteLine(" aaa - aaaa Matches: " + IsRegularExpressionMatch2("aaa", "aaaa"));
+            Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 1]));
+            Console.WriteLine("Max Area: " + MaxArea_ContainerWithMostWater2([1, 8, 6, 2, 5, 4, 8, 3, 7]));
+            var testReverseKGroup1 = new ListNode(1, new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))));
+            ReverseKGroup(testReverseKGroup1, 2);
+            ListNode[] testMergeKLists = { new ListNode(1, new ListNode(4, new ListNode(5))), new ListNode(1, new ListNode(3, new ListNode(4))), new ListNode(2, new ListNode(6)) };
+            MergeKLists(testMergeKLists);
+            ListNode[] testMergeKLists2 = { new ListNode(1, new ListNode(2, new ListNode(2))), new ListNode(1, new ListNode(1, new ListNode(2))) };
+            MergeKLists(testMergeKLists2);
+            Console.WriteLine("Indexes Found in barfoothefoobarman, [foo, bar] " + String.Join(',', FindSubstring("barfoothefoobarman", ["foo", "bar"])));
+            Console.WriteLine("Indexes Found in barfoofoobarthefoobarman, [foo, bar, the] " + String.Join(',', FindSubstring("barfoofoobarthefoobarman", ["bar", "foo", "the"])));
+            Console.WriteLine("Indexes Found in wordgoodgoodgoodbestword, [word, good, best, good] | Expected [8] : Output: " + String.Join(',', FindSubstring("wordgoodgoodgoodbestword", ["word", "good", "best", "good"])));
+            Console.WriteLine("Indexes Found in bccbcc, [bc, cc, cb] | Expected [8] : Output: " + String.Join(',', FindSubstring("bccbcc", ["bc", "cc", "cb"])));
+            Console.WriteLine("Longest Valid Parentheses in ()(() is " + LongestValidParentheses("()(()"));
+            Console.WriteLine("Trapped Water [0,1,0,2,1,0,1,3,2,1,2,1] is " + Trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]));
+            GenerateParenthesis(3);
+            Console.WriteLine("Is Wildcard Match s =  | p = ****** : " + IsWildcardMatch("", "******"));
+            Console.Write("ThreeSumClosest: [-1,2,1,-4], target = 1" + ThreeSumClosest([-1, 2, 1, -4], 1));
+            Console.Write("ContainsNearbyAlmostDuplicate: [1, 2, 3, 1], 3, 0" + ContainsNearbyAlmostDuplicate([1, 2, 3, 1], 3, 0));
+            Console.WriteLine(MaxEnvelopes([[1, 2], [2, 3], [3, 4], [4, 5], [5, 6], [5, 5], [6, 7], [7, 8]]));
+            Console.WriteLine("Two Sum {2,7,11,15} 9 " + TwoSum([2, 7, 11, 15], 9));
+            Console.WriteLine("Product of [1,2,3,4]: " + String.Join(',', ProductExceptSelf([1, 2, 3, 4])));
+            Console.WriteLine("Max Value of [-2,1,-3,4,-1,2,1,-5,4]: " + MaxSubArray([-2, 1, -3, 4, -1, 2, 1, -5, 4]));
+            Console.WriteLine("Max Product Value of [2,-5,-2,-4,3]: " + MaxProduct([2, -5, -2, -4, 3]));
+            Console.WriteLine("Max FindMin Value of [3,1,2]: " + FindMin([3, 1, 2]));
+            Console.WriteLine("Max Search Value of 1 in [8,1,2,3,4,5,6,7]: " + Search([8, 1, 2, 3, 4, 5, 6, 7], 6));
+            var nodeA = new Node(1);
+            var nodeB = new Node(2);
+            var nodeC = new Node(3);
+            var nodeD = new Node(4);
+            nodeA.neighbors.Add(nodeB);
+            nodeA.neighbors.Add(nodeC);
+            nodeA.neighbors.Add(nodeD);
+            nodeB.neighbors.Add(nodeA);
+            nodeB.neighbors.Add(nodeC);
+            nodeB.neighbors.Add(nodeD);
+            nodeC.neighbors.Add(nodeA);
+            nodeC.neighbors.Add(nodeB);
+            nodeC.neighbors.Add(nodeD);
+            nodeD.neighbors.Add(nodeA);
+            nodeD.neighbors.Add(nodeB);
+            nodeD.neighbors.Add(nodeC);
+            var cloning = CloneGraph(nodeA);
         }
 
         public static bool IsPalindrome(int x)
@@ -1178,5 +1191,209 @@ namespace LeetCodeProject.Problems
             return maxCapacity;
         }
 
+        static int GetSum(int a, int b)
+        {
+            while (b != 0)
+            {
+                int carry = a & b; // Calculate carry
+                a = a ^ b; // Sum without carry
+                b = carry << 1; // Shift carry to the left
+            }
+            return a;
+        }
+
+        static int ClimbStairs(int n)
+        {
+            return ClimbStairsRecursively(n, 0);
+        }
+
+        static int ClimbStairsRecursively(int n, int ways)
+        {
+            if (n == 0)
+                return ++ways;
+            if (n < 0)
+                return ways;
+
+            ways = ClimbStairsRecursively(n - 1, ways);
+            ways = ClimbStairsRecursively(n - 2, ways);
+
+            return ways;
+        }
+
+        static int ClimbStairs2(int n)
+        {
+
+            int prev = 1;
+            int curr = 1;
+            for (int i = 1; i < n; i++)
+            {
+                int temp = curr;
+                curr += prev;
+                prev = temp;
+            }
+            return curr;
+        }
+
+        static int ClimbStairs3(int n)
+        {
+            if (n <= 1) return 1;
+
+            int[] dp = new int[n + 1];
+            dp[0] = 1;
+            dp[1] = 1;
+
+            for (int i = 2; i <= n; i++)
+            {
+                dp[i] = dp[i - 1] + dp[i - 2];
+            }
+
+            return dp[n];
+        }
+
+        private class Node
+        {
+            public int val;
+            public IList<Node> neighbors;
+
+            public Node()
+            {
+                val = 0;
+                neighbors = new List<Node>();
+            }
+
+            public Node(int _val)
+            {
+                val = _val;
+                neighbors = new List<Node>();
+            }
+
+            public Node(int _val, List<Node> _neighbors)
+            {
+                val = _val;
+                neighbors = _neighbors;
+            }
+        }
+
+        static Node CloneGraph(Node node)
+        {
+            if (node == null) return null;
+
+            Dictionary<Node, Node> map = new Dictionary<Node, Node>();
+            return CloneNode(node, map);
+        }
+
+        static Node CloneNode(Node node, Dictionary<Node, Node> map)
+        {
+            if (map.ContainsKey(node))
+            {
+                return map[node];
+            }
+
+            Node clone = new Node(node.val);
+            map[node] = clone;
+
+            foreach (Node neighbor in node.neighbors)
+            {
+                clone.neighbors.Add(CloneNode(neighbor, map));
+            }
+
+            return clone;
+        }
+
+        static bool CanFinish(int numCourses, int[][] prerequisites)
+        {
+            // Create an adjacency list to represent the graph
+            List<int>[] graph = new List<int>[numCourses];
+            for (int i = 0; i < numCourses; i++)
+            {
+                graph[i] = new List<int>();
+            }
+
+            // Fill the adjacency list with the prerequisites
+            foreach (var prerequisite in prerequisites)
+            {
+                graph[prerequisite[1]].Add(prerequisite[0]);
+            }
+
+            // Array to track the visit status of each course
+            int[] visitStatus = new int[numCourses];
+
+            // Perform DFS for each course
+            for (int i = 0; i < numCourses; i++)
+            {
+                if (HasCycle(graph, visitStatus, i))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        static bool HasCycle(List<int>[] graph, int[] visitStatus, int course)
+        {
+            if (visitStatus[course] == 1)
+            {
+                // Cycle detected
+                return true;
+            }
+            if (visitStatus[course] == 2)
+            {
+                // Already visited and no cycle detected
+                return false;
+            }
+
+            // Mark the course as being visited
+            visitStatus[course] = 1;
+
+            // Perform DFS on the neighbors
+            foreach (var neighbor in graph[course])
+            {
+                if (HasCycle(graph, visitStatus, neighbor))
+                {
+                    return true;
+                }
+            }
+
+            // Mark the course as fully visited
+            visitStatus[course] = 2;
+
+            return false;
+        }
+
+        static int[][] Insert(int[][] intervals, int[] newInterval)
+        {
+            int newIntervalStart = newInterval[0];
+            int newIntervalEnd = newInterval[1];
+
+            int[][] newIntervals = new int[intervals.Length][];
+            int difference = 0;
+            bool isInserted = false;
+            for(int i = 0; i < intervals.Length; i++)
+            {
+                int subIntervalStart = intervals[i - difference][0];
+                int subIntervalEnd = intervals[i - difference][1];
+
+                if(subIntervalEnd > newIntervalStart || isInserted)
+                {
+                    newIntervals[i - difference][0] = subIntervalStart;
+                    newIntervals[i - difference][1] = subIntervalEnd;
+                }
+                else
+                {
+                    if (subIntervalStart < newIntervalStart)
+                        newIntervals[i - difference][0] = subIntervalStart;
+                    else
+                        newIntervals[i - difference][0] = newIntervalStart;
+
+                    while(i < intervals.Length)
+                    {
+
+                    }
+                }
+            }
+
+            return newIntervals;
+        }
     }
 }
