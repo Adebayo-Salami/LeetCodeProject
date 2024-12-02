@@ -7,16 +7,19 @@ namespace LeetCodeProject.Problems
     {
         public static void Run()
         {
-            var treeNode = new TreeNode(3);
-            treeNode.left = new TreeNode(9);
-            treeNode.right = new TreeNode(20);
-            treeNode.right.left = new TreeNode(15);
-            treeNode.right.right = new TreeNode(7);
-            MaxDepth(treeNode);
+            Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("23")));
+            Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("")));
+            Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("2")));
+            Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("234")));
+            Console.WriteLine(String.Join(',', ["adg", "adh", "adi", "aeg", "aeh", "aei", "afg", "afh", "afi", "bdg", "bdh", "bdi", "beg", "beh", "bei", "bfg", "bfh", "bfi", "cdg", "cdh", "cdi", "ceg", "ceh", "cei", "cfg", "cfh", "cfi"]));
         }
 
         static void PreviousTestParameters()
         {
+            Console.WriteLine("Value of III is " + RomanToInt("III"));
+            Console.WriteLine("Value of LVIII is " + RomanToInt("LVIII"));
+            Console.WriteLine("Value of MCMXCIV is " + RomanToInt("MCMXCIV"));
+            Console.WriteLine("Value of LLL is " + RomanToInt("LLL"));
             LengthOfLongestSubstring("dvdf");
             SetZeroes([[1, 1, 1], [1, 0, 1], [1, 1, 1]]);
             ReverseList2(new ListNode() { val = 1, next = new ListNode(2, new ListNode(3, new ListNode(4, new ListNode(5)))) });
@@ -71,6 +74,185 @@ namespace LeetCodeProject.Problems
             nodeD.neighbors.Add(nodeB);
             nodeD.neighbors.Add(nodeC);
             var cloning = CloneGraph(nodeA);
+            {
+                var treeNode = new TreeNode(3);
+                treeNode.left = new TreeNode(9);
+                treeNode.right = new TreeNode(20);
+                treeNode.right.left = new TreeNode(15);
+                treeNode.right.right = new TreeNode(7);
+                MaxDepth(treeNode);
+            }
+        }
+
+        static IList<string> LetterCombinations2(string digits)
+        {
+            List<string> result = [];
+
+            if (!String.IsNullOrWhiteSpace(digits))
+            {
+                Queue<int> priorityQueue = new();
+                for (int i = 0; i < digits.Length; i++)
+                {
+                    int val = Convert.ToInt32(digits[i]) - 48;
+                    priorityQueue.Enqueue(val);
+                }
+
+                var arrayStore = new int[digits.Length];
+                int location = 0;
+                while (priorityQueue.Count > 0)
+                    arrayStore[location++] = priorityQueue.Dequeue();
+                priorityQueue = null;
+
+                if (arrayStore.Length == 1)
+                    result = GetNumberCombinations(arrayStore[0]).Select(x => x.ToString()).ToList();
+                else
+                {
+                    var startingChars = GetNumberCombinations(arrayStore[0]);
+                    foreach (char ch in startingChars)
+                        FindCombinationsRecursively2(ch.ToString(), arrayStore, 1, result);
+                }
+            }
+
+            return result;
+        }
+
+        static char[] GetNumberCombinations(int digit)
+        {
+            if (digit == 2) return ['a', 'b', 'c'];
+            if (digit == 3) return ['d', 'e', 'f'];
+            if (digit == 4) return ['g', 'h', 'i'];
+            if (digit == 5) return ['j', 'k', 'l'];
+            if (digit == 6) return ['m', 'n', 'o'];
+            if (digit == 7) return ['p', 'q', 'r', 's'];
+            if (digit == 8) return ['t', 'u', 'v'];
+            if (digit == 9) return ['w', 'x', 'y', 'z'];
+            else return [];
+        }
+
+        static List<string> FindCombinationsRecursively2(string currentCombo, int[] store, int location, List<string> endResults)
+        {
+            if (location == store.Length)
+                return [];
+
+            var results = new List<string>();
+            var startingChars = GetNumberCombinations(store[location]);
+            foreach (var ch in startingChars)
+            {
+                results.Add(currentCombo + ch);
+                if (FindCombinationsRecursively2(currentCombo + ch, store, location + 1, endResults).Count == 0)
+                    endResults.Add(currentCombo + ch);
+            }
+
+            return results;
+        }
+
+        static List<string> FindCombinationsRecursively(string currentCombo, int[] store, int location)
+        {
+            if (location == store.Length)
+                return [];
+
+            var results = new List<string>();
+            var startingChars = GetNumberCombinations(store[location]);
+            foreach(var ch in startingChars)
+            {
+                results.Add(currentCombo + ch);
+                results.AddRange(FindCombinationsRecursively(currentCombo + ch, store, location + 1));
+            }
+
+            return results;
+        }
+
+        static IList<string> LetterCombinations(string digits)
+        {
+            List<string> result = [];
+
+            if (!String.IsNullOrWhiteSpace(digits))
+            {
+                PriorityQueue<int, int> priorityQueue = new();
+                for (int i = 0; i < digits.Length; i++)
+                    priorityQueue.Enqueue(digits[i], digits[i]);
+
+                var arrayStore = new int[digits.Length];
+                int location = 0;
+                while (priorityQueue.Count > 0)
+                    arrayStore[location++] = priorityQueue.Dequeue();
+                priorityQueue = null;
+
+                for(int i = 0; i < arrayStore.Length; i++)
+                {
+                    char[] iValues = [];
+                    if (arrayStore[i] == 2) iValues = ['a', 'b', 'c'];
+                    if (arrayStore[i] == 3) iValues = ['d', 'e', 'f'];
+                    if (arrayStore[i] == 4) iValues = ['g', 'h', 'i'];
+                    if (arrayStore[i] == 5) iValues = ['j', 'k', 'l'];
+                    if (arrayStore[i] == 6) iValues = ['m', 'n', 'o'];
+                    if (arrayStore[i] == 7) iValues = ['p', 'q', 'r', 's'];
+                    if (arrayStore[i] == 8) iValues = ['t', 'u', 'v'];
+                    if (arrayStore[i] == 9) iValues = ['w', 'x', 'y', 'z'];
+
+                    int j = i + 1;
+                    if (arrayStore.Length == 1)
+                        result = iValues.Select(x => x.ToString()).ToList();
+                    else 
+                    {
+                        while (j < arrayStore.Length)
+                        {
+                            char[] jValues = [];
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        static int RomanToInt(string s)
+        {
+            int result = 0;
+            int? previousWordValue = null;
+            for(int i = 0; i < s.Length; i++)
+            {
+                int wordValue = 0;
+                switch (s[i])
+                {
+                    case 'I':
+                        wordValue = 1;
+                        break;
+                    case 'V':
+                        wordValue = 5;
+                        break;
+                    case 'X':
+                        wordValue = 10;
+                        break;
+                    case 'L':
+                        wordValue = 50;
+                        break;
+                    case 'C':
+                        wordValue = 100;
+                        break;
+                    case 'D':
+                        wordValue = 500;
+                        break;
+                    case 'M':
+                        wordValue = 1000;
+                        break;
+                    default:
+                        break;
+                }
+
+                if (previousWordValue != null)
+                {
+                    if (previousWordValue.Value < wordValue)
+                        result += ((wordValue - previousWordValue.Value) - previousWordValue.Value);
+                    else
+                        result += wordValue;
+                }
+                else
+                    result += wordValue;
+
+                previousWordValue = wordValue;
+            }
+            return result;
         }
 
         public static bool IsPalindrome(int x)
