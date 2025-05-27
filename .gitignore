@@ -21,3 +21,16 @@
 /LeetCodeProject/obj/LeetCodeProject.csproj.nuget.dgspec.json
 /LeetCodeProject/obj/Debug/net8.0/LeetCodeProject.GeneratedMSBuildEditorConfig.editorconfig
 /LeetCodeProject/obj/project.nuget.cache
+/LeetCodeProject/bin/Debug/net8.0/LeetCodeProject.exe
+/LeetCodeProject/bin/*
+/LeetCodeProject/bin/
+/LeetCodeProject/obj/
+/LeetCodeProject/obj/*
+/LeetCodeProject/obj/Debug/net8.0/ref/LeetCodeProject.dll
+/LeetCodeProject/obj/Debug/net8.0/apphost.exe
+/LeetCodeProject/obj/Debug/net8.0/LeetCodeProject.csproj.CoreCompileInputs.cache
+/LeetCodeProject/obj/Debug/net8.0/LeetCodeProject.dll
+/LeetCodeProject/obj/Debug/net8.0/LeetCodeProject.pdb
+/LeetCodeProject/obj/Debug/net8.0/LeetCodeProject.sourcelink.json
+/LeetCodeProject/obj/Debug/net8.0/refint/LeetCodeProject.dll
+/LeetCodeProject/bin/Debug/net8.0/LeetCodeProject.pdb
