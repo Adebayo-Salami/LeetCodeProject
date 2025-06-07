@@ -1,10 +1,107 @@
-﻿namespace LeetCodeProject.Problems
+﻿using System.Text;
+
+namespace LeetCodeProject.Problems
 {
     public static class LeetProblem
     {
         public static void Run()
         {
-            Divide(-2147483648, -1);
+            FindSubstring4("lingmindraboofooowingdingbarrwingmonkeypoundcake", ["fooo", "barr", "wing", "ding", "wing"]); // Expected [13]
+        }
+
+        static IList<int> FindSubstring4(string s, string[] words)
+        {
+            int wordLength = words[0].Length;
+            int stringLength = wordLength * words.Length;
+            if (s.Length < stringLength)
+                return [];
+
+            Dictionary<string, List<int>> availableChecks = new();
+            for (int i = 0; i < words.Length; i++)
+            {
+                if (!availableChecks.TryAdd(words[i], [i]))
+                    availableChecks[words[i]].Add(i);
+            }
+
+            List<int> resultIndexes = new();
+            for (int i = 0; i <= s.Length - stringLength; i += wordLength)
+            {
+                Dictionary<string, List<int>> checks = new();
+                foreach (var availabeCheck in availableChecks)
+                    checks.Add(availabeCheck.Key, [..availabeCheck.Value]);
+
+                int stringFormedLength = 0, j = i, tries = wordLength;
+                while(tries > 0)
+                {
+                    string word = s.Substring(j, wordLength);
+                    if (checks.ContainsKey(word))
+                    {
+                        var popped = checks[word].First();
+                        checks[word].Remove(popped);
+                        if (checks[word].Count == 0)
+                            checks.Remove(word);
+                    }
+                    else
+                        break;
+
+                    stringFormedLength += wordLength;
+                    j += wordLength;
+                    tries--;
+                }
+
+                if (stringFormedLength == stringLength)
+                    resultIndexes.Add(i);
+            }
+
+            return resultIndexes;
+        }
+
+        static IList<int> FindSubstring3(string s, string[] words)
+        {
+            int wordLength = words[0].Length;
+            if (s.Length < wordLength)
+                return [];
+
+            HashSet<string> possibleCobinations = new();
+            for(int i = 0; i < words.Length; i++)   // Capture Forward Sequences
+            {
+                StringBuilder stringBuilder = new();
+                stringBuilder.Append(words[i]);
+                int j = i + 1;
+                if (j == words.Length) j = 0;
+                while (j != i)
+                {
+                    stringBuilder.Append(words[j++]);
+
+                    if (j == words.Length) j = 0;
+                }
+                possibleCobinations.Add(stringBuilder.ToString());
+            }
+
+            for (int i = words.Length - 1; i >= 0; i--)   // Capture Backward Sequences
+            {
+                StringBuilder stringBuilder = new();
+                stringBuilder.Append(words[i]);
+                int j = i - 1;
+                if (j < 0) j = words.Length - 1;
+                while (j != i)
+                {
+                    stringBuilder.Append(words[j--]);
+
+                    if (j < 0) j = words.Length - 1;
+                }
+                possibleCobinations.Add(stringBuilder.ToString());
+            }
+
+            List<int> resultIndexes = new();
+            int stringLength = wordLength * words.Length;
+            for(int i = 0; i <= s.Length - stringLength; i += wordLength)
+            {
+                if (possibleCobinations.Contains(s.Substring(i, stringLength)))
+                    resultIndexes.Add(i);
+            }
+
+            return resultIndexes;
         }
 
         static int Divide(int dividend, int divisor)
