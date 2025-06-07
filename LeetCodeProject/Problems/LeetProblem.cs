@@ -1,21 +1,144 @@
-﻿using LeetCodeProject.GoogleInterviewPractice;
-using System.Linq;
-
-namespace LeetCodeProject.Problems
+﻿namespace LeetCodeProject.Problems
 {
     public static class LeetProblem
     {
         public static void Run()
+        {
+            Divide(-2147483648, -1);
+        }
+
+        static int Divide(int dividend, int divisor)
+        {
+            // Special overflow case
+            if (dividend == int.MinValue && divisor == -1)
+                return int.MaxValue;
+
+            int divideCount = 0;
+            bool isNegativeDivisor = divisor < 0;
+            bool isNegativeDivident = dividend < 0;
+
+            dividend = Math.Abs(dividend);
+            divisor = Math.Abs(divisor);
+            for (int i = divisor; i <= dividend; i += divisor)
+                divideCount++;
+
+            if (isNegativeDivident || isNegativeDivisor)
+                divideCount = -divideCount;
+            if (isNegativeDivisor && isNegativeDivident)
+                divideCount = Math.Abs(divideCount);
+
+            return divideCount;
+        }
+
+        static int Divide_Checker(int dividend, int divisor)
+        {
+            // Special overflow case
+            if (dividend == int.MinValue && divisor == -1)
+                return int.MaxValue;
+
+            int divideCount = 0;
+            bool isNegative = (dividend < 0) ^ (divisor < 0); // XOR: true if signs differ
+
+            long ldividend = Math.Abs((long)dividend);
+            long ldivisor = Math.Abs((long)divisor);
+
+            while (ldividend >= ldivisor)
+            {
+                long temp = ldivisor, multiple = 1;
+
+                while (ldividend >= (temp << 1))
+                {
+                    temp <<= 1;
+                    multiple <<= 1;
+                }
+
+                ldividend -= temp;
+                divideCount += (int)multiple;
+            }
+
+            return isNegative ? -divideCount : divideCount;
+        }
+
+        static ListNode SwapPairs(ListNode head)
+        {
+            ListNode result = null;
+            if (head == null) return result;
+
+            ListNode c = head, n = head.next, cs = head.next?.next;
+            if (n == null) return head;
+            var temp = c;
+            c = n;
+            c.next = temp;
+            result = c;
+           
+            var p = result.next;
+            p.next = null;
+            c = cs;
+            n = c?.next;
+            cs = n?.next;
+            while (n != null)
+            {
+                cs = n?.next;
+                var temp2 = c;
+                c = n;
+                c.next = temp2;
+                p.next = c;
+                p = p.next.next;
+                p.next = null;
+
+                c = cs;
+                n = c?.next;
+            }
+
+            if (c != null)
+                p.next = c;
+
+            return result;
+        }
+
+        static ListNode RemoveNthFromEnd(ListNode head, int n)
+        {
+            int size = 1;
+            if (head.next == null && n == 1)
+                return null;
+
+            ListNode? current = head, previous = null, difference = null;
+            if (size == n) difference = head;
+
+            while (current.next != null)
+            {
+                size++;
+                if (size == n)
+                {
+                    difference = head;
+                }
+                else if(difference != null)
+                {
+                    previous = difference;
+                    difference = difference.next;
+                }
+
+                current = current.next;
+            }
+
+            if(difference != null)
+            {
+                if (previous == null)
+                    return difference.next;
+                else
+                    previous.next = difference.next;
+            }
+
+            return head;
+        }
+
+        static void PreviousTestParameters()
         {
             Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("23")));
             Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("")));
             Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("2")));
             Console.WriteLine("Letter Combination of 23 is " + String.Join(',', LetterCombinations2("234")));
             Console.WriteLine(String.Join(',', ["adg", "adh", "adi", "aeg", "aeh", "aei", "afg", "afh", "afi", "bdg", "bdh", "bdi", "beg", "beh", "bei", "bfg", "bfh", "bfi", "cdg", "cdh", "cdi", "ceg", "ceh", "cei", "cfg", "cfh", "cfi"]));
-        }
-
-        static void PreviousTestParameters()
-        {
             Console.WriteLine("Value of III is " + RomanToInt("III"));
             Console.WriteLine("Value of LVIII is " + RomanToInt("LVIII"));
             Console.WriteLine("Value of MCMXCIV is " + RomanToInt("MCMXCIV"));
@@ -82,6 +205,52 @@ namespace LeetCodeProject.Problems
                 treeNode.right.right = new TreeNode(7);
                 MaxDepth(treeNode);
             }
+        }
+
+        static IList<IList<int>> FourSum(int[] nums, int target)
+        {
+            Array.Sort(nums);
+            var result = new List<IList<int>>();
+
+            for(int i = 0; i < nums.Length - 3; i++)
+            {
+                if (i > 0 && (nums[i] == nums[i - 1])) continue;
+
+                for(int j = i + 1; j < nums.Length - 2; j++)
+                {
+                    if (j > (i + 1) && (nums[j] == nums[j - 1])) continue;
+
+                    int left = j + 1;
+                    int right = nums.Length - 1;
+
+                    while(left < right)
+                    {
+                        //var sum = nums[i] + nums[j] + nums[left] + nums[right];
+                        long sum = (long)nums[i] + nums[j] + nums[left] + nums[right]; // use long to prevent overflow
+
+                        if (sum < target)
+                        {
+                            left++;
+                        }
+                        else if(sum > target)
+                        {
+                            right--;
+                        }
+                        else
+                        {
+                            result.Add([nums[i], nums[j], nums[left], nums[right]]);
+
+                            while (left < right && (nums[left] == nums[left + 1])) left++;
+                            while (left < right && (nums[right] == nums[right - 1])) right--;
+
+                            left++;
+                            right--;
+                        }
+                    }
+                }
+            }
+
+            return result;
         }
 
         static IList<string> LetterCombinations2(string digits)
@@ -1443,30 +1612,6 @@ namespace LeetCodeProject.Problems
             return dp[n];
         }
 
-        private class Node
-        {
-            public int val;
-            public IList<Node> neighbors;
-
-            public Node()
-            {
-                val = 0;
-                neighbors = new List<Node>();
-            }
-
-            public Node(int _val)
-            {
-                val = _val;
-                neighbors = new List<Node>();
-            }
-
-            public Node(int _val, List<Node> _neighbors)
-            {
-                val = _val;
-                neighbors = _neighbors;
-            }
-        }
-
         static Node CloneGraph(Node node)
         {
             if (node == null) return null;
@@ -1713,5 +1858,42 @@ namespace LeetCodeProject.Problems
 
             return Math.Max(leftDepth, rightDepth);
         }
+
+        #region Test Classes
+        private class Node
+        {
+            public int val;
+            public IList<Node> neighbors;
+
+            public Node()
+            {
+                val = 0;
+                neighbors = new List<Node>();
+            }
+
+            public Node(int _val)
+            {
+                val = _val;
+                neighbors = new List<Node>();
+            }
+
+            public Node(int _val, List<Node> _neighbors)
+            {
+                val = _val;
+                neighbors = _neighbors;
+            }
+        }
+
+        public class ListNode
+        {
+            public int val;
+            public ListNode next;
+            public ListNode(int val = 0, ListNode next = null)
+            {
+                this.val = val;
+                this.next = next;
+            }
+        }
+        #endregion
     }
 }
